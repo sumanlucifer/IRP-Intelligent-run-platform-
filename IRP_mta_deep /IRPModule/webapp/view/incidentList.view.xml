@@ -1,0 +1,76 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="ey.irp.IRPModule.controller.incidentList"
+	xmlns:html="http://www.w3.org/1999/xhtml" class="EYbackground">
+	<Page showNavButton="true" navButtonPress="onPressIncident" title="Service Now/Incidents"
+		class="textcolor1 navbuttoncss EYLogoAlign" 	enableScrolling="false">
+	<!--	<HBox>
+			<Label text="Overview" class="EYLogoAlign sapUiMediumMarginBegin"></Label>
+			<Button text="Create New" press="onCreateNew" class="EYbutton"></Button>
+		</HBox>-->
+	<!--	<HBox>-->
+				<ScrollContainer height="150%" width="100%" horizontal="true" visible="true" vertical="true">
+			<Table id="idIncTable"  class=" sapUiSmallMarginBegin smtableclassHD hToolBar " growing="true"
+				growingThreshold="100" items="{incList>/data}" sticky="ColumnHeaders" width="100%">
+				<headerToolbar >
+					<Toolbar>
+						<VBox width="100%">
+						<VBox>
+			<Label text="Overview" class="EYLogoAlign sapUiSmallMarginBegin"></Label>
+		
+		</VBox>
+		<HBox>
+						<SearchField liveChange="onSearch" class="EYinputfield "/>
+						<Label text="Status" class="EYLogoAlign sapUiLargeMarginBegin sapUiSmallMarginTop"></Label>
+						<ComboBox items="{ path: 'incList>/Statustype' }" class="EYinputfield sapUiSmallMarginBegin" selectionChange="onStatus">
+							<core:Item key="{incList>key}" text="{incList>text}"/>
+						</ComboBox>
+							<Button text="Create New" width="6rem" press="onCreateNew" class="EYbutton sapUiLargeMarginBegin sapUiTinyMarginTop "></Button>
+						<!--	<Select id="oSelect" maxWidth="300rem" items="{incList>/data}">
+<core:Item text="{incList>state}"/>
+</Select>-->
+</HBox>
+</VBox>
+					</Toolbar>
+				</headerToolbar>
+				<columns >
+					<Column class="tableheadercss">
+						<Text text="Incident Number" class="headerText"/>
+					</Column>
+					<Column class="tableheadercss">
+						<Text text="User Name" id="ttext" class="headerText"/>
+					</Column>
+					<Column class="tableheadercss">
+						<Text text="Creation Date" class="headerText"/>
+					</Column>
+					<Column class="tableheadercss">
+						<Text text="Category" class="headerText"/>
+					</Column>
+					<Column class="tableheadercss">
+						<Text text="Description" class="headerText"/>
+					</Column>
+					<Column class="tableheadercss">
+						<Text text="Priority" class="headerText"/>
+					</Column>
+					<Column width="6rem">
+						<Text text="Status" class="tableheadercss"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem type="Active" press="onRowSelect">
+						<cells>
+							<Text text="{incList>number}" class="cellText"/>
+							<Text text="{incList>opened_by/display_value}" class="cellText"/>
+							<Text text="{incList>sys_created_on}" class="cellText"/>
+							<Text text="{incList>category}" class="cellText"/>
+							<Text text="{incList>short_description}" class="cellText"/>
+							<Text text="{incList>priority}" class="cellText"/>
+							<Text text="{incList>state}" class="cellText"/>
+							<Text text="{status}"/>
+							<!--<tnt:InfoLabel colorScheme="{path:'Status',formatter:'.formatStatus'}" text="{path:'Status',formatter:'.formatStatusText'}" />-->
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+	    </ScrollContainer>
+	<!--	</HBox>-->
+	</Page>
+</mvc:View>

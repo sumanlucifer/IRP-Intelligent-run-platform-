@@ -1,0 +1,139 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:m="sap.m" xmlns:u="sap.ui.unified" xmlns="sap.ui.table"
+	controllerName="ey.irp.IRPModule.controller.wokprocess" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<m:Page title="Monitoring Dashboard/Work Process" class="textcolor1 navbuttoncss sapUiSmallMarginTop" showNavButton="true"
+		navButtonPress="onPressWorkPorcess" enableScrolling="false">
+		<m:content>
+			<m:SplitApp id="SplitAppDemo" initialDetail="detail" initialMaster="master" class="batchjobCss sapUiMediumMarginTop">
+				<m:detailPages>
+					<m:Page id="detail1" title="Overview" backgroundDesign="Solid" class="sapUiStdPage detailcss" showHeader="false" enableScrolling="false">
+						<m:VBox width="100%" items="{path: 'workprocessModel>/'}" class="hboxcss">
+							<m:HBox class="sapUiSmallMarginBegin sapUiSmallMarginTop">
+								<m:Label text="Total Work Process: "></m:Label>
+								<m:Label class="valuecss sapUiTinyMarginBegin" text="{workprocessModel>d/totalWorkProcessCount}"></m:Label>
+								<m:Label text="Dialouge:" class="sapUiLargeMarginBegin"></m:Label>
+								<m:Label class="valuecssc sapUiTinyMarginBegin" text="{workprocessModel>d/dialougeCount}"></m:Label>
+								<m:Label text="Update:" class="sapUiLargeMarginBegin"></m:Label>
+								<m:Label class=" valuecss sapUiTinyMarginBegin" text="{workprocessModel>d/updateCount}"></m:Label>
+								<m:Label text="Background:" class="sapUiLargeMarginBegin"></m:Label>
+								<m:Label class=" valuecss sapUiTinyMarginBegin" text="{workprocessModel>d/backgroundCount}"></m:Label>
+								<m:Label text="Spool:" class="sapUiLargeMarginBegin"></m:Label>
+								<m:Label class=" valuecss sapUiTinyMarginBegin" text="{workprocessModel>d/spoolCount}"></m:Label>
+								<m:Label text="Update Task2:" class="sapUiLargeMarginBegin"></m:Label>
+								<m:Label class="valuecss sapUiTinyMarginBegin" text="{workprocessModel>d/updateTask2Count}"></m:Label>
+							</m:HBox>
+						</m:VBox>
+						<m:Panel>
+							<m:VBox width="100%">
+					<Table id="PendingTable" class="uitablecss batchjobclass" rows="{path:'workprocessModel>/0/d/results'}" selectionMode="None"
+									ariaLabelledBy="title">
+									<columns>
+										<Column width="5rem">
+											<m:Label text="System" class="tableheadercss"/>
+											<template>
+												<m:Text text="{workprocessModel>SysID}" class="tablecellscss"/>
+											</template>
+										</Column>
+										<Column width="10rem">
+											<m:Label text="Avg Load 1min" class="tableheadercss sapUiMediumMarginBegin"/>
+											<template>
+												<m:Text text="{workprocessModel>AvgLoad1min}" wrapping="false" class="sapUiLargeMarginBegin tablecellscss"/>
+											</template>
+										</Column>
+										<Column width="10rem">
+											<m:Label text="Avg Load 5min" class="tableheadercss sapUiMediumMarginBegin"/>
+											<template>
+												<m:Text text="{workprocessModel>AvgLoad5min}" wrapping="false" class="sapUiLargeMarginBegin tablecellscss"/>
+											</template>
+										</Column>
+										<Column width="10rem">
+											<m:Label text="Avg Load 15min" class="tableheadercss sapUiMediumMarginBegin"/>
+											<template>
+												<m:Text text="{workprocessModel>AvgLoad15min}" wrapping="false" class="sapUiLargeMarginBegin tablecellscss"/>
+											</template>
+										</Column>
+										<Column width="8rem">
+											<m:Label text="Number" class="tableheadercss"/>
+											<template>
+												<m:Text text="{workprocessModel>Number}" class="tablecellscss sapUiSmallMarginBegin"/>
+											</template>
+										</Column>
+										<Column width="7rem">
+											<m:Label text="Type" class="tableheadercss"/>
+											<template>
+												<m:Text text="{workprocessModel>Type}" class="tablecellscss"/>
+											</template>
+										</Column>
+										<Column width="8rem">
+											<m:Label text="Process Id" class="tableheadercss"/>
+											<template>
+												<m:Text text="{workprocessModel>ProcessId}" wrapping="false" class="tablecellscss sapUiTinyMarginBegin"/>
+											</template>
+										</Column>
+										<Column width="9rem">
+											<m:Label text="WP Status" class="tableheadercss"/>
+											<template>
+												<m:Text text="{workprocessModel>wpstatus}" wrapping="true" class="tablecellscss"/>
+											</template>
+										</Column>
+										<Column width="7rem">
+											<m:Label text="Hold On" class="tableheadercss"/>
+											<template>
+												<m:Text text="{workprocessModel>Onhold}" wrapping="false" class="tablecellscss sapUiSmallMarginBegin"/>
+											</template>
+										</Column>
+										<Column width="7rem">
+											<m:Label text="Failures" class="tableheadercss"/>
+											<template>
+												<m:Text text="{workprocessModel>Failures}" wrapping="false" class="tablecellscss sapUiSmallMarginBegin"/>
+											</template>
+										</Column>
+										<Column width="9rem">
+											<m:Label text="Locked Sem." class="tableheadercss sapUiMediumMarginBegin"/>
+											<template>
+												<m:Text text="{workprocessModel>LockedSem}" wrapping="false" class="sapUiSmallMarginBegin tablecellscss"/>
+											</template>
+										</Column>
+										<Column width="9rem">
+											<m:Label text="Cpu Time" class="tableheadercss sapUiMediumMarginBegin"/>
+											<template>
+												<m:Text text="{workprocessModel>cputime}" wrapping="false" class="sapUiLargeMarginBegin tablecellscss"/>
+											</template>
+										</Column>
+										<Column width="8rem">
+											<m:Label text="Priority" class="tableheadercss sapUiMediumMarginBegin"/>
+											<template>
+												<m:Text text="{workprocessModel>priority}" wrapping="false" class="sapUiSmallMarginBegin tablecellscss"/>
+											</template>
+										</Column>
+										<Column width="9rem">
+											<m:Label text="Wait Priority" class="tableheadercss sapUiMediumMarginBegin"/>
+											<template>
+												<m:Text text="{workprocessModel>waitpriority}" wrapping="false" class="sapUiLargeMarginBegin tablecellscss"/>
+											</template>
+										</Column>
+									</columns>
+								</Table>
+							</m:VBox>
+						</m:Panel>
+					</m:Page>
+					<m:Page id="detailDetail1" title="Overview" class="sapUiStdPage detailcss" backgroundDesign="Solid" showHeader="false"
+						enableScrolling="false">
+						<m:VBox class="sapUiSmallMargin">
+							<m:Label text="System Details"/>
+						</m:VBox>
+					</m:Page>
+				</m:detailPages>
+				<m:masterPages>
+					<m:Page id="master3" title="Systems" backgroundDesign="List" class="sapUiStdPage mastercss">
+						<m:List mode="SingleSelectMaster" id="listIDApp" items="{sysListModel>/APPSystems/data}" itemPress=".onListItemPressApp" class="s4dcss">
+							<m:items>
+								<m:StandardListItem title="{sysListModel>sysId}" type="Active" custom:to="detail1"/>
+							</m:items>
+						</m:List>
+					</m:Page>
+				</m:masterPages>
+			</m:SplitApp>
+		</m:content>
+	</m:Page>
+</mvc:View>

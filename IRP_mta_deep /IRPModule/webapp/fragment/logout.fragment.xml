@@ -1,0 +1,20 @@
+<core:FragmentDefinition xmlns:html="http://www.w3.org/1999/xhtml" xmlns:f="sap.f" xmlns:u="sap.ui.unified" xmlns:core="sap.ui.core"
+	xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns:mvc="sap.ui.core.mvc" xmlns:upload="sap.m.upload">
+	<Popover contentWidth="20%" contentHeight="50%"  showHeader="false" showArrow="true" afterClose="afterProfileClose"
+		placement="Bottom">
+		<VBox justifyContent="Center" renderType="Bare">
+			<VBox justifyContent="Center" alignItems="Center" renderType="Bare">
+				<f:Avatar src="{personalInfoModel>/employeeProfileInfo/profilePic}" displaySize="Custom" customDisplaySize="6.50rem" displayShape="Circle"
+					class="sapUiMediumMarginTop"/>
+				<HBox/>
+			</VBox>
+			<VBox justifyContent="Center" alignItems="Center" renderType="Bare">
+				<Text text="{personalInfoModel>/employeeProfileInfo/name}" class="textcolor sapUiSmallMarginTop sapUiTinyMarginBegin"></Text>
+				<Text text="{personalInfoModel>/employeeProfileInfo/email}" class="sapUiTinyMarginTop sapUiTinyMarginBegin"></Text>
+			</VBox>
+			<HBox justifyContent="Center" renderType="Bare" width="100%" class="sapUiSizeCompact sapUiMediumMarginTop">
+				<Button text="{i18n>LOGOUT}" class="sapUiTinyMarginBegin sapUiTinyMarginBegin" press="onlogoutPress"/>
+			</HBox>
+		</VBox>
+	</Popover>
+</core:FragmentDefinition>

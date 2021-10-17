@@ -1,0 +1,479 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="ey.irp.IRPModule.controller.MemoryUtilzation"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:tnt="sap.tnt" xmlns:ui="sap.ui.table" xmlns:layout="sap.ui.layout"
+	xmlns:viz="sap.viz.ui5.controls" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds" xmlns:viz.data="sap.viz.ui5.data"
+	xmlns:chart="sap.suite.ui.commons" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Page title="Monitoring Dashboard / Memory Utilization" class="textcolor1 navbuttoncss" showNavButton="true"
+		navButtonPress="onPressMemoryUtilization">
+		<IconTabBar select="getselectedKey" class="sapUiResponsiveContentPadding iconss barcss">
+			<items>
+				<IconTabFilter class="textpendinglc" text="Hana DB">
+					<HBox>
+						<VBox>
+							<RadioButton id="idMC" selected="true" groupName="GroupA" text="Memory Consumption" select="selectMConsumption"/>
+						</VBox>
+						<VBox>
+							<RadioButton id="idTC" groupName="GroupA" text="Top Counsumers" select="selectTConsumers"/>
+						</VBox>
+						<VBox>
+							<RadioButton id="idHM" groupName="GroupA" text="Instance memory" select="selectHMemory"/>
+						</VBox>
+					</HBox>
+					<HBox class="hboxcss" justifyContent="End">
+						<VBox>
+							<SearchField enabled="false" class="searchicon" search="searchuser" width="100%"/>
+						</VBox>
+						<VBox class="sapUiSmallMarginBegin">
+							<Button id="idButton4" class=" abapcss buttonhoverT" visible="true" icon="sap-icon://table-view" press="onPress4"></Button>
+						</VBox>
+						<VBox class="sapUiTinyMarginBegin">
+							<Button id="idButton3" class=" abapcss buttonhoverg" visible="true" icon="sap-icon://donut-chart" press="onPress3"></Button>
+						</VBox>
+						<VBox class="sapUiTinyMarginEnd">
+							<Button id="idButton5" class="abapcss buttonhoverF" icon="sap-icon://filter" press="onPressFilterHana"></Button>
+						</VBox>
+						<VBox>
+							<Button id="idButton6" class="abapcss buttonhoverF" icon="sap-icon://filter" press="onPressFilterHanaT"></Button>
+						</VBox>
+						<VBox class="sapUiTinyMarginEnd">
+							<Button id="idButton7" class="abapcss buttonhoverF" icon="sap-icon://filter" press="onPressFilterHanaH"></Button>
+						</VBox>
+					</HBox>
+					<SplitApp id="SplitAppDemo" initialDetail="detail" initialMaster="master" class="splitappcss">
+						<detailPages>
+							<Page id="detail" title="Overview" backgroundDesign="Solid" class="sapUiStdPage detailcss" showHeader="false">
+								<HBox>
+									<VBox width="120%" height="100%" visible="true" id="idVbox3">
+										<chart:ChartContainerContent>
+											<chart:content>
+												<viz:VizFrame id="idLineChart2" uiConfig="{applicationSet:'fiori'}" height="424px" width="102%"
+													vizProperties="{ plotArea:{ dataLabel:{visible: true} }, title : {text:'Memory Utilization per Day'} }" selectData="myOnClickHandler"
+													renderComplete="handleRenderComplete" vizType='stacked_column'>
+													<viz:dataset>
+														<viz.data:FlattenedDataset data="{hanaDBUtilzation>/analyticalview/0/}">
+															<viz.data:dimensions>
+																<viz.data:DimensionDefinition name="per Day" value="{hanaDBUtilzation>SNAPSHOT_TIME}"/>
+																<viz.data:DimensionDefinition name="Sys ID" value="{hanaDBUtilzation>SYSTEM_ID}"/>
+															</viz.data:dimensions>
+															<viz.data:measures>
+																<viz.data:MeasureDefinition name="Memory Utilization(%)" value="{hanaDBUtilzation>PHYS_USED_PCT}"/>
+															</viz.data:measures>
+														</viz.data:FlattenedDataset>
+													</viz:dataset>
+													<viz:feeds>
+														<viz.feeds:FeedItem id='valueAxisFeed1' uid="valueAxis" type="Measure" values="Memory Utilization(%)"/>
+														<viz.feeds:FeedItem id='categoryAxisFeed1' uid="categoryAxis" type="Dimension" values="per Day"/>
+														<viz.feeds:FeedItem id='categoryAxisFeed2' uid="categoryAxis" type="Dimension" values="Sys ID"/>
+													</viz:feeds>
+												</viz:VizFrame>
+											</chart:content>
+										</chart:ChartContainerContent>
+									</VBox>
+									<VBox class="sapUiTinyMarginTop" visible="false" height="100%" width="100%" id="idVbox4">
+										<Table id="idTableM" sticky="ColumnHeaders" growing="true" class="mutableclassHD" inset="false" items="{hanaDBUtilzation>/analyticalview/0}">
+											<columns>
+												<Column width="6rem">
+													<Text text="Date" class="tableheadercss"/>
+												</Column>
+												<Column width="8rem">
+													<Text text="System" class="tableheadercss"/>
+												</Column>
+												<Column width="8rem">
+													<Text text="physical total (OS)" class="tableheadercss"/>
+												</Column>
+												<Column width="6rem">
+													<Text text="physical Used" class="tableheadercss"/>
+												</Column>
+												<Column width="6rem">
+													<Text text="Phy Used(%)" class="tableheadercss"/>
+												</Column>
+												<Column width="9rem">
+													<Text text="Hana Allocation" class="tableheadercss"/>
+												</Column>
+												<Column width="8rem">
+													<Text text="Allocation limit" class="tableheadercss"/>
+												</Column>
+												<Column width="8rem">
+													<Text text="Hana Used" class="tableheadercss"/>
+												</Column>
+												<Column width="8rem">
+													<Text text="Hana Used(%)" class="tableheadercss"/>
+												</Column>
+												<Column width="8rem">
+													<Text text="Swap Free" class="tableheadercss"/>
+												</Column>
+												<Column width="8rem">
+													<Text text="Swap Used" class="tableheadercss"/>
+												</Column>
+											</columns>
+											<items>
+												<ColumnListItem>
+													<cells>
+														<Text text="{hanaDBUtilzation>SNAPSHOT_TIME}" wrapping="true" class="tablecellscss"/>
+														<Text text="{hanaDBUtilzation>SYSTEM_ID}" class="tablecellscss" wrapping="true"/>
+														<Text text="{hanaDBUtilzation>PHYS_TOTAL_GB}" class="tablecellscss" wrapping="true"/>
+														<Text text="{hanaDBUtilzation>PHYS_USED_GB}GB" class="tablecellscss" wrapping="true"/>
+														<Text text="{hanaDBUtilzation>PHYS_USED_PCT}%" class="tablecellscss" wrapping="true"/>
+														<Text text="{hanaDBUtilzation>HANA_ALLOC_GB}GB" class="tablecellscss" wrapping="true"/>
+														<Text text="{hanaDBUtilzation>ALLOC_LIM_GB}" class="tablecellscss" wrapping="true"/>
+														<Text text="{hanaDBUtilzation>HANA_USED_GB}GB" class="tablecellscss" wrapping="true"/>
+														<Text text="{hanaDBUtilzation>HANA_USED_PCT}%" class="tablecellscss" wrapping="true"/>
+														<Text text="{hanaDBUtilzation>SWAP_FREE_GB}GB" class="tablecellscss" wrapping="true"/>
+														<Text text="{hanaDBUtilzation>SWAP_USED_GB}GB" class="tablecellscss" wrapping="true"/>
+													</cells>
+												</ColumnListItem>
+											</items>
+										</Table>
+									</VBox>
+									<VBox class="sapUiTinyMarginTop" visible="false" width="100%" id="idVbox5">
+										<Table sticky="ColumnHeaders" growing="true" class="mutableclassHD" inset="false" items="{hanaDBTopC>/analyticalviewTop/0}">
+											<columns>
+												<Column width="6rem">
+													<Text text="Sample Time" class="tableheadercss"/>
+												</Column>
+												<Column width="6rem">
+													<Text text="System" class="tableheadercss"/>
+												</Column>
+												<Column width="6rem">
+													<Text text="Num Sample" class="tableheadercss"/>
+												</Column>
+												<Column width="6rem">
+													<Text text="Pct(%)" class="tableheadercss"/>
+												</Column>
+												<Column width="9rem">
+													<Text text="Host" class="tableheadercss"/>
+												</Column>
+												<Column width="8rem">
+													<Text text="Port" class="tableheadercss"/>
+												</Column>
+												<!--<Column width="8rem">-->
+												<!--	<Text text="Conn Id" class="tableheadercss"/>-->
+												<!--</Column>-->
+												<Column width="8rem">
+													<Text text="Thread Id" class="tableheadercss"/>
+												</Column>
+												<Column width="8rem">
+													<Text text="Thread Type" class="tableheadercss"/>
+												</Column>
+												<Column width="8rem">
+													<Text text="Thread Method" class="tableheadercss"/>
+												</Column>
+												<Column width="8rem">
+													<Text text="Thread State" class="tableheadercss"/>
+												</Column>
+												<Column width="15rem">
+													<Text text="Thread Details" class="tableheadercss"/>
+												</Column>
+												<Column width="8rem">
+													<Text text="Statement Hash" class="tableheadercss"/>
+												</Column>
+												<Column width="8rem">
+													<Text text="Statement Id" class="tableheadercss"/>
+												</Column>
+												<Column width="8rem">
+													<Text text="App Name" class="tableheadercss"/>
+												</Column>
+												<Column width="12rem">
+													<Text text="App Source" class="tableheadercss"/>
+												</Column>
+												<Column width="8rem">
+													<Text text="Caller" class="tableheadercss"/>
+												</Column>
+												<Column width="8rem">
+													<Text text="Duration Ms" class="tableheadercss"/>
+												</Column>
+												<Column width="8rem">
+													<Text text="Cpu Ms" class="tableheadercss"/>
+												</Column>
+											</columns>
+											<items>
+												<ColumnListItem>
+													<cells>
+														<Text text="{hanaDBTopC>SAMPLE_TIME}" wrapping="true" class="tablecellscss"/>
+														<Text text="{hanaDBTopC>SYSTEM_ID}" class="tablecellscss" wrapping="true"/>
+														<Text text="{hanaDBTopC>NUM_SAMPLES}" class="tablecellscss" wrapping="true"/>
+														<Text text="{hanaDBTopC>PCT}%" class="tablecellscss" wrapping="true"/>
+														<Text text="{hanaDBTopC>HOST}" class="tablecellscss" wrapping="true"/>
+														<Text text="{hanaDBTopC>PORT}" class="tablecellscss" wrapping="true"/>
+														<Text text="{hanaDBTopC>THREAD_ID}" class="tablecellscss" wrapping="true"/>
+														<Text text="{hanaDBTopC>THREAD_TYPE}" class="tablecellscss" wrapping="true"/>
+														<Text text="{hanaDBTopC>THREAD_METHOD}" class="tablecellscss" wrapping="true"/>
+														<Text text="{hanaDBTopC>THREAD_STATE}" class="tablecellscss" wrapping="true"/>
+														<Text text="{hanaDBTopC>THREAD_DETAIL}" class="tablecellscss" wrapping="true"/>
+														<Text text="{hanaDBTopC>STATEMENT_HASH}" class="tablecellscss" wrapping="true"/>
+														<Text text="{hanaDBTopC>STATEMENT_ID}" class="tablecellscss" wrapping="true"/>
+														<Text text="{hanaDBTopC>APP_NAME}" class="tablecellscss" wrapping="true"/>
+														<Text text="{hanaDBTopC>APP_SOURCE}" class="tablecellscss" wrapping="true"/>
+														<Text text="{hanaDBTopC>CALLER}" class="tablecellscss" wrapping="true"/>
+														<Text text="{hanaDBTopC>DURATION_MS}" class="tablecellscss" wrapping="true"/>
+														<Text text="{hanaDBTopC>CPU_MS}" class="tablecellscss" wrapping="true"/>
+													</cells>
+												</ColumnListItem>
+											</items>
+										</Table>
+									</VBox>
+									<VBox class="sapUiTinyMarginTop" visible="false" width="100%" id="idVbox6">
+										<Table growing="true" sticky="ColumnHeaders" class="mutableclassHD" inset="false" items="{hanaDBHeapMemory>/analyticalviewHeap/0}">
+											<columns>
+												<Column width="6rem">
+													<Text text="Sample Time" class="tableheadercss"/>
+												</Column>
+												<Column width="6rem">
+													<Text text="System" class="tableheadercss"/>
+												</Column>
+												<Column width="9rem">
+													<Text text="Host" class="tableheadercss"/>
+												</Column>
+												<Column width="8rem">
+													<Text text="Port" class="tableheadercss"/>
+												</Column>
+												<Column width="8rem">
+													<Text text="Allocation Limit " class="tableheadercss"/>
+												</Column>
+												<Column width="8rem">
+													<Text text="Eff AllocationLimit" class="tableheadercss"/>
+												</Column>
+												<Column width="8rem">
+													<Text text="CODE" class="tableheadercss"/>
+												</Column>
+												<Column width="8rem">
+													<Text text="Stack" class="tableheadercss"/>
+												</Column>
+												<Column width="8rem">
+													<Text text="Shared" class="tableheadercss"/>
+												</Column>
+												<Column width="8rem">
+													<Text text="Heap Allocation" class="tableheadercss"/>
+												</Column>
+												<Column width="8rem">
+													<Text text="Heap Used" class="tableheadercss"/>
+												</Column>
+												<Column width="8rem">
+													<Text text="Heap consumption Column" class="tableheadercss"/>
+												</Column>
+												<Column width="8rem">
+													<Text text="Heap consumption Row" class="tableheadercss"/>
+												</Column>
+												<Column width="8rem">
+													<Text text="Heap System" class="tableheadercss"/>
+												</Column>
+												<Column width="8rem">
+													<Text text="Heap Stmt" class="tableheadercss"/>
+												</Column>
+												<Column width="8rem">
+													<Text text="Heap Cache" class="tableheadercss"/>
+												</Column>
+												<Column width="8rem">
+													<Text text="Heap Mon" class="tableheadercss"/>
+												</Column>
+												<Column width="8rem">
+													<Text text="Heap Other" class="tableheadercss"/>
+												</Column>
+											</columns>
+											<items>
+												<ColumnListItem>
+													<cells>
+														<Text text="{hanaDBHeapMemory>SNAPSHOT_TIME}" wrapping="true" class="tablecellscss"/>
+														<Text text="{hanaDBHeapMemory>SYSTEM_ID}" class="tablecellscss" wrapping="true"/>
+														<Text text="{hanaDBHeapMemory>HOST}" class="tablecellscss" wrapping="true"/>
+														<Text text="{hanaDBHeapMemory>PORT}" class="tablecellscss" wrapping="true"/>
+														<Text text="{hanaDBHeapMemory>ALLOC_LIM_GB}GB" class="tablecellscss" wrapping="true"/>
+														<Text text="{hanaDBHeapMemory>EFF_ALLOC_LIM_GB}GB" class="tablecellscss" wrapping="true"/>
+														<Text text="{hanaDBHeapMemory>CODE_GB}GB" class="tablecellscss" wrapping="true"/>
+														<Text text="{hanaDBHeapMemory>STACK_GB}GB" class="tablecellscss" wrapping="true"/>
+														<Text text="{hanaDBHeapMemory>SHARED_GB}GB" class="tablecellscss" wrapping="true"/>
+														<Text text="{hanaDBHeapMemory>H_ALLOC_GB}GB" class="tablecellscss" wrapping="true"/>
+														<Text text="{hanaDBHeapMemory>H_USED_GB}GB" class="tablecellscss" wrapping="true"/>
+														<Text text="{hanaDBHeapMemory>H_COL_GB}GB" class="tablecellscss" wrapping="true"/>
+														<Text text="{hanaDBHeapMemory>H_ROW_GB}GB" class="tablecellscss" wrapping="true"/>
+														<Text text="{hanaDBHeapMemory>H_SYS_GB}GB" class="tablecellscss" wrapping="true"/>
+														<Text text="{hanaDBHeapMemory>H_STMT_GB}GB" class="tablecellscss" wrapping="true"/>
+														<Text text="{hanaDBHeapMemory>H_CACHE_GB}GB" class="tablecellscss" wrapping="true"/>
+														<Text text="{hanaDBHeapMemory>H_MON_GB}GB" class="tablecellscss" wrapping="true"/>
+														<Text text="{hanaDBHeapMemory>H_OTHER_GB}GB" class="tablecellscss" wrapping="true"/>
+													</cells>
+												</ColumnListItem>
+											</items>
+										</Table>
+									</VBox>
+								</HBox>
+							</Page>
+							<Page id="detailDetail" title="Overview" class="sapUiStdPage detailcss" backgroundDesign="Solid" showHeader="false">
+								<VBox class="sapUiSmallMargin">
+									<Label text="System2 Details"/>
+								</VBox>
+							</Page>
+						</detailPages>
+						<masterPages>
+							<Page id="master2" title="Systems" backgroundDesign="List" class="sapUiStdPage mastercss">
+								<List mode="SingleSelectMaster" id="listID" itemPress=".onListItemPress" items="{sysListModel>/DBSystems/data}" class="s4dcss">
+									<items>
+										<StandardListItem title="{sysListModel>sysId}" type="Active" custom:to="detail" class="s4dcss s4dcss1"/>
+									</items>
+								</List>
+							</Page>
+						</masterPages>
+					</SplitApp>
+				</IconTabFilter>
+				<IconTabFilter class="textsubmitted" text="Application">
+					<HBox>
+						<VBox>
+							<RadioButton id="idMCA" selected="true" groupName="GroupA" text="Memory Consumption" select="selectMConsumptionA"/>
+						</VBox>
+						<VBox>
+							<RadioButton id="idHMA" groupName="GroupA" text="Heap Memory" select="selectHMA"/>
+						</VBox>
+					</HBox>
+					<HBox class="hboxcss" justifyContent="End">
+						<VBox>
+							<SearchField enabled="false" class="searchicon" search="searchuser" width="100%"/>
+						</VBox>
+						<VBox class="sapUiSmallMarginBegin">
+							<Button id="idButton2" class="abapcss buttonhoverT" visible="true" icon="sap-icon://table-view" press="onPress2"></Button>
+						</VBox>
+						<VBox class="sapUiTinyMarginBegin">
+							<Button id="idButton1" class="abapcss buttonhoverg" visible="true" icon="sap-icon://donut-chart" press="onPress1"></Button>
+						</VBox>
+					</HBox>
+					<SplitApp id="SplitAppDemoApp" initialDetail="detail" initialMaster="master" class="splitappcss">
+						<detailPages>
+							<Page id="detail1" title="Overview" backgroundDesign="Solid" class="sapUiStdPage detailcss" showHeader="false">
+								<HBox>
+									<VBox width="120%" height="100%" class="mutableclassApp mutableclassAppcahrt" visible="true" id="idVbox1">
+										<chart:ChartContainer id="chartContainer3" showFullScreen="false" showZoom="false">
+											<chart:ChartContainerContent>
+												<chart:content>
+													<viz:VizFrame id="idLineChart" uiConfig="{applicationSet:'fiori'}" height="426px"
+														vizProperties="{ plotArea:{ dataLabel:{visible: true} }, title : {text:'Memory Utilization per Hour'} }" selectData="myOnClickHandler"
+														renderComplete="handleRenderComplete" vizType='line'>
+														<viz:dataset>
+															<viz.data:FlattenedDataset data="{path:'MemoryUtilzation>/0/'}">
+																<viz.data:dimensions>
+																	<viz.data:DimensionDefinition name="Time" value="{path:'MemoryUtilzation>Time', formatter: '.formatter.timeFormatter'}"/>
+																	<viz.data:DimensionDefinition name="Sysid" value="{Sysid}"/>
+																</viz.data:dimensions>
+																<viz.data:measures>
+																	<viz.data:MeasureDefinition name="Memory_Used" value="{MemoryUtilzation>UsedMem}"/>
+																</viz.data:measures>
+															</viz.data:FlattenedDataset>
+														</viz:dataset>
+														<viz:feeds>
+															<viz.feeds:FeedItem id='valueAxisFeed2' uid="valueAxis" type="Measure" values="Memory_Used"/>
+															<viz.feeds:FeedItem id='categoryAxisFeed3' uid="categoryAxis" type="Dimension" values="Time,Sysid"/>
+														</viz:feeds>
+													</viz:VizFrame>
+												</chart:content>
+											</chart:ChartContainerContent>
+										</chart:ChartContainer>
+									</VBox>
+									<VBox class="sapUiTinyMarginTop" width="100%" id="idVbox2">
+										<Table growing="true" id="idIncTable" sticky="ColumnHeaders" class="mutableclassApp" inset="false" items="{MemoryUtilzation>/0/}">
+											<headerToolbar></headerToolbar>
+											<columns>
+												<Column width="10rem">
+													<Text text="Date" class="tableheadercss"/>
+												</Column>
+												<Column width="6rem">
+													<Text text="System" class="tableheadercss"/>
+												</Column>
+												<Column width="8rem">
+													<Text text="Host Name" class="tableheadercss"/>
+												</Column>
+												<Column width="6rem">
+													<Text text="physical Memory" class="tableheadercss"/>
+												</Column>
+												<Column width="6rem">
+													<Text text="Used Memory" class="tableheadercss"/>
+												</Column>
+												<Column width="6rem">
+													<Text text="Average Memory" class="tableheadercss"/>
+												</Column>
+											</columns>
+											<items>
+												<ColumnListItem>
+													<cells>
+														<Text text="{path:'MemoryUtilzation>Date', formatter: '.formatter.dateValue'}" class="tablecellscss"/>
+														<Text text="{MemoryUtilzation>Sysid}" class="tablecellscss"/>
+														<Text text="{MemoryUtilzation>Host}" class="tablecellscss"/>
+														<Text text="{MemoryUtilzation>PhysMem}GB" class="sapUiSmallMarginBegin tablecellscss"/>
+														<!--<Text text="{MemoryUtilzation>Time}" class="cellssize"/>-->
+														<Text text="{MemoryUtilzation>UsedMem}GB" class="sapUiSmallMarginBegin tablecellscss"/>
+														<Text text="{MemoryUtilzation>AvgFrMem}GB" class="tablecellscss"/>
+													</cells>
+												</ColumnListItem>
+											</items>
+										</Table>
+									</VBox>
+									<VBox class="sapUiTinyMarginTop" width="100%" id="idVbox7">
+										<Table growing="true" id="idIncTableA" sticky="ColumnHeaders" class="mutableclassApp" inset="false"
+											items="{hanaDBHeapMemoryA>/analyticalviewHeapA/0}">
+											<headerToolbar></headerToolbar>
+											<columns>
+												<Column width="6rem">
+													<Text text="Date" class="tableheadercss"/>
+												</Column>
+												<Column width="6rem">
+													<Text text="System" class="tableheadercss"/>
+												</Column>
+												<Column width="8rem">
+													<Text text="Host" class="tableheadercss"/>
+												</Column>
+												<Column width="6rem">
+													<Text text="Day" class="tableheadercss"/>
+												</Column>
+												<Column width="6rem">
+													<Text text="EM Allocated" class="tableheadercss"/>
+												</Column>
+												<Column width="6rem">
+													<Text text="EM Used" class="tableheadercss"/>
+												</Column>
+												<Column width="8rem">
+													<Text text="EM Available" class="tableheadercss"/>
+												</Column>
+												<Column width="6rem">
+													<Text text="Heap Used" class="tableheadercss"/>
+												</Column>
+												<Column width="6rem">
+													<Text text="Heap Total" class="tableheadercss"/>
+												</Column>
+											</columns>
+											<items>
+												<ColumnListItem>
+													<cells>
+														<Text text="{path:'hanaDBHeapMemoryA>Date', formatter: '.formatter.removetime'}" class="tablecellscss"/>
+														<Text text="{hanaDBHeapMemoryA>Sysid}" class="tablecellscss"/>
+														<Text text="{hanaDBHeapMemoryA>Host}" class="tablecellscss"/>
+														<Text text="{hanaDBHeapMemoryA>Day}" class="tablecellscss"/>
+														<Text text="{hanaDBHeapMemoryA>EMAllocated}" class="sapUiSmallMarginBegin tablecellscss"/>
+														<Text text="{hanaDBHeapMemoryA>EMUsed}" class="tablecellscss"/>
+														<Text text="{hanaDBHeapMemoryA>EMAvailable}" class="sapUiSmallMarginBegin tablecellscss"/>
+														<Text text="{hanaDBHeapMemoryA>HeapUsed}" class="tablecellscss"/>
+														<Text text="{hanaDBHeapMemoryA>HeapTotal}" class="sapUiSmallMarginBegin tablecellscss"/>
+														<!--<Text text="{hanaDBHeapMemoryA>AnalyTime}" class="tablecellscss"/>-->
+													</cells>
+												</ColumnListItem>
+											</items>
+										</Table>
+									</VBox>
+								</HBox>
+							</Page>
+							<Page id="detailDetail1" title="Overview" class="sapUiStdPage detailcss" backgroundDesign="Solid" showHeader="false">
+								<VBox class="sapUiSmallMargin">
+									<Label text="System Details"/>
+								</VBox>
+							</Page>
+						</detailPages>
+						<masterPages>
+							<Page id="master3" title="System" backgroundDesign="List" class="sapUiStdPage mastercss">
+								<List mode="SingleSelectMaster" id="listIDApp" items="{sysListModel>/APPSystems/data}" itemPress=".onListItemPressApp" class="s4dcss">
+									<items>
+										<StandardListItem title="{sysListModel>sysId}" type="Active" custom:to="detail1"/>
+									</items>
+								</List>
+							</Page>
+						</masterPages>
+					</SplitApp>
+				</IconTabFilter>
+			</items>
+		</IconTabBar>
+	</Page>
+</mvc:View>

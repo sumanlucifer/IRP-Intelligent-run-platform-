@@ -1,0 +1,249 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:m="sap.m" xmlns:u="sap.ui.unified"
+	controllerName="ey.irp.IRPModule.controller.abapDumps" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:tnt="sap.tnt" xmlns="sap.ui.table"
+	xmlns:layout="sap.ui.layout" xmlns:viz="sap.viz.ui5.controls" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+	xmlns:viz.data="sap.viz.ui5.data" xmlns:chart="sap.suite.ui.commons"
+	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<m:Page title="Monitoring Dashboard/Abap Dumps" class="textcolor1 navbuttoncss sapUiSmallMarginTop" showNavButton="true"
+		navButtonPress="onPressabapdumps" enableScrolling="false">
+		<m:content>
+			<m:SplitApp id="SplitAppDemo" initialDetail="detail" initialMaster="master" class="batchjobCss sapUiMediumMarginTop">
+				<m:detailPages>
+					<m:Page id="detail" title="Overview" backgroundDesign="Solid" class="sapUiStdPage detailcss" 
+					showHeader="false" enableScrolling="false">
+						<m:HBox justifyContent="End">
+							<m:VBox class="sapUiSmallMarginBegin">
+								<m:Button id="idButton2" class="abapcss buttonhoverT" visible="true" icon="sap-icon://table-view" press="onPress2"></m:Button>
+							</m:VBox>
+							<m:VBox class="sapUiTinyMarginBegin">
+								<m:Button id="idButton1" class="abapcss buttonhoverg" visible="true" icon="sap-icon://donut-chart" press="onPress1"></m:Button>
+							</m:VBox>
+						</m:HBox>
+						<m:VBox width="100%" class="mutableclassApp mutableclassAppcahrt" visible="true" id="idVbox1">
+							<chart:ChartContainer id="chartContainer3" showFullScreen="false" showZoom="false">
+								<chart:ChartContainerContent>
+									<chart:content>
+										<viz:VizFrame id="idLineChartAbap" uiConfig="{applicationSet:'fiori'}" height="426px" width="440px"
+											vizProperties="{ plotArea:{ dataLabel:{visible: true} }, title : {text:'Dumps Created'} }" selectData="myOnClickHandler"
+											renderComplete="handleRenderComplete" vizType='line'>
+											<viz:dataset>
+												<viz.data:FlattenedDataset data="{path:'abapDumpModel>/0/d/totalDumpCountPerDate'}">
+													<viz.data:dimensions>
+														<viz.data:DimensionDefinition name="date" value=" {path: 'abapDumpModel>date', formatter: '.formatter.abapdate'}"/>
+														<!--<viz.data:DimensionDefinition name="Sysid" value="{abapDumpModel>Sysid}"/>-->
+													</viz.data:dimensions>
+													<viz.data:measures>
+														<viz.data:MeasureDefinition name="count" value="{abapDumpModel>count}"/>
+													</viz.data:measures>
+												</viz.data:FlattenedDataset>
+											</viz:dataset>
+											<viz:feeds>
+												<viz.feeds:FeedItem id='valueAxisFeed1' uid="valueAxis" type="Measure" values="count"/>
+												<viz.feeds:FeedItem id='categoryAxisFeed1' uid="categoryAxis" type="Dimension" values="date"/>
+											</viz:feeds>
+										</viz:VizFrame>
+									</chart:content>
+								</chart:ChartContainerContent>
+							</chart:ChartContainer>
+						</m:VBox>
+						<m:VBox visible="false" width="100%" id="idVbox2">
+							<Table id="idProductsTable" class="uitablecss batchjobclass" rows="{path:'abapDumpModel>/0/d/results'}" selectionMode="None"
+								ariaLabelledBy="title">
+								<columns>
+									<Column width="6rem">
+										<m:Label text="Date" class="tableheadercss"/>
+										<template>
+											<m:Text text="{path:'abapDumpModel>Zcreationdate',formatter:'.formatter.removetime'}" class="tablecellscss"/>
+										</template>
+									</Column>
+									<Column width="6rem">
+										<m:Label text="System" class="tableheadercss"/>
+										<template>
+											<m:Text text="{abapDumpModel>Sysid}" class="tablecellscss"/>
+										</template>
+									</Column>
+									<Column width="9rem">
+										<m:Label text="Host" class="tableheadercss"/>
+										<template>
+											<m:Text text="{abapDumpModel>Host}" class="tablecellscss"/>
+										</template>
+									</Column>
+									<Column width="8rem">
+										<m:Label text="User Name" class="tableheadercss"/>
+										<template>
+											<m:Text text="{abapDumpModel>Zusername}" wrapping="true" class="tablecellscss"/>
+										</template>
+									</Column>
+									<Column width="9rem">
+										<m:Label text="Incident Created" class="tableheadercss"/>
+										<template>
+											<m:Text text="{abapDumpModel>Zincident}" wrapping="false" class="tablecellscss sapUiSmallMarginBegin"/>
+										</template>
+									</Column>
+									<Column width="7rem">
+										<m:Label text="Line No" class="tableheadercss"/>
+										<template>
+											<m:Text text="{abapDumpModel>Zlinenumber}" wrapping="false" class="tablecellscss sapUiSmallMarginBegin"/>
+										</template>
+									</Column>
+									<Column width="20rem">
+										<m:Label text="Program Name" class="tableheadercss sapUiMediumMarginBegin"/>
+										<template>
+											<m:Text text="{abapDumpModel>Zprogramname}" wrapping="false" class="sapUiSmallMarginBegin tablecellscss"/>
+										</template>
+									</Column>
+									<Column width="20rem">
+										<m:Label text="Include Name" class="tableheadercss sapUiMediumMarginBegin"/>
+										<template>
+											<m:Text text="{abapDumpModel>Zincludename}" wrapping="false" class="sapUiSmallMarginBegin tablecellscss"/>
+										</template>
+									</Column>
+									<Column width="30rem">
+										<m:Label text="Description" class="tableheadercss sapUiMediumMarginBegin"/>
+										<template>
+											<m:Text text="{abapDumpModel>Zdescription}" wrapping="true" class="sapUiSmallMarginBegin tablecellscss"/>
+										</template>
+									</Column>
+								</columns>
+							</Table>
+						</m:VBox>
+					</m:Page>
+					<m:Page id="detailDetail1" title="Overview" class="sapUiStdPage detailcss" backgroundDesign="Solid" showHeader="false"
+						enableScrolling="false">
+						<m:VBox class="sapUiSmallMargin">
+							<m:Label text="System Details"/>
+						</m:VBox>
+					</m:Page>
+				</m:detailPages>
+				<m:masterPages>
+					<m:Page id="master3" title="Systems" backgroundDesign="List" class="sapUiStdPage mastercss">
+						<m:List mode="SingleSelectMaster" id="listIDApp" items="{sysListModel>/APPSystems/data}" itemPress=".onListItemPressApp" class="s4dcss">
+							<m:items>
+								<m:StandardListItem title="{sysListModel>sysId}" type="Active" custom:to="detail1"/>
+							</m:items>
+						</m:List>
+					</m:Page>
+				</m:masterPages>
+			</m:SplitApp>
+		</m:content>
+	</m:Page>
+	<!--<IconTabBar class="sapUiResponsiveContentPadding iconss barcss">-->
+	<!--	<items>-->
+	<!--		<IconTabFilter class="textsubmitted" text="Application">-->
+	<!--			<SplitApp id="SplitAppDemoApp" initialDetail="detail" initialMaster="master" class="splitappcss">-->
+	<!--				<detailPages>-->
+	<!--					<Page id="detail1" title="Overview" backgroundDesign="Solid" class="sapUiStdPage detailcss" showHeader="false">-->
+	<!--						<HBox class="hboxcss" justifyContent="End">-->
+	<!--<VBox>-->
+	<!--	<SearchField class="searchicon" search="searchuser" width="100%"/>-->
+	<!--</VBox>-->
+	<!--							<VBox class="sapUiSmallMarginBegin">-->
+	<!--								<Button id="idButton2" class="abapcss buttonhoverT" visible="true" icon="sap-icon://table-view" press="onPress2"></Button>-->
+	<!--							</VBox>-->
+	<!--							<VBox class="sapUiTinyMarginBegin">-->
+	<!--								<Button id="idButton1" class="abapcss buttonhoverg" visible="true" icon="sap-icon://donut-chart" press="onPress1"></Button>-->
+	<!--							</VBox>-->
+	<!--						</HBox>-->
+	<!--						<HBox>-->
+	<!--							<VBox width="100%" class="mutableclassApp mutableclassAppcahrt" visible="true" id="idVbox1">-->
+	<!--								<chart:ChartContainer id="chartContainer3" showFullScreen="false" showZoom="false">-->
+	<!--									<chart:ChartContainerContent>-->
+	<!--										<chart:content>-->
+	<!--											<viz:VizFrame id="idLineChartAbap" uiConfig="{applicationSet:'fiori'}" height="426px" width="440px"-->
+	<!--												vizProperties="{ plotArea:{ dataLabel:{visible: true} }, title : {text:'Dumps Created'} }" selectData="myOnClickHandler"-->
+	<!--												renderComplete="handleRenderComplete" vizType='line'>-->
+	<!--												<viz:dataset>-->
+	<!--													<viz.data:FlattenedDataset data="{path:'abapDumpModel>/0/d/totalDumpCountPerDate'}">-->
+	<!--														<viz.data:dimensions>-->
+	<!--															<viz.data:DimensionDefinition name="date" value=" {path: 'abapDumpModel>date', formatter: '.formatter.abapdate'}"/>-->
+	<!--<viz.data:DimensionDefinition name="Sysid" value="{abapDumpModel>Sysid}"/>-->
+	<!--														</viz.data:dimensions>-->
+	<!--														<viz.data:measures>-->
+	<!--															<viz.data:MeasureDefinition name="count" value="{abapDumpModel>count}"/>-->
+	<!--														</viz.data:measures>-->
+	<!--													</viz.data:FlattenedDataset>-->
+	<!--												</viz:dataset>-->
+	<!--												<viz:feeds>-->
+	<!--													<viz.feeds:FeedItem id='valueAxisFeed1' uid="valueAxis" type="Measure" values="count"/>-->
+	<!--													<viz.feeds:FeedItem id='categoryAxisFeed1' uid="categoryAxis" type="Dimension" values="date"/>-->
+	<!--												</viz:feeds>-->
+	<!--											</viz:VizFrame>-->
+	<!--										</chart:content>-->
+	<!--									</chart:ChartContainerContent>-->
+	<!--								</chart:ChartContainer>-->
+	<!--							</VBox>-->
+	<!--							<VBox visible="false" width="100%" id="idVbox2">-->
+	<!--								<Table sticky="ColumnHeaders" growing="true" growingThreshold="100" id="idIncTable" class="mutableclassApp"-->
+	<!--									items="{path:'abapDumpModel>/0/d/results'}">-->
+	<!--									<columns>-->
+	<!--										<Column width="15rem">-->
+	<!--											<Text text="Date" id="ttext" class="tableheadercss"/>-->
+	<!--										</Column>-->
+	<!--										<Column width="6rem" hAlign="Center" minScreenWidth="Tablet" demandPopin="true">-->
+	<!--											<Text text="System" class="tableheadercss"/>-->
+	<!--										</Column>-->
+	<!--										<Column width="8rem" hAlign="Center" minScreenWidth="Tablet" demandPopin="true">-->
+	<!--											<Text text="System/Host" class="tableheadercss"/>-->
+	<!--										</Column>-->
+	<!--										<Column width="8rem" hAlign="Center" minScreenWidth="Tablet" demandPopin="true">-->
+	<!--											<Text text="User Name" class="tableheadercss"/>-->
+	<!--										</Column>-->
+	<!--										<Column width="8rem" hAlign="Center" minScreenWidth="Tablet" demandPopin="true">-->
+	<!--											<Text text="Incident Created" class="tableheadercss"/>-->
+	<!--										</Column>-->
+	<!--										<Column width="8rem" hAlign="Center" minScreenWidth="Tablet" demandPopin="true">-->
+	<!--											<Text text="Line No" class="tableheadercss"/>-->
+	<!--										</Column>-->
+	<!--										<Column width="17rem" hAlign="Center" minScreenWidth="Tablet" demandPopin="true">-->
+	<!--											<Text text="Program Name" class="tableheadercss"/>-->
+	<!--										</Column>-->
+	<!--										<Column width="17rem" hAlign="Center" minScreenWidth="Tablet" demandPopin="true">-->
+	<!--											<Text text="Include Name" class="tableheadercss"/>-->
+	<!--										</Column>-->
+	<!--										<Column width="15rem" hAlign="Center" minScreenWidth="Tablet" demandPopin="true">-->
+	<!--											<Text text="Description" class="tableheadercss"/>-->
+	<!--										</Column>-->
+	<!--									</columns>-->
+	<!--									<items>-->
+	<!--										<ColumnListItem>-->
+	<!--											<cells>-->
+	<!--												<Text text="{path:'abapDumpModel>Zcreationdate',formatter:'.formatter.removetime'}" class="tablecellscss"/>-->
+	<!--												<Text text="{abapDumpModel>Sysid}" class="tablecellscss"/>-->
+	<!--												<Text text="{abapDumpModel>Host}" class="tablecellscss"/>-->
+	<!--												<Text text="{abapDumpModel>Zusername}" class="tablecellscss"/>-->
+	<!--												<Text text="{abapDumpModel>Zincident}" class="tablecellscss"/>-->
+	<!--												<Text text="{abapDumpModel>Zlinenumber}" class="tablecellscss"/>-->
+	<!--												<Text text="{abapDumpModel>Zprogramname}" class="tablecellscss"/>-->
+	<!--												<Text text="{abapDumpModel>Zincludename}" class="tablecellscss"/>-->
+	<!--												<Text text="{abapDumpModel>Zdescription}" class="tablecellscss"/>-->
+	<!--											</cells>-->
+	<!--										</ColumnListItem>-->
+	<!--									</items>-->
+	<!--								</Table>-->
+	<!--							</VBox>-->
+	<!--						</HBox>-->
+	<!--					</Page>-->
+	<!--					<Page id="detailDetail1" title="Overview" class="sapUiStdPage detailcss" backgroundDesign="Solid" showHeader="false">-->
+	<!--						<VBox class="sapUiSmallMargin">-->
+	<!--							<Label text="System Details"/>-->
+	<!--						</VBox>-->
+	<!--					</Page>-->
+	<!--				</detailPages>-->
+	<!--				<masterPages>-->
+	<!--					<Page id="master3" title="Systems" backgroundDesign="List" class="sapUiStdPage mastercss">-->
+	<!--						<List mode="SingleSelectMaster" id="listID" items="{sysListModel>/APPSystems/data}" itemPress=".onListItemPressApp" class="s4dcss">-->
+	<!--							<items>-->
+	<!--								<StandardListItem title="{sysListModel>sysId}" type="Active" custom:to="detail1"/>-->
+	<!--							</items>-->
+	<!--						</List>-->
+	<!--<List mode="SingleSelectMaster" id="listID" itemPress=".onListItemPressApp" items="{sysListModel>/DBSystems/data}" class="s4dcss">-->
+	<!--	<items>-->
+	<!--		<StandardListItem title="{sysListModel>sysId}" type="Active" custom:to="detail" class="s4dcss s4dcss1"/>-->
+	<!--	</items>-->
+	<!--</List>-->
+	<!--					</Page>-->
+	<!--				</masterPages>-->
+	<!--			</SplitApp>-->
+	<!--		</IconTabFilter>-->
+	<!--	</items>-->
+	<!--</IconTabBar>-->
+</mvc:View>

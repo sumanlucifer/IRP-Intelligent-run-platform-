@@ -1,0 +1,121 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:m="sap.m" xmlns:u="sap.ui.unified"
+	controllerName="ey.irp.IRPModule.controller.batchjoblogs" xmlns="sap.ui.table"
+	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" xmlns:html="http://www.w3.org/1999/xhtml">
+	<m:Page title="Monitoring Dashboard/Batch Job Logs" class="textcolor1 navbuttoncss sapUiSmallMarginTop" showNavButton="true"
+		navButtonPress="onPressJobLogs" enableScrolling="false">
+		<m:content>
+			<m:SplitApp id="SplitAppDemo" initialDetail="detail" initialMaster="master" class="batchjobCss sapUiMediumMarginTop">
+				<m:detailPages>
+					<m:Page id="detail" title="Overview" backgroundDesign="Solid" class="sapUiStdPage detailcss" showHeader="false" enableScrolling="false">
+						<m:HBox class="sapUiTinyMarginTop">
+							<m:VBox>
+								<m:SearchField class="searchicon sapUiTinyMarginBegin" search="searchuser" width="100%"/>
+							</m:VBox>
+							<m:VBox class="sapUiSmallMarginBegin sapUiSmallMarginTop">
+								<m:Label text="Status:" class="textcolorbatch"></m:Label>
+							</m:VBox>
+							<m:VBox class="sapUiTinyMarginBegin">
+								<m:ComboBox id="idComboType" items="{batchjobmodelN>/workProcesstype}" placeholder="select" selectionChange="officeComboChange"
+									change="onchange" class="combocss">
+									<m:items class="listcss">
+										<core:ListItem key="{batchjobmodelN>key}" text="{batchjobmodelN>text}" class="listcss1"/>
+									</m:items>
+								</m:ComboBox>
+							</m:VBox>
+							<m:VBox>
+								<m:Button id="previous" type="Emphasized" press="onPrevious" icon="sap-icon://nav-back" class="buttonclass sapUiSmallMarginBegin"/>
+							</m:VBox>
+							<m:VBox>
+								<m:Button id="idno" text="{batchjobmodelN>/currentPage}" class="buttonclassno sapUiTinyMarginBegin"/>
+							</m:VBox>
+							<m:VBox>
+								<m:Text text="/{batchjobmodelN>/totalPages}" class="textcss sapUiSmallMarginTop sapUiTinyMarginBegin"/>
+							</m:VBox>
+							<m:VBox>
+								<m:Button id="next" type="Emphasized" press="onNext" icon="sap-icon://navigation-right-arrow" class="buttonclass sapUiTinyMarginBegin"/>
+							</m:VBox>
+							<m:VBox>
+								<m:Text text="{batchjobmodelN>/disRecInfo}" class="textcss sapUiSmallMarginTop sapUiSmallMarginBegin"/>
+							</m:VBox>
+							<m:VBox>
+								<m:Button id="idButton5" class="abapcss buttonhoverF sapUiSmallMarginEnd" icon="sap-icon://filter" press="onPressFilterjob"></m:Button>
+							</m:VBox>
+						</m:HBox>
+						<m:Panel>
+							<m:VBox>
+								<Table id="idProductsTable" class="uitablecss batchjobclass" rows="{batchjobmodelN>/workProcessTableData}" selectionMode="None"
+									ariaLabelledBy="title">
+									<columns>
+										<Column width="15rem">
+											<m:Label text=" Job Start Date" class="tableheadercss"/>
+											<template>
+												<m:Text text="{path:'batchjobmodelN>Strtdate', formatter: '.formatter.dateValue'}" class="tablecellscss"/>
+											</template>
+										</Column>
+										<Column width="15rem">
+											<m:Label text="Job End Date" class="tableheadercss"/>
+											<template>
+												<m:Text text="{path:'batchjobmodelN>Enddate', formatter: '.formatter.dateValue'}" class="tablecellscss"/>
+											</template>
+										</Column>
+										<Column width="15rem">
+											<m:Label text="change date" class="tableheadercss"/>
+											<template>
+												<m:Text text="{path:'batchjobmodelN>Lastchdate', formatter: '.formatter.dateValue'}" class="tablecellscss"/>
+											</template>
+										</Column>
+										<Column width="8rem">
+											<m:Label text="System" class="tableheadercss"/>
+											<template>
+												<m:Text text="{batchjobmodelN>SysID}" wrapping="false" class="tablecellscss sapUiTinyMarginBegin"/>
+											</template>
+										</Column>
+										<Column width="15rem">
+											<m:Label text="Job Name" class="tableheadercss"/>
+											<template>
+												<m:Text text="{batchjobmodelN>Jobname}" wrapping="true" class="tablecellscss"/>
+											</template>
+										</Column>
+										<Column width="9rem">
+											<m:Label text="Duration" class="tableheadercss"/>
+											<template>
+												<m:Text text="{batchjobmodelN>Duration}" wrapping="false" class="tablecellscss sapUiSmallMarginBegin"/>
+											</template>
+										</Column>
+										<Column width="9rem">
+											<m:Label text="Job Scheduler" class="tableheadercss"/>
+											<template>
+												<m:Text text="{batchjobmodelN>Sdluname}" wrapping="false" class="tablecellscss sapUiSmallMarginBegin"/>
+											</template>
+										</Column>
+										<Column width="11rem">
+											<m:Label text="Status" class="tableheadercss sapUiMediumMarginBegin"/>
+											<template>
+												<m:Text text="{batchjobmodelN>Status}" wrapping="false" class="sapUiSmallMarginBegin tablecellscss"/>
+											</template>
+										</Column>
+									</columns>
+								</Table>
+							</m:VBox>
+						</m:Panel>
+					</m:Page>
+					<m:Page id="detailDetail" title="Overview" class="sapUiStdPage detailcss" backgroundDesign="Solid" showHeader="false"
+						enableScrolling="false">
+						<m:VBox class="sapUiSmallMargin">
+							<m:Label text="System Details"/>
+						</m:VBox>
+					</m:Page>
+				</m:detailPages>
+				<m:masterPages>
+					<m:Page id="master2" title="Systems" backgroundDesign="List" class="sapUiStdPage mastercss">
+						<m:List mode="SingleSelectMaster" items="{sysListModel>/APPSystems/data}" id="listIDApp" itemPress=".onListItemPress" class="s4dcss">
+							<m:items>
+								<m:StandardListItem title="{sysListModel>sysId}" type="Active" custom:to="detail"/>
+							</m:items>
+						</m:List>
+					</m:Page>
+				</m:masterPages>
+			</m:SplitApp>
+		</m:content>
+	</m:Page>
+</mvc:View>

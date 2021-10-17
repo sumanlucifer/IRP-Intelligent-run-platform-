@@ -1,0 +1,658 @@
+<mvc:View controllerName="ey.irp.IRPModule.controller.View1" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m"
+	xmlns:tnt="sap.tnt" xmlns:f="sap.f" height="100%" class="side-navigation-demo" xmlns:core="sap.ui.core" xmlns:viz="sap.viz.ui5.controls"
+	xmlns:viz.data="sap.viz.ui5.data" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds">
+	<tnt:ToolPage id="toolPage" class="page2BgImg">
+		<tnt:header>
+			<tnt:ToolHeader class="headercolor">
+				<Button class="buttonNav" id="sideNavigationToggleButton" icon="sap-icon://menu2" type="Transparent" press=".onSideNavButtonPress"></Button>
+				<Image src='./image/imagelogo.svg' class="margin"></Image>
+				<HBox>
+					<MultiComboBox id="multiCombomonitoring" visible="{ path: 'sysListModel>/visible' }" width="350px"
+						class="EYinputfield batchjobclass selectedcss" placeholder="Systems" items="{ path: 'sysListModel>/SystemList/sysIdList' }">
+						<core:Item key="{sysListModel>SYSTYPE}" text="{sysListModel>SYSID}"/>
+					</MultiComboBox>
+					<Button class="sapUiTinyMarginBegin buttoncss applycss" visible="{ path: 'sysListModel>/visible' }" id="idApply" text="Apply"
+						press="onApply"></Button>
+					<Button class="sapUiTinyMarginBegin buttoncss applycss" id="idP2pFilter" text="Advance Search" visible="false" press="globalP2P"></Button>
+				</HBox>
+				<ToolbarSpacer/>
+				<tnt:ToolHeaderUtilitySeparator/>
+				<ToolbarSpacer>
+					<layoutData>
+						<OverflowToolbarLayoutData priority="NeverOverflow" minWidth="20px"/>
+					</layoutData>
+				</ToolbarSpacer>
+				<Button id="BadgedButton" press="onNotificationPressed" class="bell" icon="sap-icon://bell">
+					<customData>
+						<BadgeCustomData key="badge" value="287"/>
+					</customData>
+				</Button>
+				<Label text=" | " class="text"/>
+				<Button press="onNotificationPressed1" class="bell" icon="sap-icon://sys-help"></Button>
+				<Label text=" | " class="text"/>
+				<f:Avatar press="openLogoutFragment" src="" displaySize="Custom" customDisplaySize="1.8rem" displayShape="Circle" class="sapUiTinyMarginEnd"/>
+			</tnt:ToolHeader>
+		</tnt:header>
+		<tnt:sideContent>
+			<tnt:SideNavigation expanded="true" itemSelect="onItemSelect" class="bcolor">
+				<tnt:NavigationList id="idNav" class="new">
+					<tnt:NavigationListItem id="IdM" key="root1" class="removeblack " text="Monitoring" icon="sap-icon://performance"></tnt:NavigationListItem>
+					<tnt:NavigationListItem id="IdSN" key="root2" class="removeblack" text="Service Now" icon="sap-icon://crm-service-manager"></tnt:NavigationListItem>
+					<tnt:NavigationListItem id="IdE" key="root3" class="removeblack" text="P2P Processes" icon="sap-icon://accounting-document-verification"></tnt:NavigationListItem>
+					<tnt:NavigationListItem id="IdG" key="root4" class="removeblack" text="Robotics Process Automation" icon="sap-icon://add-coursebook"></tnt:NavigationListItem>
+					<tnt:NavigationListItem id="IdME" key="root5" class="removeblack" text="Utilities" icon="sap-icon://add-coursebook"></tnt:NavigationListItem>
+				</tnt:NavigationList>
+				<!--<tnt:fixedItem>-->
+				<!--	<tnt:NavigationList class="new">-->
+				<!--		<tnt:NavigationListItem id="IdH" key="root6" class="removeblack" text="Help" icon="sap-icon://sys-help"></tnt:NavigationListItem>-->
+				<!--		<tnt:NavigationListItem id="IdL" key="root7" class="removeblack" text="Logout" icon="sap-icon://log"></tnt:NavigationListItem>-->
+				<!--	</tnt:NavigationList>-->
+				<!--</tnt:fixedItem>-->
+			</tnt:SideNavigation>
+		</tnt:sideContent>
+		<tnt:mainContents>
+			<NavContainer id="pageContainer" initialPage="root1">
+				<pages>
+					<ScrollContainer id="root1" horizontal="false" vertical="true" height="100%">
+						<HBox height="30%">
+							<VBox width="49%" height="100%" id="memoryUtilization" class="sapUiTinyMarginBegin sapUiSmallMarginTop cpumargin">
+								<Label class="yellow sapUiTinyMarginTop sapUiSmallMarginBegin"></Label>
+								<Label class="sapUiSmallMarginBegin textmargin textcolor" text="Memory Utilization"/>
+								<viz:VizFrame class="sapUiSmallMarginBegin cpumargin" id="idVizFrameMU"
+									vizProperties="{ title: {text : 'Your Title', visible : false},plotArea:{ dataLabel:{visible: true}}}" uiConfig="{applicationSet:'fiori'}"
+									height="228px" width="96%" vizType='stacked_column'>
+									<viz:dataset>
+										<viz.data:FlattenedDataset data="{path: 'landingPageModel>/'}">
+											<viz.data:dimensions>
+												<viz.data:DimensionDefinition name="Systems" value="{Sysid}"/>
+											</viz.data:dimensions>
+											<viz.data:measures>
+												<viz.data:MeasureDefinition name="Memory Used(%)" value="{memPerUsed}"/>
+											</viz.data:measures>
+										</viz.data:FlattenedDataset>
+									</viz:dataset>
+									<viz:feeds>
+										<viz.feeds:FeedItem id='valueAxisFeed' uid="valueAxis" type="Measure" values="Memory Used(%)"/>
+										<viz.feeds:FeedItem id='categoryAxisFeed' uid="categoryAxis" type="Dimension" values="Systems"/>
+									</viz:feeds>
+								</viz:VizFrame>
+							</VBox>
+							<VBox width="49%" height="100%" id="cpuUtilization" class="sapUiTinyMarginBegin sapUiSmallMarginTop cpumargin">
+								<Label class="yellow sapUiTinyMarginTop sapUiSmallMarginBegin"></Label>
+								<Label class="sapUiSmallMarginBegin textmargin textcolor" text="CPU Utilization"/>
+								<viz:VizFrame class="cpumargin" id="idVizFramCPU" vizType="stacked_bar" height="228px" width="100%"
+									vizProperties="{ title: {text : 'Your Title', visible : false},plotArea:{ dataLabel:{visible: true}}}">
+									<viz:dataset>
+										<viz.data:FlattenedDataset data="{path: 'landingPageCPUModel>/'}">
+											<viz.data:dimensions>
+												<viz.data:DimensionDefinition name="Systems" value="{Sysid}"/>
+											</viz.data:dimensions>
+											<viz.data:measures>
+												<viz.data:MeasureDefinition name="Used" value="{totalUsed}"/>
+												<viz.data:MeasureDefinition name="Idle" value="{IdleTotal}"/>
+											</viz.data:measures>
+										</viz.data:FlattenedDataset>
+									</viz:dataset>
+									<viz:feeds>
+										<viz.feeds:FeedItem id='valueAxisFeedcpu1' uid="valueAxis" type="Measure" values="Used"/>
+										<viz.feeds:FeedItem id='valueAxisFeedcpu2' uid="valueAxis" type="Measure" values="Idle"/>
+										<viz.feeds:FeedItem id='categoryAxisFeedcpu' uid="categoryAxis" type="Dimension" values="Systems"/>
+									</viz:feeds>
+								</viz:VizFrame>
+							</VBox>
+						</HBox>
+						<HBox>
+							<VBox width="24.1%" id="logandtraces" class="sapUiTinyMarginBegin sapUiTinyMarginTop sAcSS logs">
+								<Label class="yellow sapUiSmallMarginTop sapUiSmallMarginBegin"></Label>
+								<Label class="sapUiSmallMarginBegin textmargin textcolor" text="Logs and Trace"/>
+								<core:Icon src="sap-icon://create" class="sapUiTinyMarginTop sapUiSmallMarginBegin" color="#BCBCBC"></core:Icon>
+							</VBox>
+							<VBox width="24.1%" id="abapid" class="sapUiTinyMarginBegin sapUiTinyMarginTop sAcSS logs">
+								<Label class="yellow sapUiSmallMarginTop sapUiSmallMarginBegin"/>
+								<Label class="sapUiSmallMarginBegin textmargin textcolor" text="ABAP Dumps"/>
+								<core:Icon src="sap-icon://it-system" class=" sapUiTinyMarginTop sapUiSmallMarginBegin" color="#BCBCBC"></core:Icon>
+								<ScrollContainer class="scrollWidth" height="69%" vertical="true" focusable="true">
+									<VBox class="sapUiLargeMarginBegin hovercss">
+										<HBox>
+											<VBox width="30%">
+												<Label class="sapUiTinyMarginBegin textcolorcss" text="Sytems"/>
+											</VBox>
+											<VBox width="40%">
+												<Label class="sapUiLargeMarginBegin textcolorcss" text="Current Count"/>
+											</VBox>
+										</HBox>
+										<HBox>
+											<List class="listCssSA" items="{path: 'abapDumpModelL>/'}">
+												<StandardListItem class="sapUiLargeMarginEnd" title="{abapDumpModelL>d/results/0/Sysid}"
+													info=" {abapDumpModelL>d/totalDumpCountPerDate/0/count}"/>
+											</List>
+										</HBox>
+									</VBox>
+								</ScrollContainer>
+							</VBox>
+							<VBox width="24.1%" class="sapUiTinyMarginBegin sapUiTinyMarginTop sAcSS logs">
+								<Label class="yellow sapUiSmallMarginTop sapUiSmallMarginBegin"/>
+								<Label class="sapUiSmallMarginBegin textmargin textcolor" text="Jobs"/>
+								<core:Icon src="sap-icon://ppt-attachment" class=" sapUiTinyMarginTop sapUiSmallMarginBegin" color="#BCBCBC"></core:Icon>
+								<ScrollContainer class="scrollWidth" height="69%" vertical="true" focusable="true">
+									<VBox class="sapUiLargeMarginBegin hovercss">
+										<HBox>
+											<VBox width="30%">
+												<Label class="sapUiTinyMarginBegin textcolorcss" text="Sytems"/>
+											</VBox>
+											<VBox width="40%">
+												<Label class="sapUiLargeMarginBegin textcolorcss" text="Active Jobs"/>
+											</VBox>
+										</HBox>
+										<HBox>
+											<List id="batchjob" class="listCssSA" items="{path: 'landingbatchModel>/'}">
+												<StandardListItem class="sapUiLargeMarginEnd" title="{landingbatchModel>d/results/0/SysID}"
+													info=" {landingbatchModel>d/activeJobStatusCount}"/>
+											</List>
+										</HBox>
+									</VBox>
+								</ScrollContainer>
+							</VBox>
+							<VBox width="24.1%" id="workp" class="sapUiTinyMarginBegin sapUiTinyMarginTop wPlogs">
+								<Label class="yellow sapUiSmallMarginTop sapUiSmallMarginBegin"/>
+								<Label class="sapUiSmallMarginBegin textmargin textcolor" text="Work Process"/>
+								<core:Icon src="sap-icon://developer-settings" class="sapUiTinyMarginTop sapUiSmallMarginBegin" color="#BCBCBC"></core:Icon>
+								<Carousel height="92%" class="carouselcss" loop="true" pages="{path: 'landingPageWP>/'}">
+									<VBox>
+										<HBox>
+											<Label class="sapUiMediumMarginBegin textcolorSys" text="{landingPageWP>d/results/0/SysID}"/>
+											<Label class="sapUiTinyMarginBegin textcolorcss" text="Consumption:"/>
+											<Label class="sapUiTinyMarginBegin textcolor statuscolor" text="{landingPageWP>d/consumptionStatus}"/>
+											<Label class="sapUiSmallMarginBegin textcolorcss" text="Total:"/>
+											<Label class="sapUiTinyMarginBegin textcolor statuscolor" text="{landingPageWP>d/totalWorkProcessCount}"/>
+										</HBox>
+										<HBox>
+											<ProgressIndicator id="idIndicator" class="textcolor indicolorcss sapUiLargeMarginBegin"
+												percentValue="{landingPageWP>d/consumptionPercentage}" showValue="true" state="Success"/>
+										</HBox>
+									</VBox>
+								</Carousel>
+							</VBox>
+						</HBox>
+						<HBox class="sapUiLargeMarginBottom">
+							<VBox width="24.1%" id="systemAnalysis" class="sapUiTinyMarginBegin sapUiTinyMarginTop sAcSS">
+								<Label class="yellow sapUiTinyMarginTop sapUiSmallMarginBegin"></Label>
+								<Label class="sapUiSmallMarginBegin textmargin textcolor" text="System Analysis"/>
+								<core:Icon src="sap-icon://opportunity" class="sapUiSmallMarginBegin sapUiTinyMarginTop" color="#BCBCBC"></core:Icon>
+								<ScrollContainer height="69%" vertical="true" focusable="true">
+									<VBox class="sapUiLargeMarginBegin hovercss infocss">
+										<List class="listCss" items="{path: 'landingPageSA>/'}">
+											<StandardListItem class="sapUiLargeMarginEnd" title="{landingPageSA>d/results/0/Sysid}" info=" {landingPageSA>d/results/0/State}"
+												infoState="Success"/>
+										</List>
+									</VBox>
+								</ScrollContainer>
+							</VBox>
+							<VBox width="24.1%" id="activeusersession" class="sapUiTinyMarginBegin sapUiTinyMarginTop sAcSS">
+								<Label class="yellow sapUiSmallMarginTop sapUiSmallMarginBegin"/>
+								<Label class="sapUiSmallMarginBegin textmargin textcolor" text="User Info"/>
+								<core:Icon src="sap-icon://leads" class=" sapUiTinyMarginTop sapUiSmallMarginBegin" color="#BCBCBC"></core:Icon>
+							</VBox>
+							<VBox width="23.8%" id="sysChange" class="sapUiTinyMarginBegin sapUiTinyMarginTop sAcSS">
+								<Label class="yellow sapUiSmallMarginTop sapUiSmallMarginBegin"></Label>
+								<Label class="sapUiSmallMarginBegin textcolor textmargin" text="System Changes"/>
+								<core:Icon src="sap-icon://sys-first-page" class="sapUiTinyMarginTop sapUiSmallMarginBegin" color="#BCBCBC"></core:Icon>
+							</VBox>
+						</HBox>
+					</ScrollContainer>
+					<ScrollContainer id="root2" horizontal="false" vertical="true" height="100%">
+						<HBox height="30%">
+							<VBox width="24%" class="sapUiTinyMarginBegin sapUiSmallMarginTop">
+								<HBox width="100%" height="50%" class="EYVboxChart sapUiSmallMarginEnd">
+									<VBox>
+										<Label class="yellow sapUiSmallMarginBegin sapUiSmallMarginTop"/>
+										<Label text=" Total Incidents" id="idLable" class="EYLabelAlign textcolor1 sapUiSmallMarginBegin " design="Bold"/></VBox>
+									<NumericContent value="" valueColor="Critical" id="idOpen" iconDescription="Memory Used" animateTextChange="true" scale=""
+										class=" sapUiLargeMarginTop numericBoxClass1" withMargin="true"/>
+								</HBox>
+								<HBox class="EYVboxChart sapUiSmallMarginTop" width="100%" height="50%">
+									<VBox>
+										<Label class="yellow sapUiSmallMarginBegin sapUiSmallMarginTop"/>
+										<Label text=" Incidents Opened Today" id="idLable1" class="EYLabelAlign textcolor1 sapUiSmallMarginBegin " design="Bold"/></VBox>
+									<NumericContent value="" valueColor="Critical" id="idOpenToday" animateTextChange="true" scale=""
+										class="sapUiLargeMarginTop numericBoxClass2" withMargin="true"/>
+								</HBox>
+							</VBox>
+							<VBox class="sapUiTinyMarginBegin sapUiSmallMarginTop EYVboxChart" width="32%">
+								<HBox>
+									<Label class="yellow hbar"/>
+									<Label text="Incidents Status" class="EYAlign sapUiSmallMarginBegin textcolor1 sapUiSmallMarginTop " design="Bold"/></HBox>
+								<viz:VizFrame id="idpiechart" class="EYVboxChart " height="250px" width="100%" uiConfig="{applicationSet:'fiori'}" vizType="pie"
+									vizProperties="{ plotArea:{ dataLabel:{visible: true} ,drawingEffect: 'glossy' }, title : {text:''} }" selectData="myOnClickHandler">
+									<viz:dataset>
+										<viz.data:FlattenedDataset id="flattenData" data="{IceCreamModel>/data}">
+											<viz.data:dimensions>
+												<viz.data:DimensionDefinition name="state" value="{IceCreamModel>state}"/>
+											</viz.data:dimensions>
+											<viz.data:measures>
+												<viz.data:MeasureDefinition name="number" value="{IceCreamModel>number}"/>
+											</viz.data:measures>
+										</viz.data:FlattenedDataset>
+									</viz:dataset>
+									<viz:feeds >
+										<viz.feeds:FeedItem uid="size" type="Measure" values="number"/>
+										<viz.feeds:FeedItem uid="color" type="Dimension" values="state"/>
+									</viz:feeds>
+								</viz:VizFrame>
+							</VBox>
+							<VBox width="45.5%" class="sapUiTinyMarginBegin sapUiSmallMarginTop EYVboxChart">
+								<VBox>
+									<Label class="yellow sapUiSmallMarginBegin sapUiSmallMarginTop"/>
+									<Label text="Incidents by Priority" class="EYLabelAlign sapUiSmallMarginBegin textcolor1 " design="Bold"/></VBox>
+								<viz:VizFrame id="idHeatMap" uiConfig="{applicationSet:'fiori'}" class="EYVboxChart "
+									vizProperties="{ plotArea:{ dataLabel:{visible: true} ,drawingEffect: 'glossy' }, title : {text:''} }" height="200px" width="100%"
+									vizType='heatmap'>
+									<viz:dataset>
+										<viz.data:FlattenedDataset data="{heatMapModel>/data}">
+											<viz.data:dimensions>
+												<viz.data:DimensionDefinition name="state" value="{heatMapModel>state}"/>
+												<viz.data:DimensionDefinition name="priority" value="{heatMapModel>priority}"/>
+											</viz.data:dimensions>
+											<viz.data:measures>
+												<viz.data:MeasureDefinition name="number" value="{heatMapModel>number}"/>
+											</viz.data:measures>
+										</viz.data:FlattenedDataset>
+									</viz:dataset>
+									<viz:feeds>
+										<viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="state"/>
+										<viz.feeds:FeedItem uid="categoryAxis2" type="Dimension" values="priority"/>
+										<viz.feeds:FeedItem uid="color" type="Measure" values="number"/>
+									</viz:feeds>
+								</viz:VizFrame>
+							</VBox>
+						</HBox>
+						<HBox class="sapUiTinyMarginTop" height="35%">
+							<VBox width="24%" class="sapUiTinyMarginBegin sapUiTinyMarginTop">
+								<HBox class="EYVboxChart sapUiSmallMarginEnd" height="50%" width="100%">
+									<VBox>
+										<Label class="yellow sapUiSmallMarginBegin sapUiSmallMarginTop"/>
+										<Label text=" New Incidents" id="idLable2" class="EYLabelAlign textcolor1 sapUiSmallMarginBegin " design="Bold"/></VBox>
+									<NumericContent value="5" scale="" valueColor="Good" class=" nNewInc" withMargin="true"/>
+								</HBox>
+								<HBox class="EYVboxChart sapUiSmallMarginTop" height="50%">
+									<VBox>
+										<Label class="yellow sapUiTinyMarginBegin sapUiSmallMarginTop"/>
+										<Label text="Un-Assigned Incidents" id="idLable3" class=" textcolor1 EYLabelAlign sapUiSmallMarginBegin " design="Bold"/></VBox>
+									<NumericContent value="" valueColor="Critical" id="idUnAssinged" iconDescription="Memory Used" animateTextChange="true" scale=""
+										class="sapUiSmallMargin uAInc" withMargin="true"/>
+								</HBox>
+							</VBox>
+							<VBox width="30.5%" class="sapUiTinyMarginBegin sapUiTinyMarginTop EYVboxChart">
+								<HBox>
+									<Label class="yellow sapUiSmallMarginBegin sapUiSmallMarginTop"/>
+									<Label text="Incidents Closed per Week" class="EYlign textcolor1 sapUiSmallMarginBegin sapUiSmallMarginTop " design="Bold"/></HBox>
+								<viz:VizFrame id="idLineChart1" uiConfig="{applicationSet:'fiori'}" class="EYVboxChart" height="250px" width="100%"
+									vizProperties="{ plotArea:{ dataLabel:{visible: true},drawingEffect: 'glossy' } ,title:{text:''}}" selectData="myOnClickHandler"
+									renderComplete="handleRenderComplete" vizType='stacked_column'>
+									<viz:dataset>
+										<viz.data:FlattenedDataset data="{LineChartModel>/data}">
+											<viz.data:dimensions>
+												<viz.data:DimensionDefinition name="Week" value="{LineChartModel>Week}"/>
+											</viz.data:dimensions>
+											<viz.data:measures>
+												<viz.data:MeasureDefinition name="number" value="{LineChartModel>number}"/>
+												<viz.data:MeasureDefinition name="closed" value="{LineChartModel>closed}"/>
+											</viz.data:measures>
+										</viz.data:FlattenedDataset>
+									</viz:dataset>
+									<viz:feeds>
+										<viz.feeds:FeedItem id='valueAxisFeed1' uid="valueAxis" type="Measure" values="closed,number"/>
+										<viz.feeds:FeedItem id='categoryAxisFeed1' uid="categoryAxis" type="Dimension" values="Week"/>
+									</viz:feeds>
+								</viz:VizFrame>
+							</VBox>
+							<VBox width="43%" class="sapUiTinyMarginBegin sapUiTinyMarginTop EYVboxChart">
+								<HBox>
+									<Label class="yellow sapUiSmallMarginBegin sapUiSmallMarginTop hbar"/>
+									<Label text="Incidents Opened per Week" class="EYlign textcolor1 sapUiSmallMarginBegin sapUiSmallMarginTop " design="Bold"/></HBox>
+								<viz:VizFrame id="idLineChart" uiConfig="{applicationSet:'fiori'}" class="EYVboxChart" height="250px" width="100%"
+									vizProperties="{ plotArea:{ dataLabel:{visible: true} }, title : {text:''} }" selectData="myOnClickHandler"
+									renderComplete="handleRenderComplete" vizType='line'>
+									<viz:dataset>
+										<viz.data:FlattenedDataset data="{LineChartModel>/data}">
+											<viz.data:dimensions>
+												<viz.data:DimensionDefinition name="Week" value="{LineChartModel>Week}"/>
+											</viz.data:dimensions>
+											<viz.data:measures>
+												<viz.data:MeasureDefinition name="number" value="{LineChartModel>number}"/>
+											</viz.data:measures>
+										</viz.data:FlattenedDataset>
+									</viz:dataset>
+									<viz:feeds>
+										<viz.feeds:FeedItem id='valueAxisFeed0' uid="valueAxis" type="Measure" values="number"/>
+										<viz.feeds:FeedItem id='categoryAxisFeed0' uid="categoryAxis" type="Dimension" values="Week"/>
+									</viz:feeds>
+								</viz:VizFrame>
+							</VBox>
+						</HBox>
+					</ScrollContainer>
+					<ScrollContainer id="root3" horizontal="false" vertical="true" height="100%">
+						<HBox class="sapUiTinyMarginTop">
+							<VBox class="sapUiSmallMarginBegin EYVboxChart" width="32%" height="100%">
+								<HBox>
+									<Label class="yellow sapUiSmallMarginBegin sapUiSmallMarginTop yellowbar"/>
+									<Label text="Inventory" class="textcolor sapUiSmallMarginBegin sapUiSmallMarginTop pa "/>
+									<HBox class="sapUiLargeMarginBegin i">
+										<!--<Label text="" class="textcolor sapUiSmallMarginBegin sapUiSmallMarginTop "/>-->
+										<!--<Label text="" class="textcolor sapUiSmallMarginBegin sapUiSmallMarginTop "/>-->
+										<!--<Label text="" class="textcolor sapUiSmallMarginBegin sapUiSmallMarginTop "/>-->
+										<Image width="57px" height="21px" class="sapUiLargeMarginBegin sapUiSmallMarginTop" src="image/Group2111.svg"/>
+									</HBox>
+								</HBox>
+								<!--	<chart:ChartContainer  id="chartContainer1" showLegend="false"  showFullScreen="false" autoAdjustHeight="true" showZoom="false" title="">
+						<chart:ChartContainerContent >
+							<chart:content>-->
+								<HBox>
+									<Label text="Total Stock :" class="textcolor sapUiSmallMarginBegin "/>
+									<Label text="308" class="textcolor sapUiSmallMarginBegin "/></HBox>
+								<viz:VizFrame id="invPieChart" height="220px" width="100%" uiConfig="{applicationSet:'fiori'}" vizType="pie" class="invpie"
+									vizProperties="{ plotArea:{ dataLabel:{visible: true} ,drawingEffect: 'glossy' }, title : {text:'', visible: true} }"
+									selectData="onInvClick">
+									<viz:dataset>
+										<viz.data:FlattenedDataset id="invflattenData" data="{invModel>/data}">
+											<viz.data:dimensions>
+												<viz.data:DimensionDefinition name="STATUS" value="{invModel>STATUS}"/>
+											</viz.data:dimensions>
+											<viz.data:measures>
+												<viz.data:MeasureDefinition name="number" value="{invModel>number}"/>
+											</viz.data:measures>
+										</viz.data:FlattenedDataset>
+									</viz:dataset>
+									<viz:feeds >
+										<viz.feeds:FeedItem id="feed2" uid="size" type="Measure" values="number"/>
+										<viz.feeds:FeedItem id="feed3" uid="color" type="Dimension" values="STATUS"/>
+									</viz:feeds>
+								</viz:VizFrame>
+								<!--	</chart:content>
+						</chart:ChartContainerContent>
+					</chart:ChartContainer>-->
+							</VBox>
+							<VBox width="32%" class="sapUiSmallMarginBegin EYVboxChart" height="100%">
+								<HBox>
+									<Label class="yellow sapUiSmallMarginBegin sapUiSmallMarginTop yellowbar"/>
+									<Label text="Purchase Requisition" class="textcolor sapUiSmallMarginBegin sapUiSmallMarginTop pa"/>
+									<HBox class="sapUiLargeMarginBegin r">
+										<Image width="57px" height="21px" class="sapUiMediumMarginBegin sapUiSmallMarginTop" src="image/GroupStep2.svg"/>
+									</HBox>
+								</HBox>
+								<!--	<chart:ChartContainer id="chartContainer2" showFullScreen="false" showZoom="false">
+						<chart:ChartContainerContent>
+							<chart:content>-->
+								<viz:VizFrame id="idBarChartPR" uiConfig="{applicationSet:'fiori'}" class="EYVboxChart" height="235px" width="100%"
+									vizProperties="{ plotArea:{ dataLabel:{visible: true},drawingEffect: 'glossy' } ,title:{text:''}}" selectData="myOnClickPR"
+									renderComplete="handleRenderComplete" vizType='stacked_column'>
+									<viz:dataset>
+										<viz.data:FlattenedDataset data="{purReqModel>/data}">
+											<viz.data:dimensions>
+												<viz.data:DimensionDefinition name="STATUS" value="{purReqModel>STATUS}"/>
+											</viz.data:dimensions>
+											<viz.data:measures>
+												<viz.data:MeasureDefinition name="number" value="{purReqModel>number}"/>
+											</viz.data:measures>
+										</viz.data:FlattenedDataset>
+									</viz:dataset>
+									<viz:feeds>
+										<viz.feeds:FeedItem id='valueAxisFeedpr' uid="valueAxis" type="Measure" values="number"/>
+										<viz.feeds:FeedItem id='categoryAxisFeedpr' uid="categoryAxis" type="Dimension" values="STATUS"/>
+									</viz:feeds>
+								</viz:VizFrame>
+								<!--</chart:content>
+						</chart:ChartContainerContent>
+					</chart:ChartContainer>-->
+							</VBox>
+							<VBox width="32%" class="sapUiSmallMarginBegin EYVboxChart" height="100%">
+								<HBox>
+									<Label class="yellow sapUiSmallMarginBegin sapUiSmallMarginTop yellowbar"/>
+									<Label text="Purchase Order" class="textcolor sapUiSmallMarginBegin sapUiSmallMarginTop pa"/>
+									<HBox class="sapUiLargeMarginBegin o">
+										<Image width="57px" height="21px" class="sapUiMediumMarginBegin sapUiSmallMarginTop" src="image/GroupStep3.svg"/>
+									</HBox>
+								</HBox>
+								<!--<chart:ChartContainer id="chartContainer3" showFullScreen="false" showZoom="false">
+						<chart:ChartContainerContent>
+							<chart:content>-->
+								<viz:VizFrame id="POPieChart" height="235px" width="300px" uiConfig="{applicationSet:'fiori'}" vizType="donut"
+									vizProperties="{ plotArea:{ dataLabel:{visible: true} ,drawingEffect: 'glossy' }, title : {text:''} }" selectData="myOnClickPR">
+									<viz:dataset>
+										<viz.data:FlattenedDataset id="POflattenData" data="{POModel>/data}">
+											<viz.data:dimensions>
+												<viz.data:DimensionDefinition name="STATUS" value="{POModel>STATUS}"/>
+											</viz.data:dimensions>
+											<viz.data:measures>
+												<viz.data:MeasureDefinition name="number" value="{POModel>number}"/>
+											</viz.data:measures>
+										</viz.data:FlattenedDataset>
+									</viz:dataset>
+									<viz:feeds >
+										<viz.feeds:FeedItem id="feedPO" uid="size" type="Measure" values="number"/>
+										<viz.feeds:FeedItem id="feedPO1" uid="color" type="Dimension" values="STATUS"/>
+									</viz:feeds>
+								</viz:VizFrame>
+								<!--</chart:content>
+						</chart:ChartContainerContent>
+					</chart:ChartContainer>-->
+							</VBox>
+						</HBox>
+						<HBox class="sapUiTinyMarginBottom">
+							<VBox id="PO" class="sapUiSmallMarginBegin sapUiTinyMarginTop eypacss" width="32%">
+								<HBox>
+									<Label class="yellow sapUiSmallMarginBegin sapUiSmallMarginTop yellowbar"/>
+									<Label class="sapUiTinyMarginBegin sapUiTinyMarginTop textcolor ap" text="Good Receipt"/>
+									<HBox class="sapUiLargeMarginBegin pr">
+										<Label text="" class="textcolor sapUiMediumMarginBegin sapUiSmallMarginTop "/>
+										<Label text="" class="textcolor sapUiSmallMarginBegin sapUiSmallMarginTop "/>
+										<Image width="57px" height="21px" class="sapUiLargeMarginBegin sapUiSmallMarginTop" src="image/GroupStep4.svg"/>
+									</HBox>
+								</HBox>
+								<viz:VizFrame id="idBarChartGR" uiConfig="{applicationSet:'fiori'}" class="EYVboxChart" height="235px" width="100%"
+									vizProperties="{ plotArea:{ dataLabel:{visible: true},drawingEffect: 'glossy' } ,title:{text:''}}" selectData="myOnClickPR"
+									renderComplete="handleRenderComplete" vizType='stacked_bar'>
+									<viz:dataset>
+										<viz.data:FlattenedDataset data="{GRModel>/data}">
+											<viz.data:dimensions>
+												<viz.data:DimensionDefinition name="Total GR Posted" value="{GRModel>Total}"/>
+												<!--<viz.data:DimensionDefinition name="DeliveryIncomplete" value="{GRModel>DeliveryIncomplete}"/>-->
+											</viz.data:dimensions>
+											<viz.data:measures>
+												<viz.data:MeasureDefinition name="DeliveryComplete" value="{GRModel>DeliveryComplete}"/>
+												<viz.data:MeasureDefinition name="DeliveryIncomplete" value="{GRModel>DeliveryIncomplete}"/>
+											</viz.data:measures>
+										</viz.data:FlattenedDataset>
+									</viz:dataset>
+									<viz:feeds>
+										<viz.feeds:FeedItem id='valueAxisFeedgr' uid="valueAxis" type="Measure" values="DeliveryComplete"/>
+										<viz.feeds:FeedItem id='valueAxisFeedgr1' uid="valueAxis" type="Measure" values="DeliveryIncomplete"/>
+										<viz.feeds:FeedItem id='categoryAxisFeedgr' uid="categoryAxis" type="Dimension" values="Total GR Posted"/>
+									</viz:feeds>
+								</viz:VizFrame>
+							</VBox>
+							<VBox class="sapUiSmallMarginBegin sapUiTinyMarginTop eypacss" width="32%">
+								<HBox>
+									<Label class="yellow sapUiSmallMarginBegin sapUiSmallMarginTop yellowbar"/>
+									<Label text="Invoice Verification" class="textcolor sapUiSmallMarginBegin sapUiSmallMarginTop pa"/>
+									<HBox class="sapUiLargeMarginBegin br">
+										<Label text="" class="textcolor sapUiSmallMarginBegin sapUiSmallMarginTop "/>
+										<Image width="57px" height="21px" class="sapUiLargeMarginBegin sapUiSmallMarginTop" src="image/GroupStep5.svg"/>
+									</HBox>
+								</HBox>
+								<!--<chart:ChartContainer id="chartContainer3" showFullScreen="false" showZoom="false">
+						<chart:ChartContainerContent>
+							<chart:content>-->
+								<viz:VizFrame id="IVDonutChart" height="235px" width="100%" class="EYVboxChart" uiConfig="{applicationSet:'fiori'}" vizType="donut"
+									vizProperties="{ plotArea:{ dataLabel:{visible: true} ,drawingEffect: 'glossy' }, title : {text:''} }" selectData="myOnClickPR">
+									<viz:dataset>
+										<viz.data:FlattenedDataset id="IVflattenData" data="{IVModel>/data}">
+											<viz.data:dimensions>
+												<viz.data:DimensionDefinition name="STATUS" value="{IVModel>STATUS}"/>
+											</viz.data:dimensions>
+											<viz.data:measures>
+												<viz.data:MeasureDefinition name="number" value="{IVModel>number}"/>
+											</viz.data:measures>
+										</viz.data:FlattenedDataset>
+									</viz:dataset>
+									<viz:feeds >
+										<viz.feeds:FeedItem id="feedIV" uid="size" type="Measure" values="number"/>
+										<viz.feeds:FeedItem id="feedIV1" uid="color" type="Dimension" values="STATUS"/>
+									</viz:feeds>
+								</viz:VizFrame>
+								<!--</chart:content>
+						</chart:ChartContainerContent>
+					</chart:ChartContainer>-->
+							</VBox>
+							<VBox id="APR" class="sapUiTinyMarginBegin sapUiTinyMarginTop eypacss" width="32%">
+								<HBox>
+									<Label class="yellow sapUiSmallMarginBegin sapUiSmallMarginTop yellowbar"/>
+									<Label class="sapUiTinyMarginBegin sapUiTinyMarginTop textcolor ap" text="Automatic Payment Run"/>
+									<HBox class="sapUiLargeMarginBegin a">
+										<Image width="57px" height="21px" class="sapUiSmallMarginTop" src="image/GroupStep6.svg"/>
+									</HBox>
+								</HBox>
+								<viz:VizFrame id="idBarChartAPR" uiConfig="{applicationSet:'fiori'}" class="EYVboxChart" height="235px" width="100%"
+									vizProperties="{ plotArea:{ dataLabel:{visible: true},drawingEffect: 'glossy' } ,title:{text:''}}" selectData="myOnClickPR"
+									renderComplete="handleRenderComplete" vizType='stacked_column'>
+									<viz:dataset>
+										<viz.data:FlattenedDataset data="{APRModel>/data}">
+											<viz.data:dimensions>
+												<viz.data:DimensionDefinition name="Vendor Payments" value="{APRModel>Total}"/>
+												<!--<viz.data:DimensionDefinition name="DeliveryIncomplete" value="{GRModel>DeliveryIncomplete}"/>-->
+											</viz.data:dimensions>
+											<viz.data:measures>
+												<viz.data:MeasureDefinition name="Invoice Not Paid" value="{APRModel>PaymentNotProcessed}"/>
+												<viz.data:MeasureDefinition name="Invoice Paid" value="{APRModel>PaymentProcessed}"/>
+											</viz.data:measures>
+										</viz.data:FlattenedDataset>
+									</viz:dataset>
+									<viz:feeds>
+										<viz.feeds:FeedItem id='valueAxisFeedapr1' uid="valueAxis" type="Measure" values="Invoice Not Paid"/>
+										<viz.feeds:FeedItem id='valueAxisFeedapr' uid="valueAxis" type="Measure" values="Invoice Paid"/>
+										<viz.feeds:FeedItem id='categoryAxisFeedapr' uid="categoryAxis" type="Dimension" values="Vendor Payments"/>
+									</viz:feeds>
+								</viz:VizFrame>
+							</VBox>
+						</HBox>
+					</ScrollContainer>
+					<ScrollContainer id="root4" horizontal="false" vertical="true" height="100%">
+						<Text text="GRC Bots"/>
+					</ScrollContainer>
+					<ScrollContainer id="root5" horizontal="false" vertical="true" height="100%">
+						<IconTabBar select="getselectedKeys" class="sapUiResponsiveContentPadding iconss barcss">
+							<items>
+								<IconTabFilter class="textpendinglc" text="Month End Activities">
+									<VBox class="VBoxcss">
+										<VBox>
+											<Label class="yellow sapUiTinyMarginTop sapUiSmallMarginBegin"></Label>
+											<Label class="sapUiSmallMarginBegin textmargin textcolor" text="Activities Details"/>
+										</VBox>
+										<!--<HBox class="sapUiTinyMarginTop">-->
+										<!--<VBox>-->
+										<!--	<SearchField placeholder="Search by Name" enabled="true" width="20rem" class="searchicon sapUiSmallMarginBegin" search="searchuser"/>-->
+										<!--</VBox>-->
+										<!--	<ToolbarSpacer width="40%"/>-->
+										<!--	<VBox class="statusLabel sapUiSmallMarginBegin sapUiSmallMarginTop">-->
+										<!--		<Label text="Status:" class="textcolorbatch"/>-->
+										<!--	</VBox>-->
+										<!--	<VBox class="sapUiTinyMarginBegin">-->
+										<!--		<ComboBox id="idComboType" items="{batchjobmodelN>/workProcesstype}" placeholder="select" selectionChange="officeComboChange"-->
+										<!--			change="onchange" class="combocss">-->
+										<!--			<items class="listcss">-->
+										<!--				<core:ListItem key="{batchjobmodelN>key}" text="{batchjobmodelN>text}" class="listcss1"/>-->
+										<!--			</items>-->
+										<!--		</ComboBox>-->
+										<!--	</VBox>-->
+										<!--</HBox>-->
+									</VBox>
+									<Table id="idTableM" sticky="ColumnHeaders" items="{MonthEndTableModel>/Table/oData/}" growing="true" growingThreshold="20"
+										class="mutableclassHD" inset="false">
+										<headerToolbar>
+											<Toolbar>
+												<SearchField placeholder="Search by Name" enabled="true" width="20rem" class="searchicon" search="searchTcode"/>
+												<ToolbarSpacer/>
+												<Button id="previous" type="Emphasized" press="onPrevDate" icon="sap-icon://nav-back" class="buttonclass sapUiLargeMarginBegin"/>
+												<!--<Button id="idno" text="{logTraceModel>/currentPage}" class="buttonclassno sapUiTinyMarginBegin"/>-->
+												<Text text="{MonthEndTableModel>/dateValue}" class="textcss"/>
+												<!--<m:Label text="/{logTraceModel>/totalPages}" class="buttonclass sapUiMediumMarginBegin"/>-->
+												<Button id="next" type="Emphasized" press="onNextDate" icon="sap-icon://navigation-right-arrow" class="buttonclass sapUiSmallMarginBegin"/>
+												<!--<Label text="Date"></Label>-->
+												<Label text="Status"></Label>
+												<ComboBox id="idComboType" items="{MonthEndTableModel>/workProcesstype}" placeholder="select" selectionChange="officeComboChange"
+													change="onchange" class="combocss">
+													<items class="listcss">
+														<core:ListItem key="{MonthEndTableModel>key}" text="{MonthEndTableModel>text}" class="listcss1"/>
+													</items>
+												</ComboBox>
+												<!--<Label text="From Date:" class="textcolorbatch"></Label>-->
+												<!--<DatePicker width="15%" placeholder="Enter Date" change="handleChange" minDate="{logTraceModel>/fromminDate}"-->
+												<!--	maxDate="{logTraceModel>/frommaxDate}" class="combocss"/>-->
+												<!--<Label text="To Date:" class="textcolorbatch"></Label>-->
+												<!--<DatePicker width="15%" placeholder="Enter Date" change="handleChange1" minDate="{logTraceModel>/TominDate}"-->
+												<!--	maxDate="{logTraceModel>/TomaxDate}" class="combocss"/>-->
+											</Toolbar>
+										</headerToolbar>
+										<columns>
+											<Column width="6rem">
+												<Text text="SAP Tcode" class="monthEndTableHeader"/>
+											</Column>
+											<Column width="12rem">
+												<Text text="Object" class="monthEndTableHeader sapUiSmallMarginBegin"/>
+											</Column>
+											<Column width="15rem">
+												<Text text="Date / Time" class="monthEndTableHeader sapUiLargeMarginBegin"/>
+											</Column>
+											<Column width="12rem">
+												<Text text="Description" class="monthEndTableHeader sapUiLargeMarginBegin"/>
+											</Column>
+											<Column width="6rem">
+												<Text text="Status" class="monthEndTableHeader sapUiLargeMarginBegin"/>
+											</Column>
+											<Column width="9rem">
+												<Text text="" class="monthEndTableHeader"/>
+											</Column>
+										</columns>
+										<items>
+											<ColumnListItem>
+												<cells>
+													<Text text="{MonthEndTableModel>Tcode}" wrapping="true" class="monthEndTableCell"/>
+													<Text text="{MonthEndTableModel>Object}" class="monthEndTableCell" wrapping="true"/>
+													<Text text="{MonthEndTableModel>CreationDate}" class="monthEndTableCell sapUiMediumMarginBegin" wrapping="true"/>
+													<Text text="{MonthEndTableModel>Description}" class="monthEndTableCell sapUiMediumMarginBegin" wrapping="true"/>
+													<Text text="{MonthEndTableModel>Status}" width="8rem" class=" monthEndTableCell sapUiLargeMarginBegin"/>
+													<!--colorScheme="{ parts: [{path: 'MonthEndTableModel>Status'}], formatter: '.formatter.availableState'}"/>-->
+													<Link text="{MonthEndTableModel>Execution}>" subtle="true" press="handleLinkPress" class="linkcss attachmentLinkCss"/>
+												</cells>
+											</ColumnListItem>
+										</items>
+									</Table>
+								</IconTabFilter>
+								<IconTabFilter class="textpendinglc" text="IDOCs Error"></IconTabFilter>
+								<IconTabFilter class="textpendinglc" text="Data Cleaning"></IconTabFilter>
+							</items>
+						</IconTabBar>
+					</ScrollContainer>
+					<ScrollContainer id="root6" horizontal="false" vertical="true" height="100%">
+						<Text text="Help"/>
+					</ScrollContainer>
+					<ScrollContainer id="root7" horizontal="false" vertical="true" height="100%">
+						<Text text="Logout"/>
+					</ScrollContainer>
+					<!--<mvc:XMLView viewName="ey.irp.IRPModule.view.batchjoblogs" id="xml_bactjob" async="false"></mvc:XMLView>-->
+					<!--<mvc:XMLView viewName="ey.irp.IRPModule.view.wokprocess" id="xml_workprocess" async="false"></mvc:XMLView>-->
+					<!--<mvc:XMLView viewName="ey.irp.IRPModule.view.systemAnalysis" id="xml_sysAnalysis" async="false"></mvc:XMLView>-->
+					<!--<mvc:XMLView viewName="ey.irp.IRPModule.view.cpuUtilization" id="xml_cpuUtilization" async="false"></mvc:XMLView>-->
+					<!--<mvc:XMLView viewName="ey.irp.IRPModule.view.MemoryUtilzation" id="xml_MemoryUtilzation" async="false"></mvc:XMLView>-->
+					<!--<mvc:XMLView viewName="ey.irp.IRPModule.view.abapDumps" id="xml_abapDumps" async="false"></mvc:XMLView>-->
+					<!--<mvc:XMLView viewName="ey.irp.IRPModule.view.log_Traces" id="xml_log_Traces" async="false"></mvc:XMLView>-->
+					<!--<mvc:XMLView viewName="ey.irp.IRPModule.view.systemLicense" id="xml_systemLicense" async="false"></mvc:XMLView>-->
+					<!--<mvc:XMLView viewName="ey.irp.IRPModule.view.systemChange" id="xml_systemChange" async="false"></mvc:XMLView>-->
+					<!--<mvc:XMLView viewName="ey.irp.IRPModule.view.enqueueRequests" id="xml_enqueueRequests" async="false"></mvc:XMLView>-->
+					<!--<mvc:XMLView viewName="ey.irp.IRPModule.view.incidentList" id="xml_incidentList" async="false"></mvc:XMLView>-->
+					<!--<mvc:XMLView viewName="ey.irp.IRPModule.view.incidentDetail" id="xml_incidentDetail" async="true" ></mvc:XMLView>-->
+				</pages>
+			</NavContainer>
+		</tnt:mainContents>
+	</tnt:ToolPage>
+</mvc:View>

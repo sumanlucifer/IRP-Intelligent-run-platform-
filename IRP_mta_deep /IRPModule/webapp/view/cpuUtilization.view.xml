@@ -1,0 +1,218 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="ey.irp.IRPModule.controller.cpuUtilization"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:tnt="sap.tnt" xmlns:ui="sap.ui.table" xmlns:layout="sap.ui.layout"
+	xmlns:viz="sap.viz.ui5.controls" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds" xmlns:viz.data="sap.viz.ui5.data"
+	xmlns:chart="sap.suite.ui.commons" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Page title="Monitoring Dashboard/Cpu Utilization" class="textcolor1 navbuttoncss navcss" showNavButton="true"
+		navButtonPress="onPresscpuUtilization">
+		<IconTabBar select="getselectedKey" class="sapUiResponsiveContentPadding iconss barcss">
+			<items>
+				<IconTabFilter class="textpendinglc" text="Hana DB">
+					<HBox class="hboxcss" justifyContent="End">
+						<VBox>
+							<SearchField enabled="false" class="searchicon" search="searchuser" width="100%"/>
+						</VBox>
+						<VBox class="sapUiSmallMarginBegin">
+							<Button id="idButton4" class=" abapcss buttonhoverT" visible="true" icon="sap-icon://table-view" press="onPress4"></Button>
+						</VBox>
+						<VBox class="sapUiTinyMarginBegin">
+							<Button id="idButton3" class=" abapcss buttonhoverg" visible="true" icon="sap-icon://donut-chart" press="onPress3"></Button>
+						</VBox>
+						<VBox class="sapUiTinyMarginBegin">
+							<Button id="idButton5" class="abapcss buttonhoverF" icon="sap-icon://filter" press="onPressFilterHana"></Button>
+						</VBox>
+					</HBox>
+					<SplitApp id="SplitAppDemo" initialDetail="detail" initialMaster="master" class="splitappcss">
+						<detailPages>
+							<Page id="detail" title="Overview" backgroundDesign="Solid" class="sapUiStdPage detailcss" showHeader="false">
+								<HBox>
+									<VBox width="100%" class="mutableclassApp mutableclassAppcahrt sapUiMediumMarginTop" visible="true" id="idVbox3">
+										<chart:ChartContainer id="chartContainer4" showFullScreen="false" showZoom="false">
+											<chart:ChartContainerContent>
+												<chart:content>
+													<viz:VizFrame id="idcpuPerDay" uiConfig="{applicationSet:'fiori'}" height="426px" width="1000px"
+														vizProperties="{ plotArea:{ dataLabel:{visible: true} }, title : {text:'CPU Utilization per Day'} }" selectData="myOnClickHandler"
+														renderComplete="handleRenderComplete" vizType='stacked_column'>
+														<viz:dataset>
+															<viz.data:FlattenedDataset data="{cpuUtilization>/analyticalview/0/}">
+																<viz.data:dimensions>
+																	<viz.data:DimensionDefinition name="per Day" value="{cpuUtilization>SNAPSHOT_TIME}"/>
+																	<viz.data:DimensionDefinition name="Sys ID" value="{cpuUtilization>SYSTEM_ID}"/>
+																</viz.data:dimensions>
+																<viz.data:measures>
+																	<viz.data:MeasureDefinition name="Cpu Utilization(%)" value="{cpuUtilization>CPU_BUSY_PCT}"/>
+																</viz.data:measures>
+															</viz.data:FlattenedDataset>
+														</viz:dataset>
+														<viz:feeds>
+															<viz.feeds:FeedItem id='valueAxisFeed2' uid="valueAxis" type="Measure" values="Cpu Utilization(%)"/>
+															<viz.feeds:FeedItem id='categoryAxisFeed3' uid="categoryAxis" type="Dimension" values="per Day"/>
+															<viz.feeds:FeedItem id='categoryAxisFeed4' uid="categoryAxis" type="Dimension" values="Sys ID"/>
+														</viz:feeds>
+													</viz:VizFrame>
+												</chart:content>
+											</chart:ChartContainerContent>
+										</chart:ChartContainer>
+									</VBox>
+									<VBox class="sapUiMediumMarginTop" visible="false" width="100%" id="idVbox4">
+										<Table growing="true" id="submittedTable" sticky="ColumnHeaders" class="mutableclassHD" inset="false"
+											items="{cpuUtilization>/analyticalview/0}">
+											<columns>
+												<Column width="6rem">
+													<Text text="Date" class="tableheadercss"/>
+												</Column>
+												<Column width="6rem">
+													<Text text="System" class="tableheadercss"/>
+												</Column>
+												<Column width="6rem">
+													<Text text="Cpu Busy Pct" class="tableheadercss"/>
+												</Column>
+												<Column width="6rem">
+													<Text text="Cpu User" class="tableheadercss"/>
+												</Column>
+												<Column width="6rem">
+													<Text text="Cpu Io Wait" class="tableheadercss"/>
+												</Column>
+												<Column width="6rem">
+													<Text text="Cpu System" class="tableheadercss"/>
+												</Column>
+												<Column width="6rem">
+													<Text text="Cpu Idle" class="tableheadercss"/>
+												</Column>
+											</columns>
+											<items>
+												<ColumnListItem>
+													<cells>
+														<Text text="{cpuUtilization>SNAPSHOT_TIME}" class="tablecellscss"/>
+														<Text text="{cpuUtilization>SYSTEM_ID}" class="tablecellscss"/>
+														<Text text="{cpuUtilization>CPU_BUSY_PCT}" class="sapUiSmallMarginBegin tablecellscss"/>
+														<Text text="{cpuUtilization>CPU_USER}" class="tablecellscss"/>
+														<Text text="{cpuUtilization>CPU_IOWAIT}" class="tablecellscss"/>
+														<Text text="{cpuUtilization>CPU_SYS}" class="tablecellscss"/>
+														<Text text="{cpuUtilization>CPU_IDLE}" class="tablecellscss"/>
+													</cells>
+												</ColumnListItem>
+											</items>
+										</Table>
+									</VBox>
+								</HBox>
+							</Page>
+							<Page id="detailDetail" title="Overview" class="sapUiStdPage detailcss" backgroundDesign="Solid" showHeader="false">
+								<VBox class="sapUiSmallMargin">
+									<Label text="System Details"/>
+								</VBox>
+							</Page>
+						</detailPages>
+						<masterPages>
+							<Page id="master2" title="Systems" backgroundDesign="List" class="sapUiStdPage mastercss">
+								<List mode="SingleSelectMaster" id="listID" itemPress=".onListItemPress" items="{sysListModel>/DBSystems/data}" class="s4dcss">
+									<items>
+										<StandardListItem title="{sysListModel>sysId}" type="Active" custom:to="detail" class="s4dcss s4dcss1"/>
+									</items>
+								</List>
+							</Page>
+						</masterPages>
+					</SplitApp>
+				</IconTabFilter>
+				<IconTabFilter class="textsubmitted" text="Application">
+					<HBox class="hboxcss" justifyContent="End">
+						<VBox>
+							<SearchField enabled="false" class="searchicon" search="searchuser" width="100%"/>
+						</VBox>
+						<VBox class="sapUiSmallMarginBegin">
+							<Button id="idButton2" class="abapcss buttonhoverT" visible="true" icon="sap-icon://table-view" press="onPress2"></Button>
+						</VBox>
+						<VBox class="sapUiTinyMarginBegin">
+							<Button id="idButton1" class="abapcss buttonhoverg" visible="true" icon="sap-icon://donut-chart" press="onPress1"></Button>
+						</VBox>
+					</HBox>
+					<SplitApp id="SplitAppDemoApp" initialDetail="detail" initialMaster="master" class="splitappcss">
+						<detailPages>
+							<Page id="detail1" title="Overview" backgroundDesign="Solid" class="sapUiStdPage detailcss" showHeader="false">
+								<HBox>
+									<VBox width="100%" class="mutableclassApp mutableclassAppcahrt sapUiMediumMarginTop" visible="true" id="idVbox1">
+										<chart:ChartContainer id="chartContainer3" showFullScreen="false" showZoom="false">
+											<chart:ChartContainerContent>
+												<chart:content>
+													<viz:VizFrame id="idLineChart" uiConfig="{applicationSet:'fiori'}" height="380px" width="1000px"
+														vizProperties="{ plotArea:{ dataLabel:{visible: true} }, title : {text:'CPU Utilization per Hour'} }" selectData="myOnClickHandler"
+														renderComplete="handleRenderComplete" vizType='line'>
+														<viz:dataset>
+															<viz.data:FlattenedDataset data="{path:'cpuUtilizationApp>/0/d/results'}">
+																<viz.data:dimensions>
+																	<viz.data:DimensionDefinition name="Time" value="{path:'cpuUtilizationApp>Time', formatter: '.formatter.timeFormatter'}"/>
+																	<viz.data:DimensionDefinition name="Sysid" value="{cpuUtilizationApp>Sysid}"/>
+																</viz.data:dimensions>
+																<viz.data:measures>
+																	<viz.data:MeasureDefinition name="Cpu(%)" value="{cpuUtilizationApp>totalCpu}"/>
+																</viz.data:measures>
+															</viz.data:FlattenedDataset>
+														</viz:dataset>
+														<viz:feeds>
+															<viz.feeds:FeedItem id='valueAxisFeed1' uid="valueAxis" type="Measure" values="Cpu(%)"/>
+															<viz.feeds:FeedItem id='categoryAxisFeed1' uid="categoryAxis" type="Dimension" values="Time,Sysid"/>
+														</viz:feeds>
+													</viz:VizFrame>
+												</chart:content>
+											</chart:ChartContainerContent>
+										</chart:ChartContainer>
+									</VBox>
+									<VBox class="sapUiMediumMarginTop" visible="false" width="100%" id="idVbox2">
+										<Table growing="true" id="idIncTable" sticky="ColumnHeaders" class="mutableclassApp" inset="false"
+											items="{path:'cpuUtilizationApp>/0/d/results'}">
+											<columns>
+												<Column width="10rem">
+													<Text text="Date" class="tableheadercss"/>
+												</Column>
+												<Column width="6rem">
+													<Text text="System ID" class="tableheadercss"/>
+												</Column>
+												<Column width="6rem">
+													<Text text="Host Name" class="tableheadercss"/>
+												</Column>
+												<Column width="6rem">
+													<Text text="User Utilization" class="tableheadercss"/>
+												</Column>
+												<Column width="4rem">
+													<Text text="Idle" class="tableheadercss"/>
+												</Column>
+												<Column width="6rem">
+													<Text text="System Utilization" class="tableheadercss"/>
+												</Column>
+											</columns>
+											<items>
+												<ColumnListItem>
+													<cells>
+														<Text text="{path:'cpuUtilizationApp>Date', formatter: '.formatter.dateValue'}" class="tablecellscss"/>
+														<Text text="{cpuUtilizationApp>Sysid}" class="tablecellscss"/>
+														<Text text="{cpuUtilizationApp>Host}" class="tablecellscss"/>
+														<Text class="sapUiMediumMarginBegin tablecellscss" text="{cpuUtilizationApp>UserCpu}"/>
+														<Text text="{cpuUtilizationApp>IdleCpu}" class="tablecellscss"/>
+														<Text text="{cpuUtilizationApp>SysCpu}" class="tablecellscss sapUiSmallMarginBegin"/>
+													</cells>
+												</ColumnListItem>
+											</items>
+										</Table>
+									</VBox>
+								</HBox>
+							</Page>
+							<Page id="detailDetail1" title="Overview" class="sapUiStdPage detailcss" backgroundDesign="Solid" showHeader="false">
+								<VBox class="sapUiSmallMargin">
+									<Label text="System Details"/>
+								</VBox>
+							</Page>
+						</detailPages>
+						<masterPages>
+							<Page id="master3" title="Systems" backgroundDesign="List" class="sapUiStdPage mastercss">
+								<List mode="SingleSelectMaster" id="listIDApp" items="{sysListModel>/APPSystems/data}" itemPress=".onListItemPressApp" class="s4dcss">
+									<items>
+										<StandardListItem title="{sysListModel>sysId}" type="Active" custom:to="detail1"/>
+									</items>
+								</List>
+							</Page>
+						</masterPages>
+					</SplitApp>
+				</IconTabFilter>
+			</items>
+		</IconTabBar>
+	</Page>
+</mvc:View>

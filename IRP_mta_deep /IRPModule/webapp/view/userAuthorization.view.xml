@@ -1,0 +1,108 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:m="sap.m" xmlns:u="sap.ui.unified"
+	controllerName="ey.irp.IRPModule.controller.userAuthorization" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.ui.table">
+	<m:Page title="Monitoring Dashboard/User Info/Details/{userAuthModel>/userTitle}" class="sapUiContentPadding textcolor1 navbuttoncss"
+		showNavButton="true" navButtonPress="onPressUAuth" enableScrolling="false">
+		<m:content>
+			<m:HBox class="hboxcssUA">
+				<m:VBox class="sapUiSmallMarginBegin">
+					<m:Label text="Authorization Details"></m:Label>
+				</m:VBox>
+			</m:HBox>
+			<Table visibleRowCount="9" id="idsapTable" class="uitablecss batchjobclass" rows="{path:'userAuthModel>/0/d/results'}" selectionMode="None"
+				ariaLabelledBy="title">
+				<columns>
+					<Column width="12rem">
+						<m:Label text="Start Date" class="tableheadercss" wrapping="true"/>
+						<template>
+							<m:Text text="{path:'userAuthModel>From_Date', formatter: '.formatter.dateValue'}" wrapping="true"/>
+						</template>
+					</Column>
+					<Column width="12rem">
+						<m:Label text="End Date" class="tableheadercss" wrapping="true"/>
+						<template>
+							<m:Text text="{path:'userAuthModel>To_Date', formatter: '.formatter.dateValue'}" wrapping="true" class="sapUiMediumMarginBegin"/>
+						</template>
+					</Column>
+					<Column width="6rem">
+						<m:Label text="System" class="tableheadercss"/>
+						<template>
+							<m:Text text="{userAuthModel>Sysid}" wrapping="false"/>
+						</template>
+					</Column>
+					<Column width="8rem">
+						<m:Label text="Host" class="tableheadercss"/>
+						<template>
+							<m:Text text="{userAuthModel>host}" wrapping="false"/>
+						</template>
+					</Column>
+					<Column width="6rem">
+						<m:Label text="User" class="tableheadercss"/>
+						<template>
+							<m:Text text="{userAuthModel>User}" wrapping="false"/>
+						</template>
+					</Column>
+					<Column width="10rem">
+						<m:Label text="Profile" class="tableheadercss"/>
+						<template>
+							<m:Text text="{userAuthModel>Profile}" wrapping="false"/>
+						</template>
+					</Column>
+					<Column width="12rem">
+						<m:Label text="Role" class="tableheadercss"/>
+						<template>
+							<m:Text text="{userAuthModel>Role}" wrapping="false"/>
+						</template>
+					</Column>
+					<Column width="6rem">
+						<m:Label text="User Lock" class="tableheadercss"/>
+						<template>
+							<m:Text text="{userAuthModel>User_lock}" wrapping="true"/>
+						</template>
+					</Column>
+				</columns>
+			</Table>
+			<!--<Table class="tablecss batchjobclass" id="idProductsTable" items="{userAuthModel>/userAuthTableData}">-->
+			<!--	<columns>-->
+			<!--		<Column>-->
+			<!--			<Text text="System" class="tableheadercss"/>-->
+			<!--		</Column>-->
+			<!--		<Column>-->
+			<!--			<Text text="Host" class="tableheadercss"/>-->
+			<!--		</Column>-->
+			<!--		<Column>-->
+			<!--			<Text text="User" class="tableheadercss"/>-->
+			<!--		</Column>-->
+			<!--		<Column>-->
+			<!--			<Text text="Profile" class="tableheadercss"/>-->
+			<!--		</Column>-->
+			<!--		<Column>-->
+			<!--			<Text text="Role" class="tableheadercss"/>-->
+			<!--		</Column>-->
+			<!--		<Column>-->
+			<!--			<Text text="Start Date" class="tableheadercss"/>-->
+			<!--		</Column>-->
+			<!--		<Column>-->
+			<!--			<Text text="End Date" class="tableheadercss"/>-->
+			<!--		</Column>-->
+			<!--		<Column>-->
+			<!--			<Text text="User Lock" class="tableheadercss"/>-->
+			<!--		</Column>-->
+			<!--	</columns>-->
+			<!--	<items>-->
+			<!--		<ColumnListItem>-->
+			<!--			<cells>-->
+			<!--				<Text text="{userAuthModel>Sysid}" class="tablecellscss"/>-->
+			<!--				<Text text="{userAuthModel>host}" class="tablecellscss"/>-->
+			<!--				<Text text="{userAuthModel>User}" class="sapUiTinyMarginBegin tablecellscss"/>-->
+			<!--				<Text text="{userAuthModel>Profile}" class="tablecellscss"/>-->
+			<!--				<Text text="{userAuthModel>Role}" class="tablecellscss"/>-->
+			<!--				<Text text="{path:'userAuthModel>From_Date', formatter: '.formatter.dateValue'}" class="tablecellscss"/>-->
+			<!--				<Text text="{path:'userAuthModel>To_Date', formatter: '.formatter.dateValue'}" class="tablecellscss"/>-->
+			<!--				<Text text="{userAuthModel>User_lock}" class="tablecellscss"/>-->
+			<!--			</cells>-->
+			<!--		</ColumnListItem>-->
+			<!--	</items>-->
+			<!--</Table>-->
+		</m:content>
+	</m:Page>
+</mvc:View>

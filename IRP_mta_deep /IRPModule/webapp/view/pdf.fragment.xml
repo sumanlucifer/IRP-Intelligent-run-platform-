@@ -1,0 +1,31 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog id="pdf" title="" class= "p2pfilter">
+		<ScrollContainer
+		height="50%"
+		width="50%"
+		horizontal="true"
+		vertical="true">
+		<FlexBox class="sapUiSmallMargin" direction="Column" renderType="Div">
+		<!--	<FlexBox>
+				<Button text="Correctly Displayed" press="onCorrectPathClick"/>
+				<Button text="Loading Error" press="onIncorrectPathClick"/>
+			</FlexBox>-->
+			<FlexBox direction="Row" fitContainer="true" renderType="Div">
+				<PDFViewer class="sapUiSmallMarginEnd" source="{/Source}" title="{/Title1}" height="{/Height}" width="auto">
+					<layoutData>
+						<FlexItemData growFactor="1"/>
+					</layoutData>
+				</PDFViewer>
+				<PDFViewer class="sapUiSmallMarginBegin" source="{/Source}" title="{/Title2}" height="{/Height}" width="auto">
+					<layoutData>
+						<FlexItemData growFactor="1"/>
+					</layoutData>
+				</PDFViewer>
+			</FlexBox>
+		</FlexBox>
+	</ScrollContainer>
+		<beginButton>
+			<Button text="{i18n>dialogCloseButtonText}" press= "onCloseFilterDialog"/>
+		</beginButton>
+	</Dialog>
+</core:FragmentDefinition>

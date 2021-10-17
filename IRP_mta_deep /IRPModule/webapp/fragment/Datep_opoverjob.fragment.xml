@@ -1,0 +1,26 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc">
+	<ResponsivePopover contentWidth="240px" contentHeight="470px" title="Select Filters" class="sapUiPopupWithPadding topcss" placement="Left">
+		<content>
+			<VBox class="sapUiTinyMarginBegin sapUiMediumMarginTop">
+				<Label text="Start Date:" class="textcolorbatch"></Label>
+			</VBox>
+			<VBox>
+				<DatePicker width="83%" placeholder="Enter Date" change="handleChange" minDate="{batchjobmodelN>/fromminDate}"
+					maxDate="{batchjobmodelN>/frommaxDate}" class="combocss"/>
+			</VBox>
+			<VBox class="sapUiTinyMarginBegin sapUiSmallMarginTop">
+				<Label text="End Date:" class="textcolorbatch"></Label>
+			</VBox>
+			<VBox>
+				<DatePicker width="83%" placeholder="Enter Date" change="handleChange1" minDate="{batchjobmodelN>/TominDate}"
+					maxDate="{batchjobmodelN>/TomaxDate}" class="combocss"/>
+			</VBox>
+		</content>
+		<beginButton>
+			<Button text="Cancel" class="buttonFragC sapUiTinyMarginBottom" press="handleCloseButtonjob"/>
+		</beginButton>
+		<endButton>
+			<Button text="Apply" class="buttonFragA sapUiTinyMarginBottom" press="handleApplyButton"/>
+		</endButton>
+	</ResponsivePopover>
+</core:FragmentDefinition>

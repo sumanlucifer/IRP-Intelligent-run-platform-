@@ -1,0 +1,111 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:m="sap.m" xmlns:u="sap.ui.unified"
+	controllerName="ey.irp.IRPModule.controller.user_Privilege" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.ui.table">
+	<m:Page title="Monitoring Dashboard/User Info/Details/{userAuthHModel>/userTitle}" class="sapUiContentPadding textcolor1 navbuttoncss" showNavButton="true" navButtonPress="onPressUAuthP"
+		enableScrolling="false">
+		<m:content>
+			<m:HBox class="hboxcssUA" justifyContent="End">
+				<m:VBox class="sapUiSmallMarginBegin">
+					<m:Label></m:Label>
+				</m:VBox>
+				<m:VBox >
+					<m:Button id="idButton1" class="abapcss buttonuP" visible="true" text="Role" press="onPress1"></m:Button>
+				</m:VBox>
+				<m:VBox>
+					<m:Button id="idButton2" class="abapcss buttonuP" visible="true" text="privilege" press="onPress2"></m:Button>
+				</m:VBox>
+			</m:HBox>
+			<m:VBox class="mutableclassApp" visible="true" id="idVbox1">
+				<Table visibleRowCount="9" id="idsapTable" class="uitablecss batchjobclass" rows="{path:'userAuthHModel>/0/d/results'}" selectionMode="None"
+					ariaLabelledBy="title">
+					<columns>
+						<Column width="6rem">
+							<m:Label text="System" class="tableheadercss"/>
+							<template>
+								<m:Text text="{userAuthHModel>SYSTEM_ID}" wrapping="false"/>
+							</template>
+						</Column>
+						<Column width="15rem">
+							<m:Label text="User" class="tableheadercss"/>
+							<template>
+								<m:Text text="{userAuthHModel>P_USER}" wrapping="false"/>
+							</template>
+						</Column>
+						<Column width="10rem">
+							<m:Label text="Grantee" class="tableheadercss"/>
+							<template>
+								<m:Text text="{userAuthHModel>GRANTEE}" wrapping="false"/>
+							</template>
+						</Column>
+						<Column width="12rem">
+							<m:Label text="Role Name" class="tableheadercss"/>
+							<template>
+								<m:Text text="{userAuthHModel>ROLE_NAME}" wrapping="false"/>
+							</template>
+						</Column>
+						<Column width="10rem">
+							<m:Label text="Role Schema Name" class="tableheadercss"/>
+							<template>
+								<m:Text text="{userAuthHModel>ROLE_SCHEMA_NAME}" wrapping="true"/>
+							</template>
+						</Column>
+						<Column width="8rem">
+							<m:Label text="Grantor" class="tableheadercss"/>
+							<template>
+								<m:Text text="{userAuthHModel>GRANTOR}" wrapping="true"/>
+							</template>
+						</Column>
+					</columns>
+				</Table>
+			</m:VBox>
+			<m:VBox class="mutableclassApp" visible="false" id="idVbox2">
+				<Table visibleRowCount="9" class="uitablecss batchjobclass" rows="{path:'userAuthHPModel>/0/d/results'}" selectionMode="None"
+					ariaLabelledBy="title">
+					<columns>
+						<Column width="6rem">
+							<m:Label text="System" class="tableheadercss"/>
+							<template>
+								<m:Text text="{userAuthHPModel>SYSTEM_ID}" wrapping="false"/>
+							</template>
+						</Column>
+						<Column width="15rem">
+							<m:Label text="Host" class="tableheadercss"/>
+							<template>
+								<m:Text text="{userAuthHPModel>HOST}" wrapping="false"/>
+							</template>
+						</Column>
+						<Column width="15rem">
+							<m:Label text="User" class="tableheadercss"/>
+							<template>
+								<m:Text text="{userAuthHPModel>P_USER}" wrapping="false"/>
+							</template>
+						</Column>
+						<Column width="9rem">
+							<m:Label text="Grantee" class="tableheadercss"/>
+							<template>
+								<m:Text text="{userAuthHPModel>GRANTEE}" wrapping="false"/>
+							</template>
+						</Column>
+						<Column width="9rem">
+							<m:Label text="Grantee Type" class="tableheadercss"/>
+							<template>
+								<m:Text text="{userAuthHPModel>GRANTEE_TYPE}" wrapping="false"/>
+							</template>
+						</Column>
+						<Column width="9rem">
+							<m:Label text="Object Type" class="tableheadercss" wrapping="true"/>
+							<template>
+								<m:Text text="{userAuthHPModel>OBJECT_TYPE}" wrapping="false"/>
+							</template>
+						</Column>
+						<Column width="15rem">
+							<m:Label text="Privilege" class="tableheadercss" wrapping="true"/>
+							<template>
+								<m:Text text="{userAuthHPModel>PRIVILEGE}" wrapping="false"/>
+							</template>
+						</Column>
+					</columns>
+				</Table>
+			</m:VBox>
+		</m:content>
+	</m:Page>
+</mvc:View>

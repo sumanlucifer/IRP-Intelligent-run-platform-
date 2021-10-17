@@ -1,0 +1,805 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="ey.irp.IRPModule.controller.monthEndUpadte" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="Utilities Dashboard/Month end Activities/ Input Details" class="textcolor1 navbuttoncss" showNavButton="true"
+		navButtonPress="onBackMonthend">
+		<content>
+			<VBox class="sapUiSmallMargin monthEndVbox">
+				<f:Form id="f32StdForm" visible="{ path: 'MonthEndUpdate>/f32StdVisible' }" editable="true">
+					<f:layout class="vbox">
+						<f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="4" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0"
+							emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="false"/>
+					</f:layout>
+					<f:formContainers class="inputfieldscss">
+						<f:FormContainer title="Input Details" class="textcolor1 tcodeformCss">
+							<f:formElements>
+								<f:FormElement label="Account Number">
+									<f:fields>
+										<Input name="accountf32-CustomerNoSet-Account" showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequest"
+											value="{MonthEndUpdate>/f32StdDataModel/Account}" class="inputCss"></Input>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Company Code">
+									<f:fields>
+										<Input name="companyCode-CompCodeSet-CompanyCode" placeholder="Enter product" showSuggestion="true" showValueHelp="true" class="inputCss"
+											value="{MonthEndUpdate>/f32StdDataModel/CompanyCode}" valueHelpRequest=".onValueHelpRequest"></Input>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Clearing Date">
+									<f:fields>
+										<DatePicker class="inputCss" value="{MonthEndUpdate>/f32StdDataModel/ClearingDate}"></DatePicker>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Period">
+									<f:fields>
+										<Input name="postingPeriod-PostPeriodSet-Period" showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequest"
+											class="inputCss" value="{MonthEndUpdate>/f32StdDataModel/Period}"></Input>
+									</f:fields>
+								</f:FormElement>
+							</f:formElements>
+						</f:FormContainer>
+						<f:FormContainer class="sapUiMediumMarginTop">
+							<f:formElements class="sapUiMediumMarginTop">
+								<f:FormElement label="Currency">
+									<f:fields>
+										<Input name="currencySet-Currency1Set-Currency" showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequest"
+											class="inputCss" value="{MonthEndUpdate>/f32StdDataModel/Currency}"></Input>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Document Number">
+									<f:fields>
+										<Input class="inputCss" value="{MonthEndUpdate>/f32StdDataModel/DocumentNumber}"></Input>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Difference Posting">
+									<f:fields>
+										<Input class="inputCss" value="{MonthEndUpdate>/f32StdDataModel/DifferencePosting}"></Input>
+									</f:fields>
+								</f:FormElement>
+							</f:formElements>
+						</f:FormContainer>
+					</f:formContainers>
+				</f:Form>
+				<f:Form id="f32PrtForm" visible="{ path: 'MonthEndUpdate>/f32PrtVisible' }" editable="true">
+					<f:layout class="vbox">
+						<f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="4" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0"
+							emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="false"/>
+					</f:layout>
+					<f:formContainers>
+						<f:FormContainer title="Input Details" class="textcolor1">
+							<f:formElements>
+								<f:FormElement label="Account Number">
+									<f:fields>
+										<Input class="inputCss" showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequest"
+											name="accountf32-CustomerNoSet-Account" value="{MonthEndUpdate>/f32PrtDataModel/Account}"></Input>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Company Code">
+									<f:fields>
+										<Input name="companyCode-CompCodeSet-CompanyCode" showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequest"
+											class="inputCss" value="{MonthEndUpdate>/f32PrtDataModel/CompanyCode}"></Input>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Clearing Date">
+									<f:fields>
+										<DatePicker class="inputCss" value="{MonthEndUpdate>/f32PrtDataModel/ClearingDate}"></DatePicker>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Period">
+									<f:fields>
+										<Input name="postingPeriod-PostPeriodSet-Period" showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequest"
+											class="inputCss" value="{MonthEndUpdate>/f32PrtDataModel/Period}"></Input>
+									</f:fields>
+								</f:FormElement>
+							</f:formElements>
+						</f:FormContainer>
+						<f:FormContainer class="sapUiMediumMarginTop">
+							<f:formElements class="sapUiMediumMarginTop">
+								<f:FormElement label="Currency">
+									<f:fields>
+										<Input name="currencySet-Currency1Set-Currency" showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequest"
+											class="inputCss" value="{MonthEndUpdate>/f32PrtDataModel/Currency}"></Input>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Document Number">
+									<f:fields>
+										<Input class="inputCss" value="{MonthEndUpdate>/f32PrtDataModel/DocumentNumber}"></Input>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Difference Posting">
+									<f:fields>
+										<Input class="inputCss" value="{MonthEndUpdate>/f32PrtDataModel/DifferencePosting}"></Input>
+									</f:fields>
+								</f:FormElement>
+							</f:formElements>
+						</f:FormContainer>
+					</f:formContainers>
+				</f:Form>
+				<f:Form id="f32ResForm" visible="{ path: 'MonthEndUpdate>/f32ResVisible' }" editable="true">
+					<f:layout class="vbox">
+						<f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="4" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0"
+							emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="false"/>
+					</f:layout>
+					<f:formContainers>
+						<f:FormContainer title="Input Details" class="textcolor1">
+							<f:formElements>
+								<f:FormElement label="Account Number">
+									<f:fields>
+										<Input name="accountf32-CustomerNoSet-Account" showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequest"
+											class="inputCss" value="{MonthEndUpdate>/f32ResDataModel/Account}"></Input>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Company Code">
+									<f:fields>
+										<Input name="companyCode-CompCodeSet-CompanyCode" showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequest"
+											class="inputCss" value="{MonthEndUpdate>/f32ResDataModel/CompanyCode}"></Input>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Clearing Date">
+									<f:fields>
+										<DatePicker class="inputCss" value="{MonthEndUpdate>/f32ResDataModel/ClearingDate}"></DatePicker>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Period">
+									<f:fields>
+										<Input name="postingPeriod-PostPeriodSet-Period" showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequest"
+											class="inputCss" value="{MonthEndUpdate>/f32ResDataModel/Period}"></Input>
+									</f:fields>
+								</f:FormElement>
+							</f:formElements>
+						</f:FormContainer>
+						<f:FormContainer class="sapUiMediumMarginTop">
+							<f:formElements class="sapUiMediumMarginTop">
+								<f:FormElement label="Currency">
+									<f:fields>
+										<Input name="currencySet-Currency1Set-Currency" showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequest"
+											class="inputCss" value="{MonthEndUpdate>/f32ResDataModel/Currency}"></Input>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Document Number">
+									<f:fields>
+										<Input class="inputCss" value="{MonthEndUpdate>/f32ResDataModel/DocumentNumber}"></Input>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Difference Posting">
+									<f:fields>
+										<Input class="inputCss" value="{MonthEndUpdate>/f32ResDataModel/DifferencePosting}"></Input>
+									</f:fields>
+								</f:FormElement>
+							</f:formElements>
+						</f:FormContainer>
+					</f:formContainers>
+				</f:Form>
+				<f:Form id="f44StdForm" visible="{ path: 'MonthEndUpdate>/f44StdVisible' }" editable="true">
+					<f:layout class="vbox">
+						<f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="4" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0"
+							emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="false"/>
+					</f:layout>
+					<f:formContainers>
+						<f:FormContainer title="Input Details" class="textcolor1">
+							<f:formElements>
+								<f:FormElement label="Account Number">
+									<f:fields>
+										<Input class="inputCss" showSuggestion="true" name="accountf44-VendorNoSet-Account" showValueHelp="true"
+											valueHelpRequest=".onValueHelpRequest" value="{MonthEndUpdate>/f44StdDataModel/Account}"></Input>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Company Code">
+									<f:fields>
+										<Input class="inputCss" name="companyCode-CompCodeSet-CompanyCode" showSuggestion="true" showValueHelp="true"
+											valueHelpRequest=".onValueHelpRequest" value="{MonthEndUpdate>/f44StdDataModel/CompanyCode}"></Input>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Clearing Date">
+									<f:fields>
+										<DatePicker class="inputCss" value="{MonthEndUpdate>/f44StdDataModel/ClearingDate}"></DatePicker>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Period">
+									<f:fields>
+										<Input class="inputCss" name="postingPeriod-PostPeriodSet-Period" showSuggestion="true" showValueHelp="true"
+											valueHelpRequest=".onValueHelpRequest" value="{MonthEndUpdate>/f44StdDataModel/Period}"></Input>
+									</f:fields>
+								</f:FormElement>
+							</f:formElements>
+						</f:FormContainer>
+						<f:FormContainer class="sapUiMediumMarginTop">
+							<f:formElements class="sapUiMediumMarginTop">
+								<f:FormElement label="Currency" class="sapUiMediumMarginTop">
+									<f:fields>
+										<Input class="inputCss" name="currencySet-Currency1Set-Currency" showSuggestion="true" showValueHelp="true"
+											valueHelpRequest=".onValueHelpRequest" value="{MonthEndUpdate>/f44StdDataModel/Currency}"></Input>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Document Number">
+									<f:fields>
+										<Input class="inputCss" value="{MonthEndUpdate>/f44StdDataModel/DocumentNumber}"></Input>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Difference Posting">
+									<f:fields>
+										<Input class="inputCss" value="{MonthEndUpdate>/f44StdDataModel/DifferencePosting}"></Input>
+									</f:fields>
+								</f:FormElement>
+							</f:formElements>
+						</f:FormContainer>
+					</f:formContainers>
+				</f:Form>
+				<f:Form id="f44PrtForm" visible="{ path: 'MonthEndUpdate>/f44PrtVisible' }" editable="true">
+					<f:layout class="vbox">
+						<f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="4" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0"
+							emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="false"/>
+					</f:layout>
+					<f:formContainers>
+						<f:FormContainer title="Input Details" class="textcolor1">
+							<f:formElements>
+								<f:FormElement label="Account Number">
+									<f:fields>
+										<Input name="accountf44-VendorNoSet-Account" showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequest"
+											class="inputCss" value="{MonthEndUpdate>/f44PrtDataModel/Account}"></Input>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Company Code">
+									<f:fields>
+										<Input name="companyCode-CompCodeSet-CompanyCode" showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequest"
+											class="inputCss" value="{MonthEndUpdate>/f44PrtDataModel/CompanyCode}"></Input>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Clearing Date">
+									<f:fields>
+										<DatePicker class="inputCss" value="{MonthEndUpdate>/f44PrtDataModel/ClearingDate}"></DatePicker>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Period">
+									<f:fields>
+										<Input name="postingPeriod-PostPeriodSet-Period" showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequest"
+											class="inputCss" value="{MonthEndUpdate>/f44PrtDataModel/Period}"/>
+									</f:fields>
+								</f:FormElement>
+							</f:formElements>
+						</f:FormContainer>
+						<f:FormContainer class="sapUiMediumMarginTop">
+							<f:formElements class="sapUiMediumMarginTop">
+								<f:FormElement label="Currency" class="sapUiMediumMarginTop">
+									<f:fields>
+										<Input name="currencySet-Currency1Set-Currency" showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequest"
+											class="inputCss" value="{MonthEndUpdate>/f44PrtDataModel/Currency}"/>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Document Number">
+									<f:fields>
+										<Input class="inputCss" value="{MonthEndUpdate>/f44PrtDataModel/DocumentNumber}"/>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Difference Posting">
+									<f:fields>
+										<Input class="inputCss" value="{MonthEndUpdate>/f44PrtDataModel/DifferencePosting}"/>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Payment Amount">
+									<f:fields>
+										<Input class="inputCss" value="{MonthEndUpdate>/f44PrtDataModel/PaymentAmount}"/>
+									</f:fields>
+								</f:FormElement>
+							</f:formElements>
+						</f:FormContainer>
+					</f:formContainers>
+				</f:Form>
+				<f:Form id="f44ResForm" visible="{ path: 'MonthEndUpdate>/f44ResVisible' }" editable="true">
+					<f:layout class="vbox">
+						<f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="4" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0"
+							emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="false"/>
+					</f:layout>
+					<f:formContainers>
+						<f:FormContainer title="Input Details" class="textcolor1">
+							<f:formElements>
+								<f:FormElement label="Account Number">
+									<f:fields>
+										<Input name="accountf44-VendorNoSet-Account" showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequest"
+											class="inputCss" value="{MonthEndUpdate>/f44ResDataModel/Account}"></Input>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Company Code">
+									<f:fields>
+										<Input name="companyCode-CompCodeSet-CompanyCode" showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequest"
+											class="inputCss" value="{MonthEndUpdate>/f44ResDataModel/CompanyCode}"></Input>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Clearing Date">
+									<f:fields>
+										<DatePicker class="inputCss" value="{MonthEndUpdate>/f44ResDataModel/ClearingDate}"></DatePicker>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Period">
+									<f:fields>
+										<Input name="postingPeriod-PostPeriodSet-Period" showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequest"
+											class="inputCss" value="{MonthEndUpdate>/f44ResDataModel/Period}"/>
+									</f:fields>
+								</f:FormElement>
+							</f:formElements>
+						</f:FormContainer>
+						<f:FormContainer class="sapUiMediumMarginTop">
+							<f:formElements class="sapUiMediumMarginTop">
+								<f:FormElement label="Currency" class="sapUiMediumMarginTop">
+									<f:fields>
+										<Input name="currencySet-Currency1Set-Currency" showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequest"
+											class="inputCss" value="{MonthEndUpdate>/f44ResDataModel/Currency}"/>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Document Number">
+									<f:fields>
+										<Input value="{MonthEndUpdate>/f44ResDataModel/DocumentNumber}"/>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Difference Posting">
+									<f:fields>
+										<Input class="inputCss" value="{MonthEndUpdate>/f44ResDataModel/DifferencePosting}"/>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Residual Items">
+									<f:fields>
+										<Input class="inputCss" value="{MonthEndUpdate>/f44ResDataModel/ResidualItems}"/>
+									</f:fields>
+								</f:FormElement>
+							</f:formElements>
+						</f:FormContainer>
+					</f:formContainers>
+				</f:Form>
+				<f:Form id="ob52Form" visible="{ path: 'MonthEndUpdate>/ob52Visible' }" editable="true">
+					<f:layout class="vbox">
+						<f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="4" labelSpanM="6" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0"
+							emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="false"/>
+					</f:layout>
+					<f:formContainers>
+						<f:FormContainer title="Input Details" class="textcolor1">
+							<f:formElements>
+								<f:FormElement label="Posting Period">
+									<f:fields>
+										<HBox>
+											<RadioButtonGroup columns="2" id="radioTest" select="onSelectPosting" class="sapUiMediumMarginBottom">
+												<RadioButton id="radioOpen" text="Open"/>
+												<RadioButton id="radioClose" text="Close"/>
+											</RadioButtonGroup>
+										</HBox>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="From fiscal year" visible="{ path: 'MonthEndUpdate>/ob52OpenVisible' }">
+									<f:fields>
+										<DatePicker valueFormat="yyyy" displayFormat="yyyy" value="{MonthEndUpdate>/ob52FiOpnDataModel/FiscalYear}"></DatePicker>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="From Period" visible="{ path: 'MonthEndUpdate>/ob52OpenVisible' }">
+									<f:fields>
+										<Input class="inputCss" value="{MonthEndUpdate>/ob52FiOpnDataModel/FromPeriod1}"/>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Account Type" visible="{ path: 'MonthEndUpdate>/ob52OpenVisible' }">
+									<f:fields>
+										<Input name="accountType-AcctypeSet-AccountType" showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequest"
+											class="inputCss" value="{MonthEndUpdate>/ob52FiOpnDataModel/AccountType}"/>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="From Fiscal Year2" visible="{ path: 'MonthEndUpdate>/ob52OpenVisible' }">
+									<f:fields>
+										<Input class="inputCss" value="{MonthEndUpdate>/ob52FiOpnDataModel/FromFiscalYear2}"/>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="From Period2" visible="{ path: 'MonthEndUpdate>/ob52OpenVisible' }">
+									<f:fields>
+										<Input class="inputCss" value="{MonthEndUpdate>/ob52FiOpnDataModel/FromPeriod2}"/>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="To Fiscal Year2" visible="{ path: 'MonthEndUpdate>/ob52OpenVisible' }">
+									<f:fields>
+										<Input class="inputCss" value="{MonthEndUpdate>/ob52FiOpnDataModel/ToFiscalYear2}"/>
+									</f:fields>
+								</f:FormElement>
+							</f:formElements>
+						</f:FormContainer>
+						<f:FormContainer class="sapUiMediumMarginTop">
+							<f:formElements class="sapUiMediumMarginTop">
+								<f:FormElement label="Posting Period Variant" class="sapUiMediumMarginTop" visible="{ path: 'MonthEndUpdate>/ob52OpenVisible' }">
+									<f:fields>
+										<Input class="inputCss" name="companyCodeVariant-CompCodeVarSet-CompanyCodeVariant" showSuggestion="true" showValueHelp="true"
+											valueHelpRequest=".onValueHelpRequest" value="{MonthEndUpdate>/ob52FiOpnDataModel/CompanyCodeVariant}"/>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="To Fiscal Year" visible="{ path: 'MonthEndUpdate>/ob52OpenVisible' }">
+									<f:fields>
+										<DatePicker valueFormat="yyyy" displayFormat="yyyy" value="{MonthEndUpdate>/ob52FiOpnDataModel/ToFiscalYear}"></DatePicker>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="To Period" visible="{ path: 'MonthEndUpdate>/ob52OpenVisible' }">
+									<f:fields>
+										<Input showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequest" name="postingPeriod-PostPeriodSet-ToPeriod1"
+											class="inputCss" value="{MonthEndUpdate>/ob52FiOpnDataModel/ToPeriod1}"/>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="To Period3" visible="{ path: 'MonthEndUpdate>/ob52OpenVisible' }">
+									<f:fields>
+										<Input showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequest" name="postingPeriod-PostPeriodSet-ToPeriod3"
+											class="inputCss" value="{MonthEndUpdate>/ob52FiOpnDataModel/ToPeriod3}"/>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="From Account" visible="{ path: 'MonthEndUpdate>/ob52OpenVisible' }">
+									<f:fields>
+										<Input class="inputCss" value="{MonthEndUpdate>/ob52FiOpnDataModel/FromAccount}"/>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="To Account" visible="{ path: 'MonthEndUpdate>/ob52OpenVisible' }">
+									<f:fields>
+										<Input class="inputCss" value="{MonthEndUpdate>/ob52FiOpnDataModel/ToAccount}"/>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Authorization Group" visible="{ path: 'MonthEndUpdate>/ob52OpenVisible' }">
+									<f:fields>
+										<Input class="inputCss" value="{MonthEndUpdate>/ob52FiOpnDataModel/AuthorizationGroup}"/>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="From Period3" visible="{ path: 'MonthEndUpdate>/ob52OpenVisible' }">
+									<f:fields>
+										<Input class="inputCss" value="{MonthEndUpdate>/ob52FiOpnDataModel/FromPeriod3}"/>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="To Period2" visible="{ path: 'MonthEndUpdate>/ob52OpenVisible' }">
+									<f:fields>
+										<Input class="inputCss" showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequest"
+											name="postingPeriod-PostPeriodSet-ToPeriod2" value="{MonthEndUpdate>/ob52FiOpnDataModel/ToPeriod2}"/>
+									</f:fields>
+								</f:FormElement>
+							</f:formElements>
+						</f:FormContainer>
+						<!--.....................-->
+						<f:FormContainer>
+							<f:formElements>
+								<f:FormElement label="From fiscal year" visible="{ path: 'MonthEndUpdate>/ob52ClsVisible' }">
+									<f:fields>
+										<DatePicker value="{MonthEndUpdate>/ob52FiClsDataModel/FiscalYear}"></DatePicker>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Account Type" visible="{ path: 'MonthEndUpdate>/ob52ClsVisible' }">
+									<f:fields>
+										<Input class="inputCss" showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequest"
+											name="accountType-AcctypeSet-AccountType" value="{MonthEndUpdate>/ob52FiClsDataModel/AccountType}"/>
+									</f:fields>
+								</f:FormElement>
+							</f:formElements>
+						</f:FormContainer>
+						<f:FormContainer class="sapUiMediumMarginTop">
+							<f:formElements class="sapUiMediumMarginTop">
+								<f:FormElement label="Posting Period Variant" visible="{ path: 'MonthEndUpdate>/ob52ClsVisible' }" class="sapUiMediumMarginTop">
+									<f:fields>
+										<Input class="inputCss" showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequest"
+											name="companyCodeVariant-CompCodeVarSet-CompanyCodeVariant" value="{MonthEndUpdate>/ob52FiClsDataModel/CompanyCodeVariant}"/>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="To Period" visible="{ path: 'MonthEndUpdate>/ob52ClsVisible' }">
+									<f:fields>
+										<Input class="inputCss" showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequest"
+											name="postingPeriod-PostPeriodSet-ToPeriod1" value="{MonthEndUpdate>/ob52FiClsDataModel/ToPeriod1}"/>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="To Period2" visible="{ path: 'MonthEndUpdate>/ob52ClsVisible' }">
+									<f:fields>
+										<Input class="inputCss" showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequest"
+											name="postingPeriod-PostPeriodSet-ToPeriod2" value="{MonthEndUpdate>/ob52FiClsDataModel/ToPeriod2}"/>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="To Period3" visible="{ path: 'MonthEndUpdate>/ob52ClsVisible' }">
+									<f:fields>
+										<Input class="inputCss" showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequest"
+											name="postingPeriod-PostPeriodSet-ToPeriod3" value="{MonthEndUpdate>/ob52FiClsDataModel/ToPeriod3}"/>
+									</f:fields>
+								</f:FormElement>
+							</f:formElements>
+						</f:FormContainer>
+					</f:formContainers>
+				</f:Form>
+				<f:Form id="mr11Form" visible="{ path: 'MonthEndUpdate>/mr11Visible' }" editable="true">
+					<f:layout class="vbox">
+						<f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="4" labelSpanM="6" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0"
+							emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="false"/>
+					</f:layout>
+					<f:formContainers>
+						<f:FormContainer title="Input Details" class="textcolor1">
+							<f:formElements>
+								<f:FormElement label="PO Number">
+									<f:fields>
+										<Input class="inputCss" value="{MonthEndUpdate>/mr11DataModel/GRIR/0/PoNumber}"></Input>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="FY Current Period">
+									<f:fields>
+										<Input class="inputCss" value="{MonthEndUpdate>/mr11DataModel/GRIR/0/FYCurrentPeriod}"></Input>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Ref Doc">
+									<f:fields>
+										<Input class="inputCss" value="{MonthEndUpdate>/mr11DataModel/GRIR/0/RefDoc}"></Input>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Ref Doc IT">
+									<f:fields>
+										<Input class="inputCss" value="{MonthEndUpdate>/mr11DataModel/GRIR/0/RefDocIT}"></Input>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Ref Doc Year">
+									<f:fields>
+										<Input class="inputCss" value="{MonthEndUpdate>/mr11DataModel/GRIR/0/RefDocYear}"></Input>
+									</f:fields>
+								</f:FormElement>
+							</f:formElements>
+						</f:FormContainer>
+						<f:FormContainer class="sapUiMediumMarginTop">
+							<f:formElements class="sapUiMediumMarginTop">
+								<f:FormElement label="Delivery Surplus" class="sapUiMediumMarginTop">
+									<f:fields>
+										<Input class="inputCss" value="{MonthEndUpdate>/mr11DataModel/GRIR/0/DeliverySurplus}"></Input>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Select Invoice Surplus">
+									<f:fields>
+										<Input class="inputCss" value="{MonthEndUpdate>/mr11DataModel/GRIR/0/InvoiceSurplus}"></Input>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Select GR/IR Clear Account">
+									<f:fields>
+										<Input class="inputCss" value="{MonthEndUpdate>/mr11DataModel/GRIR/0/GRIRClearingAccount}"></Input>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Posting Date">
+									<f:fields>
+										<DatePicker value="{MonthEndUpdate>/mr11DataModel/GRIR/0/PostingDate}"></DatePicker>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="PO Date">
+									<f:fields>
+										<DatePicker value="{MonthEndUpdate>/mr11DataModel/GRIR/0/PoDate}"></DatePicker>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="PO Item">
+									<f:fields>
+										<Input class="inputCss" value="{MonthEndUpdate>/mr11DataModel/GRIR/0/PoItem}"></Input>
+									</f:fields>
+								</f:FormElement>
+							</f:formElements>
+						</f:FormContainer>
+					</f:formContainers>
+				</f:Form>
+				<f:Form id="afabForm" visible="{ path: 'MonthEndUpdate>/afabVisible' }" editable="true">
+					<f:layout class="vbox">
+						<f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="4" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0"
+							emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="false"/>
+					</f:layout>
+					<f:formContainers>
+						<f:FormContainer title="Input Details" class="textcolor1">
+							<f:formElements>
+								<f:FormElement label="Company Code">
+									<f:fields>
+										<Input name="companyCode-CompCodeSet-CompanyCode" showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequest"
+											class="inputCss" value="{MonthEndUpdate>/afabDataModel/CompanyCode}"></Input>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Fiscal Year">
+									<f:fields>
+										<DatePicker value="{MonthEndUpdate>/afabDataModel/FiscalYear}"></DatePicker>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Posting Period">
+									<f:fields>
+										<Input class="inputCss" showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequest"
+											name="postingPeriod-PostPeriodSet-PostingPeriod" value="{MonthEndUpdate>/afabDataModel/PostingPeriod}"></Input>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Acct Principle">
+									<f:fields>
+										<Input showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequest" class="inputCss"
+											name="acctPrinciple-AccountingPrincipleSet-AcctPrinciple" value="{MonthEndUpdate>/afabDataModel/AcctPrinciple}"/>
+									</f:fields>
+								</f:FormElement>
+							</f:formElements>
+						</f:FormContainer>
+					</f:formContainers>
+				</f:Form>
+				<f:Form id="mmpvForm" visible="{ path: 'MonthEndUpdate>/mmpvVisible' }" editable="true">
+					<f:layout class="vbox">
+						<f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="4" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0"
+							emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="false"/>
+					</f:layout>
+					<f:formContainers>
+						<f:FormContainer title="Input Details" class="textcolor1">
+							<f:formElements>
+								<f:FormElement label="From Company Code">
+									<f:fields>
+										<Input class="inputCss" showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequest"
+											name="companyCode-CompCodeSet-FromCompanyCode" value="{MonthEndUpdate>/mmpvDataModel/FromCompanyCode}"></Input>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="To Company Code">
+									<f:fields>
+										<Input class="inputCss" showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequest"
+											name="companyCode-CompCodeSet-ToCompanyCode" value="{MonthEndUpdate>/mmpvDataModel/ToCompanyCode}"></Input>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Current Date">
+									<f:fields>
+										<DatePicker value="{{MonthEndUpdate>/mmpvDataModel/CurrentDate}"></DatePicker>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Period">
+									<f:fields>
+										<Input class="inputCss" showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequest"
+											name="postingPeriod-PostPeriodSet-Period" value="{MonthEndUpdate>/mmpvDataModel/Period}"></Input>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Fiscal Year">
+									<f:fields>
+										<DatePicker value="{MonthEndUpdate>/mmpvDataModel/FiscalYear}"></DatePicker>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Date">
+									<f:fields>
+										<DatePicker value="{MonthEndUpdate>/mmpvDataModel/Date}"></DatePicker>
+									</f:fields>
+								</f:FormElement>
+							</f:formElements>
+						</f:FormContainer>
+						<f:FormContainer class="sapUiMediumMarginTop">
+							<f:formElements class="sapUiMediumMarginTop">
+								<f:FormElement label="Check Close Period" class="sapUiMediumMarginTop">
+									<f:fields>
+										<Input class="inputCss" value="{MonthEndUpdate>/mmpvDataModel/CheckClosePeriod}"/>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="CheckPeriodOnly">
+									<f:fields>
+										<Input class="inputCss" value="{MonthEndUpdate>/mmpvDataModel/CheckPeriodOnly}"/>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Close Period Only">
+									<f:fields>
+										<Input class="inputCss" value="{MonthEndUpdate>/mmpvDataModel/ClosePeriodOnly}"/>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Allow Neg Qty">
+									<f:fields>
+										<Input class="inputCss" value="{MonthEndUpdate>/mmpvDataModel/AllowNegQty}"/>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Allow Neg Val">
+									<f:fields>
+										<Input class="inputCss" value="{MonthEndUpdate>/mmpvDataModel/AllowNegVal}"/>
+									</f:fields>
+								</f:FormElement>
+							</f:formElements>
+						</f:FormContainer>
+					</f:formContainers>
+				</f:Form>
+				<f:Form id="fbs1Form" visible="{ path: 'MonthEndUpdate>/fbs1Visible' }" editable="true">
+					<f:layout class="vbox">
+						<f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="4" labelSpanM="6" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0"
+							emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="false"/>
+					</f:layout>
+					<f:formContainers>
+						<f:FormContainer title="Input Details" class="textcolor1">
+							<f:formElements>
+								<f:FormElement label="User name">
+									<f:fields>
+										<Input class="inputCss" value="{MonthEndUpdate>/fbs1DataModel/Username}"></Input>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Company Code">
+									<f:fields>
+										<Input class="inputCss" showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequest"
+											name="companyCode-CompCodeSet-CompanyCode" value="{MonthEndUpdate>/fbs1DataModel/CompanyCode}"></Input>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Document Date In Document">
+									<f:fields>
+										<DatePicker value="{MonthEndUpdate>/fbs1DataModel/DocumentDateInDocument}" valueFormat="YYYYMMdd"></DatePicker>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Posting Date in the Document">
+									<f:fields>
+										<DatePicker value="{MonthEndUpdate>/fbs1DataModel/PostingDateintheDocument}" valueFormat="YYYYMMdd"></DatePicker>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Fiscal period">
+									<f:fields>
+										<Input class="inputCss" value="{MonthEndUpdate>/fbs1DataModel/Fiscalperiod}"></Input>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Document Type">
+									<f:fields>
+										<Input showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequest" name="documentType-DocTypeSet-DocumentType"
+											class="inputCss" value="{MonthEndUpdate>/fbs1DataModel/DocumentType}"></Input>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Reason For Reversal">
+									<f:fields>
+										<Input showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequest" class="inputCss"
+											name="reversalSet-ReasonforreversalSet-ReasonForReversal" value="{MonthEndUpdate>/fbs1DataModel/ReasonForReversal}"></Input>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Currency">
+									<f:fields>
+										<Input showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequest" name="currencySet-Currency1Set-Currency"
+											class="inputCss" value="{MonthEndUpdate>/fbs1DataModel/Currency}"></Input>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Reversal Date">
+									<f:fields>
+										<DatePicker value="{MonthEndUpdate>/fbs1DataModel/ReversalDate}"></DatePicker>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement>
+									<f:fields>
+										<Table sticky="ColumnHeaders" items="{MonthEndUpdate>/fbs1DataModel/NavAccDeferToLine}" growing="true" growingThreshold="20"
+											class="mutableclassHD" inset="false">
+											<columns>
+												<Column width="6rem">
+													<Text text="Item No" class="monthEndTableHeader"/>
+												</Column>
+												<Column width="12rem">
+													<Text text="Gl Account" class="monthEndTableHeader sapUiSmallMarginBegin"/>
+												</Column>
+												<Column width="15rem">
+													<Text text="Amt Doc" class="monthEndTableHeader sapUiLargeMarginBegin"/>
+												</Column>
+											</columns>
+											<items>
+												<ColumnListItem>
+													<cells>
+														<Input value="{MonthEndUpdate>ItemNo_Acc}" class="monthEndTableCell"/>
+														<Input value="{MonthEndUpdate>GL_Account}" class="monthEndTableCell"/>
+														<Input value="{MonthEndUpdate>Amt_doccur}" class="monthEndTableCell sapUiMediumMarginBegin"/>
+													</cells>
+												</ColumnListItem>
+											</items>
+										</Table>
+									</f:fields>
+								</f:FormElement>
+							</f:formElements>
+						</f:FormContainer>
+					</f:formContainers>
+				</f:Form>
+				<f:Form id="f81Form" visible="{ path: 'MonthEndUpdate>/f81Visible' }" editable="true">
+					<f:layout class="vbox">
+						<f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="4" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0"
+							emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="false"/>
+					</f:layout>
+					<f:formContainers>
+						<f:FormContainer title="Input Details" class="textcolor1">
+							<f:formElements>
+								<f:FormElement label="Fiscal year">
+									<f:fields>
+										<DatePicker value="{MonthEndUpdate>/f81DataModel/FiscalYear}"></DatePicker>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Company Code">
+									<f:fields>
+										<Input name="companyCode-CompCodeSet-CompanyCode" showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequest"
+											class="inputCss" value="{MonthEndUpdate>/f81DataModel/CompanyCode}"></Input>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Accounting document number">
+									<f:fields>
+										<Input class="inputCss" value="{MonthEndUpdate>/f81DataModel/AccDocNumber}"></Input>
+									</f:fields>
+								</f:FormElement>
+							</f:formElements>
+						</f:FormContainer>
+					</f:formContainers>
+				</f:Form>
+				<HBox justifyContent="End">
+					<Button text="Cancel" class="sapUiTinyMarginEnd sapUiLargeMarginBottom buttonFragC" press="OnpressCancel"/>
+					<Button text="Update" class="sapUiTinyMarginEnd sapUiLargeMarginBottom buttonFragA" press="OnpressUpdate"/>
+				</HBox>
+			</VBox>
+		</content>
+		<footer>
+			<OverflowToolbar>
+				<ToolbarSpacer/>
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</mvc:View>

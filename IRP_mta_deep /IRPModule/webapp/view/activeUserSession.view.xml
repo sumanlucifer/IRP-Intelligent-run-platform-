@@ -1,0 +1,248 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:u="sap.ui.unified"
+	controllerName="ey.irp.IRPModule.controller.activeUserSession" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:ui="sap.ui.table"
+	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Page title="Monitoring Dashboard/Active User Session" class="sapUiContentPadding textcolor1 navbuttoncss" showNavButton="true"
+		navButtonPress="onPressactiveUS" enableScrolling="false">
+		<content>
+			<IconTabBar select="getselectedKey" class="sapUiResponsiveContentPadding iconss barcss">
+				<items>
+					<IconTabFilter class="textpendinglc" text="Hana DB">
+						<HBox>
+							<VBox class="sapUiTinyMarginBegin">
+								<Label text="User Details For hana DB"/>
+							</VBox>
+						</HBox>
+						<SplitApp id="SplitAppDemo" initialDetail="detail" initialMaster="master" class="splitappcss splitappcss1">
+							<detailPages>
+								<Page id="detail" title="Overview" backgroundDesign="Solid" class="sapUiStdPage detailcss " showHeader="false">
+									<HBox>
+										<VBox class="mutableclassApp " visible="true" id="idVbox1">
+											<Table sticky="ColumnHeaders" class="mutableclassHD" inset="false" items="{path:'activeHanaUSuserDetail>/0/d/results'}">
+												<columns>
+													<Column width="6rem">
+														<Text text="User Name" class="tableheadercss"/>
+													</Column>
+													<Column width="9rem">
+														<Text text="Host" class="tableheadercss"/>
+													</Column>
+													<Column width="6rem">
+														<Text text="User Id" class="tableheadercss"/>
+													</Column>
+													<Column width="11rem">
+														<Text text="User Group Name" class="tableheadercss"/>
+													</Column>
+													<Column width="6rem">
+														<Text text="User Mode" class="tableheadercss"/>
+													</Column>
+													<Column width="11rem">
+														<Text text="External Identity" class="tableheadercss"/>
+													</Column>
+													<Column width="6rem">
+														<Text text="Creator" class="tableheadercss"/>
+													</Column>
+													<Column width="11rem">
+														<Text text="Create Time" class="tableheadercss"/>
+													</Column>
+													<Column width="11rem">
+														<Text text="Valid From" class="tableheadercss"/>
+													</Column>
+													<Column width="11rem">
+														<Text text="Valid Until" class="tableheadercss"/>
+													</Column>
+													<Column width="11rem">
+														<Text text="Last Successful Connect" class="tableheadercss"/>
+													</Column>
+													<Column width="15rem">
+														<Text text="Last Invalid Connect Attempt" class="tableheadercss"/>
+													</Column>
+													<Column width="11rem">
+														<Text text="Invalid Connect Attempts" class="tableheadercss"/>
+													</Column>
+													<Column width="15rem">
+														<Text text="Admin Given Password" class="tableheadercss"/>
+													</Column>
+													<Column width="11rem">
+														<Text text="Last Password Chnage Time" class="tableheadercss"/>
+													</Column>
+													<Column width="15rem">
+														<Text text="Password Change Needed" class="tableheadercss"/>
+													</Column>
+													<Column width="11rem">
+														<Text text="User Deactivated" class="tableheadercss"/>
+													</Column>
+													<Column width="15rem">
+														<Text text="Deactivation Time" class="tableheadercss"/>
+													</Column>
+												</columns>
+												<items>
+													<ColumnListItem>
+														<cells>
+															<Link text="{activeHanaUSuserDetail>USER_NAME}" press="handleLinkPressHana" class="tablecellscss"/>
+															<Text text="{activeHanaUSuserDetail>HOST}" class="tablecellscss" wrapping="true"/>
+															<Text text="{activeHanaUSuserDetail>USER_ID}" class="tablecellscss" wrapping="true"/>
+															<Text text="{activeHanaUSuserDetail>USERGROUP_NAME}" class="tablecellscss" wrapping="true"/>
+															<Text text="{activeHanaUSuserDetail>USER_MODE}" class="tablecellscss" wrapping="true"/>
+															<Text text="{activeHanaUSuserDetail>EXTERNAL_IDENTITY}" class="tablecellscss" wrapping="true"/>
+															<Text text="{activeHanaUSuserDetail>CREATOR}" class="tablecellscss" wrapping="true"/>
+															<Text text="{path:'activeHanaUSuserDetail>CREATE_TIME', formatter: '.formatter.dateValue'}" class="tablecellscss"/>
+															<Text text="{path:'activeHanaUSuserDetail>VALID_FROM', formatter: '.formatter.dateValue'}" class="tablecellscss"/>
+															<Text text="{path:'activeHanaUSuserDetail>VALID_UNTIL', formatter: '.formatter.dateValue'}" class="tablecellscss"/>
+															<Text text="{path:'activeHanaUSuserDetail>LAST_SUCCESSFUL_CONNECT', formatter: '.formatter.dateValue'}" class="tablecellscss"/>
+															<Text text="{activeHanaUSuserDetail>LAST_INVALID_CONNECT_ATTEMPT}" class="tablecellscss" wrapping="true"/>
+															<Text text="{activeHanaUSuserDetail>INVALID_CONNECT_ATTEMPTS}" class="tablecellscss sapUiSmallMarginBegin" wrapping="true"/>
+															<Text text="{activeHanaUSuserDetail>ADMIN_GIVEN_PASSWORD}" class="tablecellscss" wrapping="true"/>
+															<Text text="{path:'activeHanaUSuserDetail>LAST_PASSWORD_CHANGE_TIME', formatter: '.formatter.dateValue'}" class="tablecellscss"/>
+															<Text text="{activeHanaUSuserDetail>PASSWORD_CHANGE_NEEDED}" class="tablecellscss" wrapping="true"/>
+															<Text text="{activeHanaUSuserDetail>USER_DEACTIVATED}" class="tablecellscss" wrapping="true"/>
+															<Text text="{path:'activeHanaUSuserDetail>DEACTIVATION_TIME', formatter: '.formatter.dateValue'}"
+																class="tablecellscss sapUiSmallMarginBegin" wrapping="true"/>
+														</cells>
+													</ColumnListItem>
+												</items>
+											</Table>
+										</VBox>
+									</HBox>
+								</Page>
+								<Page id="detailDetail" title="Overview" class="sapUiStdPage detailcss" backgroundDesign="Solid" showHeader="false">
+									<VBox class="sapUiSmallMargin">
+										<Label text="System2 Details"/>
+									</VBox>
+								</Page>
+							</detailPages>
+							<masterPages>
+								<Page id="master1" title="Systems" backgroundDesign="List" class="sapUiStdPage mastercss">
+									<List mode="SingleSelectMaster" id="listIDH" items="{sysListModel>/DBSystems/data}" itemPress=".onListItemPress" class="s4dcss">
+										<items>
+											<StandardListItem title="{sysListModel>sysId}" type="Active" custom:to="detail1"/>
+										</items>
+									</List>
+								</Page>
+							</masterPages>
+						</SplitApp>
+					</IconTabFilter>
+					<IconTabFilter class="textpendinglc" text="Application">
+						<HBox class="hboxcss" justifyContent="End">
+							<VBox class="sapUiTinyMarginBegin">
+								<Button id="idButton3" class="abapcss buttonhover4 buttonwidth" visible="true" text="Active User Session" press="onPress3"></Button>
+							</VBox>
+							<VBox class="sapUiTinyMarginBegin">
+								<Button id="idButton4" class="abapcss buttonhover4" visible="true" text="User Details" press="onPress4"></Button>
+							</VBox>
+						</HBox>
+						<SplitApp id="SplitAppDemoA" initialDetail="detail" initialMaster="master" class="splitappcss splitappcss1">
+							<detailPages>
+								<Page id="detail1" title="Overview" backgroundDesign="Solid" class="sapUiStdPage detailcss" showHeader="false">
+									<HBox>
+										<VBox  visible="true" id="idVbox3">
+											<Table sticky="ColumnHeaders" class="mutableclassHD" inset="false" items="{path:'userSessionModel>/0/d/results'}">
+												<columns>
+													<Column width="6rem">
+														<Text text="System" class="tableheadercss"/>
+													</Column>
+													<Column width="9rem">
+														<Text text="Host" class="tableheadercss"/>
+													</Column>
+													<Column width="6rem">
+														<Text text="Client" class="tableheadercss"/>
+													</Column>
+													<Column width="6rem">
+														<Text text="User Id" class="tableheadercss"/>
+													</Column>
+													<Column width="11rem">
+														<Text text="Client Host" class="tableheadercss"/>
+													</Column>
+													<Column width="6rem">
+														<Text text="Application" class="tableheadercss"/>
+													</Column>
+													<Column width="11rem">
+														<Text text="Dialog Time" class="tableheadercss"/>
+													</Column>
+													<Column width="6rem">
+														<Text text="Type of User Session" class="tableheadercss"/>
+													</Column>
+													<Column width="11rem">
+														<Text text="Sessions" class="tableheadercss"/>
+													</Column>
+													<Column width="11rem">
+														<Text text="Priority" class="tableheadercss"/>
+													</Column>
+													<Column width="6rem">
+														<Text text="Memory" class="tableheadercss"/>
+													</Column>
+													<Column width="11rem">
+														<Text text="ConvID" class="tableheadercss"/>
+													</Column>
+													<Column width="15rem">
+														<Text text="AppInfo" class="tableheadercss"/>
+													</Column>
+												</columns>
+												<items>
+													<ColumnListItem>
+														<cells>
+															<Text text="{userSessionModel>SystemId}" class="tablecellscss" wrapping="true"/>
+															<Text text="{userSessionModel>Host}" class="tablecellscss" wrapping="true"/>
+															<Text text="{userSessionModel>Client}" class="tablecellscss sapUiSmallMarginBegin" wrapping="true"/>
+															<Text text="{userSessionModel>UserId}" class="tablecellscss" wrapping="true"/>
+															<Text text="{userSessionModel>ClientHost}" class="tablecellscss" wrapping="true"/>
+															<Text text="{userSessionModel>Application}" class="tablecellscss" wrapping="true"/>
+															<Text text="{userSessionModel>DialogTime}" class="tablecellscss" wrapping="true"/>
+															<Text text="{userSessionModel>TypeofUserSession}" class="tablecellscss sapUiSmallMarginBegin" wrapping="true"/>
+															<Text text="{userSessionModel>Sessions}" class="tablecellscss" wrapping="true"/>
+															<Text text="{userSessionModel>Priority}" class="tablecellscss" wrapping="true"/>
+															<Text text="{userSessionModel>Memory}" class="tablecellscss" wrapping="true"/>
+															<Text text="{userSessionModel>ConvID}" class="tablecellscss" wrapping="true"/>
+															<Text text="{userSessionModel>AppInfo}" class="tablecellscss sapUiSmallMarginBegin" wrapping="true"/>
+														</cells>
+													</ColumnListItem>
+												</items>
+											</Table>
+										</VBox>
+										<VBox class="sapUiTinyMarginTop" visible="true" width="100%" id="idVbox4">
+											<Table id="iduserDetails" sticky="ColumnHeaders" growing="true" growingThreshold="100" class="mutableclassHD" inset="false"
+												items="{path:'activeUSuserDetail>/0/d/results'}">
+												<columns>
+													<Column width="9rem">
+														<Text text="User Name" class="tableheadercss"/>
+													</Column>
+													<Column width="9rem">
+														<Text text="Host Name" class="tableheadercss"/>
+													</Column>
+													<Column width="6rem">
+														<Text text="Lock Status" class="tableheadercss"/>
+													</Column>
+												</columns>
+												<items>
+													<ColumnListItem type="Active">
+														<cells>
+															<Link text="{activeUSuserDetail>USER}" press="handleLinkPress" class="tablecellscss"/>
+															<Text text="{activeUSuserDetail>HOST}" class="tablecellscss" wrapping="true"/>
+															<Text text="{activeUSuserDetail>User_lock}" class="tablecellscss" wrapping="true"/>
+														</cells>
+													</ColumnListItem>
+												</items>
+											</Table>
+										</VBox>
+									</HBox>
+								</Page>
+								<Page id="detailDetail1" title="Overview" class="sapUiStdPage detailcss" backgroundDesign="Solid" showHeader="false">
+									<VBox class="sapUiSmallMargin">
+										<Label text="System2 Details"/>
+									</VBox>
+								</Page>
+							</detailPages>
+							<masterPages>
+								<Page id="master2" title="Systems" backgroundDesign="List" class="sapUiStdPage mastercss">
+									<List mode="SingleSelectMaster" id="listIDApp" items="{sysListModel>/APPSystems/data}" itemPress=".onListItemPressA" class="s4dcss">
+										<items>
+											<StandardListItem title="{sysListModel>sysId}" type="Active" custom:to="detail1"/>
+										</items>
+									</List>
+								</Page>
+							</masterPages>
+						</SplitApp>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</content>
+	</Page>
+</mvc:View>

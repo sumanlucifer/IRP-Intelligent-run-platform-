@@ -1,0 +1,88 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" controllerName="ey.irp.IRPModule.controller.createIncident"
+	xmlns:html="http://www.w3.org/1999/xhtml" class="EYbackground" >
+	<!--<App>
+		<pages>
+			<Page title="Title">
+				<content></content>
+			</Page>
+		</pages>
+	</App>-->
+	
+	<VBox width="92%" id="idUpdateBox" height="100%" visible="true" alignItems="Stretch" alignContent="Center" fitContainer="false"
+		class=" sapUiMediumMarginEnd sapUiLargeMarginBegin">
+		
+			<Button text="Create New" press= "onSubmit" class=""></Button>
+		<f:SimpleForm width="100%" id="idsf" singleContainerFullSize="true" columnsM="3" columnsL="3" columnsXL="3" emptySpanS="0" emptySpanM="0"
+			emptySpanL="0" emptySpanXL="0" adjustLabelSpan="true" labelSpanS="12" labelSpanM="12" labelSpanL="4" labelSpanXL="4"
+			layout="ResponsiveGridLayout" editable="true" class="EYFormClass sapUiLargeMarginEnd  simpleForm ">
+			<f:content>
+				<core:Title/>
+				
+				<Label text="Incident Number" class="EYLogoAlign"/>
+				<Input id="idnumber" value="{incModel>number}" class="EYinputfield"/>
+				<!-- <Input id="id1" value="{incModel>number}" required="true" placeholder="Incident Number"/> -->
+				<Label text="Caller" class="EYLogoAlign"/>
+				<!-- <Text id="idcaller" text="{incModel>opened_by/display_value}" class="EYLogoAlign" /> -->
+				<Input id="idUser" value="{incModel>opened_by/display_value}" placeholder="" class="EYinputfield"/>
+				<Label text="Category" class="EYLogoAlign"/>
+				<!-- <Text id="idcategory" text="{incModel>category}" class="EYLogoAlign" /> -->
+				<Input id="idcategory" value="{incModel>category}" placeholder="" class="EYinputfield"/>
+				<Label text="Subcategory" class="EYLogoAlign"/>
+				<Input id="idSubcategory" value="{incModel>subcategory}" placeholder="" class="EYinputfield"/>
+				<!-- 	<Text id="idsubcategory" text="{incModel>subcategory}"  class="EYLogoAlign" /> -->
+				<Label text="Business Service" class="EYLogoAlign"/>
+				<!-- <Text id="idbusinessService" text="{incModel>business_service}"  class="EYLogoAlign"/> -->
+				<Input id="idbusinessService" value="{incModel>business_service}" placeholder="" class="EYinputfield"/>
+				<Label text="Service Offering" class="EYLogoAlign"/>
+				<!-- <Text id="idService" text="{incModel>service_offering}"  class="EYLogoAlign"/> -->
+				<Input id="idService" required="true" value="{incModel>service_offering}" placeholder="" class="EYinputfield"/>
+				<!-- 	<Label text="Configuration Item" class="EYLogoAlign"/>
+				<Input id="id7" required="true" placeholder=""/> -->
+				<core:Title/>
+				<Label text="Contact Type" class="EYLogoAlign"/>
+				<Input id="idcontact" required="true" placeholder="Email ID" class="EYinputfield"/>
+				<Label text="State" class="EYLogoAlign"/>
+				<Input id="idstate" value="{incModel>state}" class="EYinputfield"/>
+				<Label text="Impact" class="EYLogoAlign"/>
+				<Input id="idImpact" value="{incModel>impact}" class="EYinputfield"/>
+				<!-- <Input id="id10" required="true" placeholder=""/> -->
+				<!-- 	<Label text="Urgency" class="EYLogoAlign"/>
+				<Input id="idUrgency" value="{incModel>urgency}" class="EYLogoAlign"/> -->
+				<!-- 	<Input id="id11" required="true" placeholder=""/> -->
+				<Label text="Priority" class="EYLogoAlign"/>
+				<Input id="idpriority" value="{incModel>priority}" class="EYinputfield"/>
+				<Label text="Assignment Group" class="EYLogoAlign"/>
+				<Input id="idassignmentGrp" value="{incModel>assignment_group/display_value}" class="EYinputfield"/>
+				<!-- <Input id="id13" required="true" placeholder=""/> -->
+				<Label text="Assigned To" class="EYLogoAlign"/>
+				<Input id="idassignedTo" value="{incModel>assigned_to/display_value}" class="EYinputfield"/>
+				<!--<Label text="Short Description" class="EYLogoAlign"/>
+				<Input id="idshortDes0" value="{incModel>short_description}" maxLength="100" class="EYinputfield"  textAlign="Left"/>-->
+			</f:content>
+		</f:SimpleForm>
+		
+		<f:SimpleForm editable="true" id="idsf1" class=" EYFormClass simpleForm sapUiLargeMarginEnd">
+			<f:content>
+				<Label text="Short Description" class="EYLogoAlign"/>
+				<Input id="idshortDes" value="{incModel>short_description}" maxLength="100" class="EYinputfield" width="80%" textAlign="Left"/>
+				<!-- 				<Input required="true" width="80%" textAlign="Right"/> -->
+				<!--	<Label text="Description" class="EYLogoAlign"/>
+				<Input id="idwork" value="{incModel>assigned_to/display_value}" class="EYinputfield"  textAlign="Right"/>-->
+				<Label text="Work Notes" class="EYLogoAlign"/>
+				<Input required="true" value="{incModel>assigned_to/display_value}" width="80%" textAlign="Left" class="EYinputfield"/>
+				<Label text="Activities" class="EYLogoAlign"/>
+				<Input required="false" width="80%" textAlign="Right" class="EYinputfield"/>
+				<!-- <Input required="false" width="80%" textAlign="Right"/> -->
+			</f:content>
+		</f:SimpleForm>
+		<Label text=""/>
+		<!-- 	<f:SimpleForm editable="true">
+			<f:content>
+				<Label text="Work Notes" class="EYLogoAlign"/>
+				<Input required="true" width="80%" textAlign="Right" class="EYinputfield"/>
+				<Label text="Activities" class="EYLogoAlign"/>
+				<Input required="false" width="80%" textAlign="Right" class="EYinputfield"/>
+			</f:content>
+		</f:SimpleForm> -->
+	</VBox>
+</mvc:View>

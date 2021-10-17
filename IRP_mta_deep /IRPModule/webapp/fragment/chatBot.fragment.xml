@@ -1,0 +1,25 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout"
+	xmlns:mvc="sap.ui.core.mvc">
+	<ResponsivePopover contentWidth="15rem" contentHeight="18rem" title="Select Filters" class="sapUiPopupWithPadding topcss" placement="Top"
+		afterClose="fnResPopClose">
+		<customHeader>
+			<Bar>
+				<contentLeft>
+					<Image></Image>
+					<Title text="Chat with your Bot"></Title>
+				</contentLeft>
+				<contentRight>
+					<Button press="fnChatBotClose"></Button>
+				</contentRight>
+			</Bar>
+		</customHeader>
+		<content>
+			<HBox></HBox>
+			<VBox></VBox>
+		</content>
+		<beginButton>
+			<Button enabled="false" width="20%" class="buttonFragC sapUiTinyMarginBottom" press="handleCloseButton"/>
+			<Input width="80%" placeholder="Write Something..."></Input>
+		</beginButton>
+	</ResponsivePopover>
+</core:FragmentDefinition>

@@ -1,0 +1,460 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="ey.irp.IRPModule.controller.inventory"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page showNavButton="true" id="idEYPA" navButtonPress="onPressbackP2P" title="" 
+	class="textcolor1 navbuttoncss EYLogoAlign"
+		enableScrolling="false">
+		<!--	<HBox>-->
+		<IconTabBar id="idIconTabBar" applyContentPadding="false" stretchContentHeight="true" select=".onFilterSelect"
+			class="sapUiResponsiveContentPadding barcss p2pbarcss">
+			<items>
+				<IconTabFilter iconColor="Critical" design="Horizontal" count="1" text="Inventory" key="invPieChart">
+					<ScrollContainer height="150%" width="100%" horizontal="true" visible="true" vertical="true">
+						<!--	<HBox width="80%">-->
+						<Table class="sapUiSmallMarginBegin smtableclassHD hToolBar" id="idIvnTable" growing="true" growingThreshold="100" items="{inventoryModel>/}"
+							updateFinished="onUpdateFinished" sticky="ColumnHeaders" width="100%">
+							<headerToolbar class="sapUiMediumMarginTop " >
+								<OverflowToolbar>
+									<content>
+										<VBox width="100%" class="sapUiSmallMarginBottom" >
+											<VBox>
+												<Label class="yellow sapUiTinyMarginTop sapUiTinyMarginBegin"></Label>
+												<Label class="sapUiTinyMarginBegin textcolor" text="Overview"/>
+											</VBox>
+											<HBox>
+												<ComboBox items="{ path: 'inventoryModel>/Inventorytype' }" class="EYinputfield batchjobclass" change="onInvCombo"
+													placeholder="All Inventory">
+													<core:Item key="{inventoryModel>key}" text="{inventoryModel>text}"/>
+												</ComboBox>
+												<SearchField liveChange="onSearch" class="EYinputfield batchjobclass sapUiLargeMarginEnd" placeholder="Search here"/>
+												<Label class="sapUiLargeMarginBegin textmargin textcolor" text="Status"/>
+												<ComboBox items="{ path:'inventoryModel>/Inventorystatus' }" class="EYinputfield batchjobclass sapUiSmallMarginBegin" change="onInvType"
+													placeholder="All ">
+													<core:Item key="{inventoryModel>key}" text="{inventoryModel>text}"/>
+												</ComboBox>
+											</HBox>
+											<!--<HBox>
+												<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTop">
+													<Label text="Below Reorder Point: " class=" sapUiTinyMarginBegin sapUiSmallMarginBottom"></Label>
+												</VBox>
+												<VBox>
+													<Label class="valuecss sapUiTinyMarginBegin sapUiSmallMarginTop" text="{workprocessModel>/tableCount/totalWorkProcessCount}"></Label>
+												</VBox>
+													<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTop">
+								<Label text="Near Reorder Point: "></Label>
+							</VBox>
+							<VBox>
+								<Label class="valuecss sapUiTinyMarginBegin sapUiSmallMarginTop" text="{workprocessModel>/tableCount/totalWorkProcessCount}"></Label>
+							</VBox>
+								<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTop">
+								<Label text="Above Reorder Point: "></Label>
+							</VBox>
+							<VBox>
+								<Label class="valuecss sapUiTinyMarginBegin sapUiSmallMarginTop" text="{workprocessModel>/tableCount/totalWorkProcessCount}"></Label>
+							</VBox>
+											</HBox>-->
+										</VBox>
+									</content>
+								</OverflowToolbar>
+							</headerToolbar>
+							<columns class="sapUiLargeMarginTop sapUiLargeMarginBegin">
+								<Column class="tableheadercss">
+									<Text text="Material Number" class="headerText"/>
+								</Column>
+								<Column class="tableheadercss">
+									<Text text="Plant" id="ttext" class="headerText"/>
+								</Column>
+								<Column class="tableheadercss">
+									<Text text="Storage Location " class="headerText"/>
+								</Column>
+								<Column class="tableheadercss">
+									<Text text="Description" class="headerText"/>
+								</Column>
+								<Column class="tableheadercss">
+									<Text text="Current Stock" class="headerText"/>
+								</Column>
+								<Column class="tableheadercss">
+									<Text text="Reorder Point" class="headerText"/>
+								</Column>
+								<Column class="tableheadercss">
+									<Text text="Status" class="headerText"/>
+								</Column>
+								<!--<Column width="6rem">
+						<Text text="Status" class="tableheadercss"/>
+					</Column>-->
+							</columns>
+							<items>
+								<ColumnListItem type="Active" press="onRowSelect">
+									<cells>
+										<Text text="{inventoryModel>MATNR}" class="cellText"/>
+										<Text text="{inventoryModel>PLANT}" class="cellText"/>
+										<Text text="{inventoryModel>SLOC}" class="cellText"/>
+										<Text text="{inventoryModel>DESC}" class="cellText"/>
+										<Text text="{inventoryModel>STOCK}" class="cellText"/>
+										<Text text="{inventoryModel>REORDER}" class="cellText"/>
+										<Text text="{ path: 'inventoryModel>STATUS', formatter: '.formatter.InvstatusText'}" class="cellText"/>
+										<!--<tnt:InfoLabel colorScheme="{path:'Status',formatter:'.formatStatus'}" text="{path:'Status',formatter:'.formatStatusText'}" />-->
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+						<!--</HBox>-->
+					</ScrollContainer>
+				</IconTabFilter>
+				<IconTabSeparator icon="sap-icon://open-command-field"/>
+				<IconTabFilter iconColor="Critical" design="Horizontal" count="2" text="Purchase Requisition" key="idBarChartPR">
+					<ScrollContainer height="150%" width="100%" horizontal="true" visible="true" vertical="true">
+						<Table class="sapUiSmallMarginBegin smtableclassHD " sticky="ColumnHeaders" id="idPurReqTable" growing="true" growingThreshold="100"
+							items="{PurReqModel>/}" updateFinished="onUpdateFinished" width="100%">
+							<headerToolbar class="sapUiMediumMarginTop">
+								<OverflowToolbar>
+									<content>
+										<VBox width="100%" class= "sapUiSmallMarginBottom">
+											<VBox>
+												<Label class="yellow sapUiTinyMarginTop sapUiTinyMarginBegin"></Label>
+												<Label class="sapUiTinyMarginBegin textcolor" text="Overview"/>
+											</VBox>
+											<HBox >
+												<ComboBox items="{ path: 'PurReqModel>/PRtype' }" class="EYinputfield batchjobclass" change="onPurReqCombo" placeholder="All Requisition">
+													<core:Item key="{PurReqModel>key}" text="{PurReqModel>text}"/>
+												</ComboBox>
+												<SearchField liveChange="onSearchPurReq" class="EYinputfield batchjobclass sapUiLargeMarginEnd " placeholder="Search here"/>
+												<Label class="sapUiLargeMarginBegin textmargin textcolor" text="Status"/>
+												<ComboBox items="{ path:'PurReqModel>/PRStatus' }" class="EYinputfield batchjobclass sapUiSmallMarginBegin" change="onPRStatus"
+													placeholder="All ">
+													<core:Item key="{PurReqModel>key}" text="{PurReqModel>text}"/>
+												</ComboBox>
+											</HBox>
+										</VBox>
+									</content>
+								</OverflowToolbar>
+							</headerToolbar>
+							<columns class="sapUiLargeMarginTop">
+								<Column class="tableheadercss" width="6rem">
+									<Text text="PR Number" class="headerText"/>
+								</Column>
+								<Column class="tableheadercss" width="6rem">
+									<Text text="Material Number" class="headerText"/>
+								</Column>
+								<Column class="tableheadercss" width="6rem">
+									<Text text="Plant " class="headerText"/>
+								</Column>
+								<Column class="tableheadercss" width="6rem">
+									<Text text="Item Category" class="headerText"/>
+								</Column>
+								<Column class="tableheadercss" width="6rem">
+									<Text text="Quantity" class="headerText"/>
+								</Column>
+								<Column class="tableheadercss" width="6rem">
+									<Text text=" Material Group" class="headerText"/>
+								</Column>
+								<Column class="tableheadercss" width="6rem">
+									<Text text=" Description" class="headerText"/>
+								</Column>
+								<Column class="tableheadercss" width="6rem">
+									<Text text=" Requisitioner" class="headerText"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem type="Active" press="onRowSelect">
+									<cells>
+										<Text text="{PurReqModel>PR}" class="cellText"/>
+										<Text text="{PurReqModel>MATNR}" class="cellText"/>
+										<Text text="{PurReqModel>PLANT}" class="cellText"/>
+										<!--	<Text text="{PurReqModel>ITEM_CAT}" class="cellText"/>-->
+										<Text text="{ path: 'PurReqModel>ITEM_CAT', formatter: '.formatter.PRItemCatText'}" class="cellText"/>
+										<Text text="{PurReqModel>QTY}" class="cellText"/>
+										<Text text="{PurReqModel>MAT_GROUP}" class="cellText"/>
+										<Text text="{PurReqModel>DESC}" class="cellText"/>
+										<Text text="{PurReqModel>REQUISITIONER}" class="cellText"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</ScrollContainer>
+				</IconTabFilter>
+				<IconTabSeparator icon="sap-icon://open-command-field"/>
+				<IconTabFilter iconColor="Critical" design="Horizontal" count="3" text="Purchase Order" key="POPieChart">
+					<ScrollContainer height="150%" width="100%" horizontal="true" visible="true" vertical="true">
+						<Table class="sapUiSmallMarginBegin smtableclassHD " id="idPurOrdrTable" growing="true" growingThreshold="100" items="{purOrderModel>/}"
+							updateFinished="onUpdateFinished" width="100%" sticky="ColumnHeaders">
+							<headerToolbar class="sapUiMediumMarginTop">
+								<OverflowToolbar>
+									<content>
+										<VBox width="100%" class= "sapUiSmallMarginBottom">
+											<VBox>
+												<Label class="yellow sapUiTinyMarginTop sapUiTinyMarginBegin"></Label>
+												<Label class="sapUiTinyMarginBegin textcolor" text="Overview"/>
+											</VBox>
+											<HBox>
+												<ComboBox items="{ path: 'purOrderModel>/POtype' }" class="EYinputfield batchjobclass" change="onPOCombo" placeholder="All Process">
+													<core:Item key="{purOrderModel>key}" text="{purOrderModel>text}"/>
+												</ComboBox>
+												<SearchField liveChange="onSearchPO" class="EYinputfield batchjobclass sapUiLargeMarginEnd " placeholder="Search here"/>
+												<Label class="sapUiLargeMarginBegin textmargin textcolor" text="Status"/>
+												<ComboBox items="{ path:'purOrderModel>/POStatus' }" class="EYinputfield batchjobclass sapUiSmallMarginBegin" change="onPOStatus"
+													placeholder="All ">
+													<core:Item key="{purOrderModel>key}" text="{purOrderModel>text}"/>
+												</ComboBox>
+											</HBox>
+										</VBox>
+									</content>
+								</OverflowToolbar>
+							</headerToolbar>
+							<columns class="sapUiLargeMarginTop">
+								<Column class="tableheadercss">
+									<Text text="PR Number" class="headerText"/>
+								</Column>
+								<Column class="tableheadercss">
+									<Text text="PO Number" class="headerText"/>
+								</Column>
+								<Column class="tableheadercss">
+									<Text text="Company Code " class="headerText"/>
+								</Column>
+								<Column class="tableheadercss">
+									<Text text="Purchase Org." class="headerText"/>
+								</Column>
+								<Column class="tableheadercss">
+									<Text text="Material Number" class="headerText"/>
+								</Column>
+								<Column class="tableheadercss">
+									<Text text=" Description " class="headerText"/>
+								</Column>
+								<Column class="tableheadercss">
+									<Text text="Qty. Ordered " class="headerText"/>
+								</Column>
+								<Column class="tableheadercss">
+									<Text text=" Vendor" class="headerText"/>
+								</Column>
+								<Column class="tableheadercss">
+									<Text text=" Plant" class="headerText"/>
+								</Column>
+								<Column class="tableheadercss">
+									<Text text=" PO Value" class="headerText"/>
+								</Column>
+								<!--<Column width="6rem">
+						<Text text="Status" class="tableheadercss"/>
+					</Column>-->
+							</columns>
+							<items>
+								<ColumnListItem type="Active" press="onRowSelect">
+									<cells>
+										<Text text="{purOrderModel>PURREQNO}" class="cellText"/>
+										<Text text="{purOrderModel>PONUMBER}" class="cellText"/>
+										<Text text="{purOrderModel>COMPANYCODE}" class="cellText"/>
+										<Text text="{purOrderModel>PURORG}" class="cellText"/>
+										<Text text="{purOrderModel>MATERIAL}" class="cellText"/>
+										<Text text="{purOrderModel>DESCRIPTION}" class="cellText"/>
+										<Text text="{purOrderModel>QUANTITY}" class="cellText"/>
+										<Text text="{purOrderModel>VENDOR}" class="cellText"/>
+										<Text text="{purOrderModel>PLANT}" class="cellText"/>
+										<Text text="{purOrderModel>PONETVALUE}" class="cellText"/>
+										<!--<tnt:InfoLabel colorScheme="{path:'Status',formatter:'.formatStatus'}" text="{path:'Status',formatter:'.formatStatusText'}" />-->
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</ScrollContainer>
+				</IconTabFilter>
+				<IconTabSeparator icon="sap-icon://open-command-field"/>
+				<IconTabFilter iconColor="Critical" design="Horizontal" count="4" text="Good Receipt" key="idBarChartGR">
+					<ScrollContainer height="150%" width="100%" horizontal="true" visible="true" vertical="true">
+						<Table class="sapUiSmallMarginBegin smtableclassHD " id="idGRTable" growing="true" growingThreshold="100" items="{GoodRecieptModel>/}"
+							updateFinished="onUpdateFinished" sticky="ColumnHeaders" width="100%">
+							<headerToolbar class="toolbar sapUiMediumMarginTop">
+								<OverflowToolbar>
+									<content>
+										<VBox width="100%" class= "sapUiSmallMarginBottom">
+											<VBox>
+												<Label class="yellow "></Label>
+												<Label class="sapUiTinyMarginBegin textcolor" text="Overview"/></VBox>
+											<HBox width="100%">
+												<ComboBox items="{ path: 'GoodRecieptModel>/GRtype' }" class="EYinputfield batchjobclass combobox" change="onGRCombo"
+													placeholder="All Process">
+													<core:Item key="{GoodRecieptModel>key}" text="{GoodRecieptModel>text}"/>
+												</ComboBox>
+												<SearchField liveChange="onSearchGR" class="EYinputfield batchjobclass" placeholder="Search here"/></HBox>
+										</VBox>
+									</content>
+								</OverflowToolbar>
+							</headerToolbar>
+							<columns class="sapUiLargeMarginTop">
+								<Column class="tableheadercss">
+									<Text text="PO Number" class="headerText"/>
+								</Column>
+								<Column class="tableheadercss">
+									<Text text="Good ReceiptNumber" class="headerText"/>
+								</Column>
+								<Column class="tableheadercss">
+									<Text text="Material Number " class="headerText"/>
+								</Column>
+								<Column class="tableheadercss">
+									<Text text="Material Document year " class="headerText"/>
+								</Column>
+								<Column class="tableheadercss">
+									<Text text="Plant" class="headerText"/>
+								</Column>
+								<Column class="tableheadercss">
+									<Text text="Storage Location" class="headerText"/>
+								</Column>
+								<Column class="tableheadercss">
+									<Text text=" Quantity " class="headerText"/>
+								</Column>
+								<!--<Column width="6rem">
+						<Text text="Status" class="tableheadercss"/>
+					</Column>-->
+							</columns>
+							<items>
+								<ColumnListItem type="Active" press="onRowSelect">
+									<cells>
+										<Text text="{GoodRecieptModel>PO}" class="cellText"/>
+										<Text text="{GoodRecieptModel>GRNO}" class="cellText"/>
+										<Text text="{GoodRecieptModel>MATNR}" class="cellText"/>
+										<Text text="{GoodRecieptModel>MATDOC_YEAR}" class="cellText"/>
+										<Text text="{GoodRecieptModel>PLANT}" class="cellText"/>
+										<Text text="{GoodRecieptModel>SLOC}" class="cellText"/>
+										<Text text="{GoodRecieptModel>QTY}" class="cellText"/>
+										<!--<tnt:InfoLabel colorScheme="{path:'Status',formatter:'.formatStatus'}" text="{path:'Status',formatter:'.formatStatusText'}" />-->
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</ScrollContainer>
+				</IconTabFilter>
+				<IconTabSeparator icon="sap-icon://open-command-field"/>
+				<IconTabFilter iconColor="Critical" design="Horizontal" count="5" text="InvoiceVerification" key="IVDonutChart">
+					<ScrollContainer height="150%" width="100%" horizontal="true" visible="true" vertical="true">
+						<Table class="sapUiSmallMarginBegin smtableclassHD " id="idIVTable" growing="true" growingThreshold="100" items="{InvoiceModel>/}"
+							updateFinished="onUpdateFinished" sticky="ColumnHeaders" width="100%">
+							<headerToolbar class="toolbar sapUiMediumMarginTop">
+								<OverflowToolbar>
+									<content>
+										<!--	<Title  text="Overview" ></Title>-->
+										<VBox width="100%" class= "sapUiSmallMarginBottom">
+											<VBox>
+												<Label class="yellow "></Label>
+												<Label class="sapUiTinyMarginBegin textcolor" text="Overview"/></VBox>
+											<HBox width="100%">
+												<ComboBox items="{ path: 'InvoiceModel>/IVtype' }" class="EYinputfield batchjobclass combobox" change="onIVCombo" placeholder="All Process">
+													<core:Item key="{InvoiceModel>key}" text="{InvoiceModel>text}"/>
+												</ComboBox>
+												<SearchField liveChange="onSearchIV" class="EYinputfield batchjobclass " placeholder="Search here"/></HBox>
+										</VBox>
+									</content>
+								</OverflowToolbar>
+							</headerToolbar>
+							<columns class="sapUiLargeMarginTop">
+								<Column class="tableheadercss">
+									<Text text="PO Number" class="headerText"/>
+								</Column>
+								<Column class="tableheadercss">
+									<Text text="Vendor Number" class="headerText"/>
+								</Column>
+								<Column class="tableheadercss">
+									<Text text="Invoice Number " class="headerText"/>
+								</Column>
+								<Column class="tableheadercss">
+									<Text text="Invoice Date" class="headerText"/>
+								</Column>
+								<Column class="tableheadercss">
+									<Text text="Invoice Amount " class="headerText"/>
+								</Column>
+								<!--<Column width="6rem">
+						<Text text="Status" class="tableheadercss"/>
+					</Column>-->
+							</columns>
+							<items>
+								<ColumnListItem type="Active" press="onRowSelect">
+									<cells>
+										<Text text="{InvoiceModel>PURORDER}" class="cellText"/>
+										<Text text="{InvoiceModel>VENDOR}" class="cellText"/>
+										<Text text="{InvoiceModel>INVOICENO}" class="cellText"/>
+										<Text text="{path:'InvoiceModel>INVOICEDATE', formatter: '.formatter.dateValue'}" class="cellText"/>
+										<Text text="{InvoiceModel>INVOICEAMT}" class="cellText"/>
+										<!--<tnt:InfoLabel colorScheme="{path:'Status',formatter:'.formatStatus'}" text="{path:'Status',formatter:'.formatStatusText'}" />-->
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</ScrollContainer>
+				</IconTabFilter>
+				<IconTabSeparator icon="sap-icon://open-command-field"/>
+				<IconTabFilter iconColor="Critical" design="Horizontal" count="6" text="Automatice Payment Run" key="idBarChartAPR">
+					<ScrollContainer height="150%" width="100%" horizontal="true" visible="true" vertical="true">
+						<Table class="sapUiSmallMarginBegin smtableclassHD " id="idAPRTable" growing="true" growingThreshold="100" items="{PaymentRunModel>/}"
+							updateFinished="onUpdateFinished" sticky="ColumnHeaders" width="100%">
+							<headerToolbar class="toolbar sapUiMediumMarginTop">
+								<OverflowToolbar>
+									<content>
+										<!--	<Title  text="Overview" ></Title>-->
+										<VBox width="100%" class= "sapUiSmallMarginBottom">
+											<VBox>
+												<Label class="yellow "></Label>
+												<Label class="sapUiTinyMarginBegin textcolor" text="Overview"/></VBox>
+											<HBox width="100%">
+												<ComboBox items="{ path: 'PaymentRunModel>/APRtype' }" class="EYinputfield batchjobclass combobox" change="onAPRCombo"
+													placeholder="All Process">
+													<core:Item key="{PaymentRunModel>key}" text="{PaymentRunModel>text}"/>
+												</ComboBox>
+												<SearchField liveChange="onSearchAPR" class="EYinputfield batchjobclass " placeholder="Search here"/></HBox>
+										</VBox>
+									</content>
+								</OverflowToolbar>
+							</headerToolbar>
+							<columns class="sapUiLargeMarginTop">
+								<Column class="tableheadercss">
+									<Text text="Company Code" class="headerText"/>
+								</Column>
+								<Column class="tableheadercss">
+									<Text text="Payment Method" class="headerText"/>
+								</Column>
+								<Column class="tableheadercss">
+									<Text text="Vendor Number " class="headerText"/>
+								</Column>
+									<Column class="tableheadercss">
+									<Text text="Vendor Name " class="headerText"/>
+								</Column>
+								<Column class="tableheadercss">
+									<Text text=" Discount " class="headerText"/>
+								</Column>
+								<Column class="tableheadercss">
+									<Text text="Invoice Amount " class="headerText"/>
+								</Column>
+								<Column class="tableheadercss">
+									<Text text="Currency " class="headerText"/>
+								</Column>
+								<Column class="tableheadercss">
+									<Text text="Debit/Credit " class="headerText"/>
+								</Column>
+								<Column class="tableheadercss">
+									<Text text="Payment Document Number" class="headerText"/>
+								</Column>
+								<!--<Column width="6rem">
+						<Text text="Status" class="tableheadercss"/>
+					</Column>-->
+							</columns>
+							<items>
+								<ColumnListItem type="Active" press="onRowSelect">
+									<cells>
+										<Text text="{PaymentRunModel>COCODE}" class="cellText"/>
+										<Text text="{PaymentRunModel>PAYMETHOD}" class="cellText"/>
+										<Text text="{PaymentRunModel>VENDOR}" class="cellText"/>
+											<Text text="{PaymentRunModel>VENDOR_NAME}" class="cellText"/>
+										<Text text="{PaymentRunModel>CASH_DIS_AMOUNT}" class="cellText"/>
+										<Text text="{PaymentRunModel>AMOUNT_PAID}" class="cellText"/>
+										<Text text="{PaymentRunModel>CURRENCY}" class="cellText"/>
+										<Text text="{PaymentRunModel>INDICATOR}" class="cellText"/>
+										<Text text="{PaymentRunModel>PAYMENT_DOC_NO}" class="cellText"/>
+										<!--<tnt:InfoLabel colorScheme="{path:'Status',formatter:'.formatStatus'}" text="{path:'Status',formatter:'.formatStatusText'}" />-->
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</ScrollContainer>
+				</IconTabFilter>
+			</items>
+		</IconTabBar>
+		<!--	<Label text="" class="EYLogoAlign sapUiMediumMarginBegin"></Label>-->
+		<!--	<Button text="Create New" press="onCreateNew" class="EYbutton"></Button>-->
+		<!--	</HBox>-->
+	</Page>
+</mvc:View>

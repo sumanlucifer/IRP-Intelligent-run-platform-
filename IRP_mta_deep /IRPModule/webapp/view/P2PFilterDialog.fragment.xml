@@ -1,0 +1,51 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog id="P2PFilterDialog" title="" class= "p2pfilter">
+		<ScrollContainer height="100%" width="100%" horizontal="true" visible="true" vertical="true">
+		<Table class=" smtableclassHD tablecss batchjobclass" id="idIvnTable" growing="true" growingThreshold="100" width="100%" sticky="ColumnHeaders"
+								items="{P2PglobalModel>/}"  >
+								
+								<columns class="sapUiLargeMarginTop sapUiLargeMarginBegin">
+									<Column class="tableheadercss">
+										<Text text="Material Number" class="headerText"/>
+									</Column>
+									<Column class="tableheadercss">
+										<Text text="Purchase Requisition" id="ttext" class="headerText"/>
+									</Column>
+									<Column class="tableheadercss">
+										<Text text="Purchase Order " class="headerText"/>
+									</Column>
+									<Column class="tableheadercss">
+										<Text text="Good Receipt" class="headerText"/>
+									</Column>
+									<Column class="tableheadercss">
+										<Text text=" Invoice Numver" class="headerText"/>
+									</Column>
+									<Column class="tableheadercss">
+										<Text text="Payment Number" class="headerText"/>
+									</Column>
+								
+									<!--<Column width="6rem">
+						<Text text="Status" class="tableheadercss"/>
+					</Column>-->
+								</columns>
+								<items>
+									<ColumnListItem type="Active" press="onRowSelect">
+										<cells>
+											<Text text="{P2PglobalModel>Material}" class="cellText"/>
+											<Text text="{P2PglobalModel>PR}" class="cellText"/>
+											<Text text="{P2PglobalModel>PO}" class="cellText"/>
+											<Text text="{P2PglobalModel>GR}" class="cellText"/>
+											<Text text="{P2PglobalModel>InvoiceNo}" class="cellText"/>
+											<Text text="{P2PglobalModel>PaymentNo}" class="cellText"/>
+												
+											<!--<tnt:InfoLabel colorScheme="{path:'Status',formatter:'.formatStatus'}" text="{path:'Status',formatter:'.formatStatusText'}" />-->
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+	</ScrollContainer>
+		<beginButton>
+			<Button text="{i18n>dialogCloseButtonText}" press= "onCloseFilterDialog"/>
+		</beginButton>
+	</Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,402 @@
+<edmx:Edmx xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+	xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+	<edmx:DataServices m:DataServiceVersion="2.0">
+		<Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ZIRP_MONTH_END_CLOSING_API_SRV" xml:lang="en" sap:schema-version="1">
+			<EntityType Name="Period_Close" sap:content-version="1">
+				<Key><PropertyRef Name="CompanyCodeVariant"/><PropertyRef Name="FiscalYear"/><PropertyRef Name="ToPeriod1"/></Key><Property Name="CompanyCodeVariant" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="FiscalYear" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="ToPeriod1" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="AccountType" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="ToPeriod2" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="ToPeriod3" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><NavigationProperty Name="NavPeriodCloseToResult" Relationship="ZIRP_MONTH_END_CLOSING_API_SRV.AssnPeriodCloseToResult"
+					FromRole="FromRole_AssnPeriodCloseToResult" ToRole="ToRole_AssnPeriodCloseToResult"/></EntityType>
+			<EntityType Name="Accrual_Deferral_Post" sap:content-version="1">
+				<Key><PropertyRef Name="CompanyCode"/></Key><Property Name="Username" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="CompanyCode" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="DocumentDateInDocument" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="PostingDateintheDocument" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="Fiscalperiod" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="DocumentType" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="ReasonForReversal" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="Currency" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="ReversalDate" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="FiscalYear" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><NavigationProperty Name="NavAccDeferToLine" Relationship="ZIRP_MONTH_END_CLOSING_API_SRV.AssnAccDeferToLine"
+					FromRole="FromRole_AssnAccDeferToLine" ToRole="ToRole_AssnAccDeferToLine"/></EntityType>
+			<EntityType Name="Accrual_Deferral_Result" sap:content-version="1">
+				<Key><PropertyRef Name="CompanyCode"/></Key><Property Name="CompanyCode" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="MessageId" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="MessageType" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="Message" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/></EntityType>
+			<EntityType Name="GR_IR_CLEARING" sap:content-version="1">
+				<Key><PropertyRef Name="PoNumber"/><PropertyRef Name="PostingDate"/></Key><Property Name="PoNumber" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="FYCurrentPeriod" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="PoDate" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="PostingDate" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="PoItem" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="RefDoc" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="RefDocIT" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="RefDocYear" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="DeliverySurplus" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="InvoiceSurplus" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="GRIRClearingAccount" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><NavigationProperty Name="Result" Relationship="ZIRP_MONTH_END_CLOSING_API_SRV.AssnGRIRTOGRIROut" FromRole="FromRole_AssnGRIRTOGRIROut"
+					ToRole="ToRole_AssnGRIRTOGRIROut"/></EntityType>
+			<EntityType Name="GR_IR_CLEARING_H" sap:content-version="1">
+				<Key><PropertyRef Name="PostingDate"/></Key><Property Name="PostingDate" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><NavigationProperty Name="GRIR" Relationship="ZIRP_MONTH_END_CLOSING_API_SRV.AssnGRIRHTToGRIR" FromRole="FromRole_AssnGRIRHTToGRIR"
+					ToRole="ToRole_AssnGRIRHTToGRIR"/></EntityType>
+			<EntityType Name="GR_IR_CLEARING_OUT" sap:content-version="1">
+				<Key><PropertyRef Name="PoNumber"/><PropertyRef Name="PostingDate"/><PropertyRef Name="GR_IR_Account_Doc"/></Key><Property Name="PoNumber" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="PostingDate" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="GR_IR_Account_Doc" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="FiscalYear" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="Message" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/></EntityType>
+			<EntityType Name="Accrual_Deferral_Line" sap:content-version="1">
+				<Key><PropertyRef Name="CompanyCode"/></Key><Property Name="CompanyCode" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="ItemNo_Acc" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="GL_Account" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="Amt_doccur" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="CostCenter" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><NavigationProperty Name="NavAccDeferLineToResult" Relationship="ZIRP_MONTH_END_CLOSING_API_SRV.AssnAccDeferLineToResult"
+					FromRole="FromRole_AssnAccDeferLineToResult" ToRole="ToRole_AssnAccDeferLineToResult"/></EntityType>
+			<EntityType Name="Accural_Deferral_Reverse" sap:content-version="1">
+				<Key><PropertyRef Name="FiscalYear"/><PropertyRef Name="CompanyCode"/><PropertyRef Name="AccDocNumber"/></Key><Property Name="FiscalYear" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="CompanyCode" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="AccDocNumber" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><NavigationProperty Name="NavAccDeferRevPostReversal" Relationship="ZIRP_MONTH_END_CLOSING_API_SRV.AssnAccDeferRevToResult"
+					FromRole="FromRole_AssnAccDeferRevToResult" ToRole="ToRole_AssnAccDeferRevToResult"/></EntityType>
+			<EntityType Name="Accural_Deferral_Reverse_Result" sap:content-version="1">
+				<Key><PropertyRef Name="CompanyCode"/><PropertyRef Name="FiscalYear"/><PropertyRef Name="AccDocNumber"/></Key><Property Name="CompanyCode" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="FiscalYear" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="AccDocNumber" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="MessageID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="MessageType" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="Message" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/></EntityType>
+			<EntityType Name="Cust_Clearing_Std" sap:content-version="1">
+				<Key><PropertyRef Name="Account"/></Key><Property Name="Account" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="CompanyCode" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="ClearingDate" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="Period" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="Currency" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="DocumentNumber" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="DifferencePosting" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><NavigationProperty Name="NavCusClrStdToResult" Relationship="ZIRP_MONTH_END_CLOSING_API_SRV.AssnCusClrStdToResult"
+					FromRole="FromRole_AssnCusClrStdToResult" ToRole="ToRole_AssnCusClrStdToResult"/></EntityType>
+			<EntityType Name="Cust_clearing_Std_Result" sap:content-version="1">
+				<Key><PropertyRef Name="Account"/></Key><Property Name="Account" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="L_MSTRING" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/></EntityType>
+			<EntityType Name="Cust_Clearing_Part" sap:content-version="1">
+				<Key><PropertyRef Name="Account"/></Key><Property Name="Account" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="ClearingDate" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="Period" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="CompanyCode" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="Currency" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="DocumentNumber" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="PaymentAmount" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="DifferencePosting" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><NavigationProperty Name="NavCusClrPartToResult" Relationship="ZIRP_MONTH_END_CLOSING_API_SRV.AssnCusClrPartToResult"
+					FromRole="FromRole_AssnCusClrPartToResult" ToRole="ToRole_AssnCusClrPartToResult"/></EntityType>
+			<EntityType Name="Cust_Clearing_Part_Result" sap:content-version="1">
+				<Key><PropertyRef Name="Account"/></Key><Property Name="Account" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="L_mstring" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/></EntityType>
+			<EntityType Name="Cust_Clearing_Res" sap:content-version="1">
+				<Key><PropertyRef Name="Account"/></Key><Property Name="Account" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="ClearingDate" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="Period" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="CompanyCode" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="Currency" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="DocumentNumber" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="ResidualItems" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="DifferencePosting" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><NavigationProperty Name="NavCusClrResToResult" Relationship="ZIRP_MONTH_END_CLOSING_API_SRV.AssnCusClrResToResult"
+					FromRole="FromRole_AssnCusClrResToResult" ToRole="ToRole_AssnCusClrResToResult"/></EntityType>
+			<EntityType Name="Cust_Clearing_Res_Result" sap:content-version="1">
+				<Key><PropertyRef Name="Account"/></Key><Property Name="Account" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="L_MSTRING" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/></EntityType>
+			<EntityType Name="Vend_Clearing_Std" sap:content-version="1">
+				<Key><PropertyRef Name="Account"/></Key><Property Name="Account" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="ClearingDate" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="Period" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="CompanyCode" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="Currency" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="DocumentNumber" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="DifferencePosting" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><NavigationProperty Name="NavVendClrStdToResult" Relationship="ZIRP_MONTH_END_CLOSING_API_SRV.AssnVendClrStdToResult"
+					FromRole="FromRole_AssnVendClrStdToResult" ToRole="ToRole_AssnVendClrStdToResult"/></EntityType>
+			<EntityType Name="Vend_Clearing_Std_Result" sap:content-version="1">
+				<Key><PropertyRef Name="Account"/></Key><Property Name="Account" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="L_mstring" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/></EntityType>
+			<EntityType Name="Vend_Clearing_Part" sap:content-version="1">
+				<Key><PropertyRef Name="Account"/></Key><Property Name="Account" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="ClearingDate" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="Period" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="CompanyCode" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="Currency" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="DocumentNumber" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="PaymentAmount" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="DifferencePosting" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><NavigationProperty Name="NavVendClrPartToResult" Relationship="ZIRP_MONTH_END_CLOSING_API_SRV.AssnVendClrPartToResult"
+					FromRole="FromRole_AssnVendClrPartToResult" ToRole="ToRole_AssnVendClrPartToResult"/></EntityType>
+			<EntityType Name="Vend_Clearing_Part_Result" sap:content-version="1">
+				<Key><PropertyRef Name="Account"/></Key><Property Name="Account" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="L_mstring" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/></EntityType>
+			<EntityType Name="Result" sap:content-version="1">
+				<Key><PropertyRef Name="CompanyCodeVariant"/><PropertyRef Name="FiscalYear"/><PropertyRef Name="ToPeriod1"/><PropertyRef Name="MessageID"/><PropertyRef Name="MessageType"/></Key><Property Name="CompanyCodeVariant" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="FiscalYear" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="ToPeriod1" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="MessageID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="MessageType" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="Message" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/></EntityType>
+			<EntityType Name="MM_Period" sap:content-version="1">
+				<Key><PropertyRef Name="FromCompanyCode"/><PropertyRef Name="Period"/><PropertyRef Name="FiscalYear"/></Key><Property Name="FromCompanyCode" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="ToCompanyCode" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="CurrentDate" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="Period" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="FiscalYear" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="Date" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="CheckClosePeriod" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="CheckPeriodOnly" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="ClosePeriodOnly" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="AllowNegQty" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="AllowNegVal" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><NavigationProperty Name="Result" Relationship="ZIRP_MONTH_END_CLOSING_API_SRV.AssnMMPeriodToResult"
+					FromRole="FromRole_AssnMMPeriodToResult" ToRole="ToRole_AssnMMPeriodToResult"/></EntityType>
+			<EntityType Name="MM_Period_Result" sap:content-version="1">
+				<Key><PropertyRef Name="FromCompanyCode"/><PropertyRef Name="FiscalYear"/><PropertyRef Name="MessageType"/><PropertyRef Name="MessageID"/><PropertyRef Name="Period"/></Key><Property Name="FromCompanyCode" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="FiscalYear" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="MessageType" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="MessageID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="Message" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="Period" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/></EntityType>
+			<EntityType Name="Period_Open" sap:content-version="1">
+				<Key><PropertyRef Name="CompanyCodeVariant"/><PropertyRef Name="FiscalYear"/><PropertyRef Name="FromPeriod1"/></Key><Property Name="CompanyCodeVariant" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Company Code Variant"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="FiscalYear" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Fiscal Year"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="FromPeriod1" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="From Period 1"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="ToFiscalYear" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label=" To Fiscal Year"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="ToPeriod1" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="To Period 1"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="FromFiscalYear2" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="FromFiscalYear2"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="FromPeriod2" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="From Period 2"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="ToFiscalYear2" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="To Fiscal Year 2"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="ToPeriod2" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="To Period 2"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="FromPeriod3" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="From Period 3"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="ToPeriod3" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="To Period 3"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="AccountType" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Account Type"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="FromAccount" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="From Account"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="ToAccount" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="To Account"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="AuthorizationGroup" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Authorization Group"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><NavigationProperty Name="NavPeriodOpenToResult" Relationship="ZIRP_MONTH_END_CLOSING_API_SRV.AssnPeriodOpenToResult"
+					FromRole="FromRole_AssnPeriodOpenToResult" ToRole="ToRole_AssnPeriodOpenToResult"/></EntityType>
+			<EntityType Name="Result_Open" sap:content-version="1">
+				<Key><PropertyRef Name="CompanyCodeVariant"/><PropertyRef Name="FiscalYear"/><PropertyRef Name="FromPeriod1"/><PropertyRef Name="MessageId"/><PropertyRef Name="MessageType"/></Key><Property Name="CompanyCodeVariant" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Company Code Variant"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="FiscalYear" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="FromPeriod1" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="MessageId" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="MessageType" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="Message" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/></EntityType>
+			<EntityType Name="Depreciation_Posting" sap:content-version="1">
+				<Key><PropertyRef Name="CompanyCode"/><PropertyRef Name="TargetLedgerGroup"/></Key><Property Name="CompanyCode" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Company Code"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="TargetLedgerGroup" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Target Ledger Group"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="DepreciationAreaRealorDerived" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false"
+					sap:label="Depreciation Area Real or Derived" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="FiscalYear" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="FiscalYear"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="PostingPeriod" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Posting Period"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="PostingDateInTheDocument" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false"
+					sap:label="Posting Date In The Document" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="AssetTransactionType" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false"
+					sap:label="Asset Transaction Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="NoOfDepreciationPostingRuns" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false"
+					sap:label="Number of Depreciation Posting Runs in the Period" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false"/><Property Name="Client" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Client" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="ReferenceProcedure" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Reference Procedure"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="ReferenceDocumentNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false"
+					sap:label="Reference Document Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="ReferenceOrganaizationalUnits" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false"
+					sap:label="Reference OrganaizationalUnits" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="LeadingOrgUnitForAssetAcc" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false"
+					sap:label="Leading Organizational Unit for Asset Accounting" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false"/><Property Name="MainAssetNumber" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Main Asset Number"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="AssetSubNumber" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Asset Sub Number"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><NavigationProperty Name="NavDepPostingtoResult" Relationship="ZIRP_MONTH_END_CLOSING_API_SRV.AssnDepPeriodToDepResult"
+					FromRole="FromRole_AssnDepPeriodToDepResult" ToRole="ToRole_AssnDepPeriodToDepResult"/></EntityType>
+			<EntityType Name="Depreciation_Result" sap:content-version="1">
+				<Key><PropertyRef Name="CompanyCode"/><PropertyRef Name="TargetLedgerGroup"/><PropertyRef Name="CompData"/></Key><Property Name="CompanyCode" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Company Code"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="TargetLedgerGroup" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Target Ledger Group"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="CompData" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Comp Data" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="StartTime" Type="Edm.Time" Nullable="false" Precision="0" sap:unicode="false" sap:label="Start Time" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="EndTime" Type="Edm.Time" Nullable="false" Precision="0" sap:unicode="false" sap:label="End Time" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/></EntityType>
+			<EntityType Name="Vend_Clearing_Res" sap:content-version="1">
+				<Key><PropertyRef Name="Account"/></Key><Property Name="Account" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="ClearingDate" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="Period" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="CompanyCode" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="Currency" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="DocumentNumber" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="ResidualItems" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="DifferencePosting" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><NavigationProperty Name="NavVendClrResToResult" Relationship="ZIRP_MONTH_END_CLOSING_API_SRV.AssnVendResPartToResult"
+					FromRole="FromRole_AssnVendResPartToResult" ToRole="ToRole_AssnVendResPartToResult"/></EntityType>
+			<EntityType Name="Vend_Clearing_Res_Result" sap:content-version="1">
+				<Key><PropertyRef Name="Account"/></Key><Property Name="Account" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="L_mstring" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/></EntityType>
+			<Association Name="AssnAccDeferRevToResult" sap:content-version="1"><End Type="ZIRP_MONTH_END_CLOSING_API_SRV.Accural_Deferral_Reverse" Multiplicity="1" Role="FromRole_AssnAccDeferRevToResult"/><End Type="ZIRP_MONTH_END_CLOSING_API_SRV.Accural_Deferral_Reverse_Result" Multiplicity="*" Role="ToRole_AssnAccDeferRevToResult"/>
+				<ReferentialConstraint>
+					<Principal Role="FromRole_AssnAccDeferRevToResult"><PropertyRef Name="AccDocNumber"/><PropertyRef Name="CompanyCode"/><PropertyRef Name="FiscalYear"/></Principal>
+					<Dependent Role="ToRole_AssnAccDeferRevToResult"><PropertyRef Name="AccDocNumber"/><PropertyRef Name="CompanyCode"/><PropertyRef Name="FiscalYear"/></Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="AssnVendClrStdToResult" sap:content-version="1"><End Type="ZIRP_MONTH_END_CLOSING_API_SRV.Vend_Clearing_Std" Multiplicity="1" Role="FromRole_AssnVendClrStdToResult"/><End Type="ZIRP_MONTH_END_CLOSING_API_SRV.Vend_Clearing_Std_Result" Multiplicity="*" Role="ToRole_AssnVendClrStdToResult"/>
+				<ReferentialConstraint>
+					<Principal Role="FromRole_AssnVendClrStdToResult"><PropertyRef Name="Account"/></Principal>
+					<Dependent Role="ToRole_AssnVendClrStdToResult"><PropertyRef Name="Account"/></Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="AssnPeriodCloseToResult" sap:content-version="1"><End Type="ZIRP_MONTH_END_CLOSING_API_SRV.Period_Close" Multiplicity="1" Role="FromRole_AssnPeriodCloseToResult"/><End Type="ZIRP_MONTH_END_CLOSING_API_SRV.Result" Multiplicity="*" Role="ToRole_AssnPeriodCloseToResult"/>
+				<ReferentialConstraint>
+					<Principal Role="FromRole_AssnPeriodCloseToResult"><PropertyRef Name="ToPeriod1"/><PropertyRef Name="FiscalYear"/><PropertyRef Name="CompanyCodeVariant"/></Principal>
+					<Dependent Role="ToRole_AssnPeriodCloseToResult"><PropertyRef Name="ToPeriod1"/><PropertyRef Name="FiscalYear"/><PropertyRef Name="CompanyCodeVariant"/></Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="AssnPeriodOpenToResult" sap:content-version="1"><End Type="ZIRP_MONTH_END_CLOSING_API_SRV.Period_Open" Multiplicity="1" Role="FromRole_AssnPeriodOpenToResult"/><End Type="ZIRP_MONTH_END_CLOSING_API_SRV.Result_Open" Multiplicity="*" Role="ToRole_AssnPeriodOpenToResult"/>
+				<ReferentialConstraint>
+					<Principal Role="FromRole_AssnPeriodOpenToResult"><PropertyRef Name="FiscalYear"/><PropertyRef Name="CompanyCodeVariant"/><PropertyRef Name="FromPeriod1"/></Principal>
+					<Dependent Role="ToRole_AssnPeriodOpenToResult"><PropertyRef Name="FiscalYear"/><PropertyRef Name="CompanyCodeVariant"/><PropertyRef Name="FromPeriod1"/></Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="AssnCusClrPartToResult" sap:content-version="1"><End Type="ZIRP_MONTH_END_CLOSING_API_SRV.Cust_Clearing_Part" Multiplicity="1" Role="FromRole_AssnCusClrPartToResult"/><End Type="ZIRP_MONTH_END_CLOSING_API_SRV.Cust_Clearing_Part_Result" Multiplicity="*" Role="ToRole_AssnCusClrPartToResult"/>
+				<ReferentialConstraint>
+					<Principal Role="FromRole_AssnCusClrPartToResult"><PropertyRef Name="Account"/></Principal>
+					<Dependent Role="ToRole_AssnCusClrPartToResult"><PropertyRef Name="Account"/></Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="AssnAccDeferLineToResult" sap:content-version="1"><End Type="ZIRP_MONTH_END_CLOSING_API_SRV.Accrual_Deferral_Line" Multiplicity="1" Role="FromRole_AssnAccDeferLineToResult"/><End Type="ZIRP_MONTH_END_CLOSING_API_SRV.Accrual_Deferral_Result" Multiplicity="*" Role="ToRole_AssnAccDeferLineToResult"/>
+				<ReferentialConstraint>
+					<Principal Role="FromRole_AssnAccDeferLineToResult"><PropertyRef Name="CompanyCode"/></Principal>
+					<Dependent Role="ToRole_AssnAccDeferLineToResult"><PropertyRef Name="CompanyCode"/></Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="AssnDepPeriodToDepResult" sap:content-version="1"><End Type="ZIRP_MONTH_END_CLOSING_API_SRV.Depreciation_Posting" Multiplicity="1" Role="FromRole_AssnDepPeriodToDepResult"/><End Type="ZIRP_MONTH_END_CLOSING_API_SRV.Depreciation_Result" Multiplicity="*" Role="ToRole_AssnDepPeriodToDepResult"/>
+				<ReferentialConstraint>
+					<Principal Role="FromRole_AssnDepPeriodToDepResult"><PropertyRef Name="CompanyCode"/><PropertyRef Name="TargetLedgerGroup"/></Principal>
+					<Dependent Role="ToRole_AssnDepPeriodToDepResult"><PropertyRef Name="CompanyCode"/><PropertyRef Name="TargetLedgerGroup"/></Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="AssnGRIRTOGRIROut" sap:content-version="1"><End Type="ZIRP_MONTH_END_CLOSING_API_SRV.GR_IR_CLEARING" Multiplicity="1" Role="FromRole_AssnGRIRTOGRIROut"/><End Type="ZIRP_MONTH_END_CLOSING_API_SRV.GR_IR_CLEARING_OUT" Multiplicity="*" Role="ToRole_AssnGRIRTOGRIROut"/>
+				<ReferentialConstraint>
+					<Principal Role="FromRole_AssnGRIRTOGRIROut"><PropertyRef Name="PostingDate"/><PropertyRef Name="PoNumber"/></Principal>
+					<Dependent Role="ToRole_AssnGRIRTOGRIROut"><PropertyRef Name="PostingDate"/><PropertyRef Name="PoNumber"/></Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="AssnCusClrResToResult" sap:content-version="1"><End Type="ZIRP_MONTH_END_CLOSING_API_SRV.Cust_Clearing_Res" Multiplicity="1" Role="FromRole_AssnCusClrResToResult"/><End Type="ZIRP_MONTH_END_CLOSING_API_SRV.Cust_Clearing_Res_Result" Multiplicity="*" Role="ToRole_AssnCusClrResToResult"/>
+				<ReferentialConstraint>
+					<Principal Role="FromRole_AssnCusClrResToResult"><PropertyRef Name="Account"/></Principal>
+					<Dependent Role="ToRole_AssnCusClrResToResult"><PropertyRef Name="Account"/></Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="AssnVendClrPartToResult" sap:content-version="1"><End Type="ZIRP_MONTH_END_CLOSING_API_SRV.Vend_Clearing_Part" Multiplicity="1" Role="FromRole_AssnVendClrPartToResult"/><End Type="ZIRP_MONTH_END_CLOSING_API_SRV.Vend_Clearing_Part_Result" Multiplicity="*" Role="ToRole_AssnVendClrPartToResult"/>
+				<ReferentialConstraint>
+					<Principal Role="FromRole_AssnVendClrPartToResult"><PropertyRef Name="Account"/></Principal>
+					<Dependent Role="ToRole_AssnVendClrPartToResult"><PropertyRef Name="Account"/></Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="AssnVendResPartToResult" sap:content-version="1"><End Type="ZIRP_MONTH_END_CLOSING_API_SRV.Vend_Clearing_Res" Multiplicity="1" Role="FromRole_AssnVendResPartToResult"/><End Type="ZIRP_MONTH_END_CLOSING_API_SRV.Vend_Clearing_Res_Result" Multiplicity="*" Role="ToRole_AssnVendResPartToResult"/>
+				<ReferentialConstraint>
+					<Principal Role="FromRole_AssnVendResPartToResult"><PropertyRef Name="Account"/></Principal>
+					<Dependent Role="ToRole_AssnVendResPartToResult"><PropertyRef Name="Account"/></Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="AssnGRIRHTToGRIR" sap:content-version="1"><End Type="ZIRP_MONTH_END_CLOSING_API_SRV.GR_IR_CLEARING_H" Multiplicity="1" Role="FromRole_AssnGRIRHTToGRIR"/><End Type="ZIRP_MONTH_END_CLOSING_API_SRV.GR_IR_CLEARING" Multiplicity="*" Role="ToRole_AssnGRIRHTToGRIR"/>
+				<ReferentialConstraint>
+					<Principal Role="FromRole_AssnGRIRHTToGRIR"><PropertyRef Name="PostingDate"/></Principal>
+					<Dependent Role="ToRole_AssnGRIRHTToGRIR"><PropertyRef Name="PostingDate"/></Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="AssnMMPeriodToResult" sap:content-version="1"><End Type="ZIRP_MONTH_END_CLOSING_API_SRV.MM_Period" Multiplicity="1" Role="FromRole_AssnMMPeriodToResult"/><End Type="ZIRP_MONTH_END_CLOSING_API_SRV.MM_Period_Result" Multiplicity="*" Role="ToRole_AssnMMPeriodToResult"/>
+				<ReferentialConstraint>
+					<Principal Role="FromRole_AssnMMPeriodToResult"><PropertyRef Name="FiscalYear"/><PropertyRef Name="Period"/><PropertyRef Name="FromCompanyCode"/></Principal>
+					<Dependent Role="ToRole_AssnMMPeriodToResult"><PropertyRef Name="FiscalYear"/><PropertyRef Name="Period"/><PropertyRef Name="FromCompanyCode"/></Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="AssnCusClrStdToResult" sap:content-version="1"><End Type="ZIRP_MONTH_END_CLOSING_API_SRV.Cust_Clearing_Std" Multiplicity="1" Role="FromRole_AssnCusClrStdToResult"/><End Type="ZIRP_MONTH_END_CLOSING_API_SRV.Cust_clearing_Std_Result" Multiplicity="*" Role="ToRole_AssnCusClrStdToResult"/>
+				<ReferentialConstraint>
+					<Principal Role="FromRole_AssnCusClrStdToResult"><PropertyRef Name="Account"/></Principal>
+					<Dependent Role="ToRole_AssnCusClrStdToResult"><PropertyRef Name="Account"/></Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="AssnAccDeferToLine" sap:content-version="1"><End Type="ZIRP_MONTH_END_CLOSING_API_SRV.Accrual_Deferral_Post" Multiplicity="1" Role="FromRole_AssnAccDeferToLine"/><End Type="ZIRP_MONTH_END_CLOSING_API_SRV.Accrual_Deferral_Line" Multiplicity="*" Role="ToRole_AssnAccDeferToLine"/>
+				<ReferentialConstraint>
+					<Principal Role="FromRole_AssnAccDeferToLine"><PropertyRef Name="CompanyCode"/></Principal>
+					<Dependent Role="ToRole_AssnAccDeferToLine"><PropertyRef Name="CompanyCode"/></Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<EntityContainer Name="ZIRP_MONTH_END_CLOSING_API_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx"><EntitySet Name="Period_CloseSet" EntityType="ZIRP_MONTH_END_CLOSING_API_SRV.Period_Close" sap:pageable="false" sap:addressable="false"
+				sap:content-version="1"/><EntitySet Name="Accrual_Deferral_PostSet" EntityType="ZIRP_MONTH_END_CLOSING_API_SRV.Accrual_Deferral_Post" sap:creatable="false"
+				sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/><EntitySet Name="Accrual_Deferral_ResultSet" EntityType="ZIRP_MONTH_END_CLOSING_API_SRV.Accrual_Deferral_Result" sap:creatable="false"
+				sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/><EntitySet Name="GR_IR_CLEARINGSet" EntityType="ZIRP_MONTH_END_CLOSING_API_SRV.GR_IR_CLEARING" sap:creatable="false" sap:updatable="false"
+				sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/><EntitySet Name="GR_IR_CLEARING_HSet" EntityType="ZIRP_MONTH_END_CLOSING_API_SRV.GR_IR_CLEARING_H" sap:creatable="false"
+				sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/><EntitySet Name="GR_IR_CLEARING_OUTSet" EntityType="ZIRP_MONTH_END_CLOSING_API_SRV.GR_IR_CLEARING_OUT" sap:creatable="false"
+				sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/><EntitySet Name="Accrual_Deferral_LineSet" EntityType="ZIRP_MONTH_END_CLOSING_API_SRV.Accrual_Deferral_Line" sap:creatable="false"
+				sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/><EntitySet Name="Accural_Deferral_ReverseSet" EntityType="ZIRP_MONTH_END_CLOSING_API_SRV.Accural_Deferral_Reverse" sap:creatable="false"
+				sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/><EntitySet Name="Accural_Deferral_Reverse_ResultSet" EntityType="ZIRP_MONTH_END_CLOSING_API_SRV.Accural_Deferral_Reverse_Result"
+				sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/><EntitySet Name="Cust_Clearing_StdSet" EntityType="ZIRP_MONTH_END_CLOSING_API_SRV.Cust_Clearing_Std" sap:creatable="false"
+				sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/><EntitySet Name="Cust_clearing_Std_ResultSet" EntityType="ZIRP_MONTH_END_CLOSING_API_SRV.Cust_clearing_Std_Result" sap:creatable="false"
+				sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/><EntitySet Name="Cust_Clearing_PartSet" EntityType="ZIRP_MONTH_END_CLOSING_API_SRV.Cust_Clearing_Part" sap:creatable="false"
+				sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/><EntitySet Name="Cust_Clearing_Part_ResultSet" EntityType="ZIRP_MONTH_END_CLOSING_API_SRV.Cust_Clearing_Part_Result" sap:creatable="false"
+				sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/><EntitySet Name="Cust_Clearing_ResSet" EntityType="ZIRP_MONTH_END_CLOSING_API_SRV.Cust_Clearing_Res" sap:creatable="false"
+				sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/><EntitySet Name="Cust_Clearing_Res_ResultSet" EntityType="ZIRP_MONTH_END_CLOSING_API_SRV.Cust_Clearing_Res_Result" sap:creatable="false"
+				sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/><EntitySet Name="Vend_Clearing_StdSet" EntityType="ZIRP_MONTH_END_CLOSING_API_SRV.Vend_Clearing_Std" sap:creatable="false"
+				sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/><EntitySet Name="Vend_Clearing_Std_ResultSet" EntityType="ZIRP_MONTH_END_CLOSING_API_SRV.Vend_Clearing_Std_Result" sap:creatable="false"
+				sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/><EntitySet Name="Vend_Clearing_PartSet" EntityType="ZIRP_MONTH_END_CLOSING_API_SRV.Vend_Clearing_Part" sap:creatable="false"
+				sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/><EntitySet Name="Vend_Clearing_Part_ResultSet" EntityType="ZIRP_MONTH_END_CLOSING_API_SRV.Vend_Clearing_Part_Result" sap:creatable="false"
+				sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/><EntitySet Name="ResultSet" EntityType="ZIRP_MONTH_END_CLOSING_API_SRV.Result" sap:creatable="false" sap:updatable="false"
+				sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/><EntitySet Name="MM_PeriodSet" EntityType="ZIRP_MONTH_END_CLOSING_API_SRV.MM_Period" sap:creatable="false" sap:updatable="false"
+				sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/><EntitySet Name="MM_Period_ResultSet" EntityType="ZIRP_MONTH_END_CLOSING_API_SRV.MM_Period_Result" sap:creatable="false"
+				sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/><EntitySet Name="Period_OpenSet" EntityType="ZIRP_MONTH_END_CLOSING_API_SRV.Period_Open" sap:creatable="false" sap:updatable="false"
+				sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/><EntitySet Name="Result_OpenSet" EntityType="ZIRP_MONTH_END_CLOSING_API_SRV.Result_Open" sap:creatable="false" sap:updatable="false"
+				sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/><EntitySet Name="Depreciation_PostingSet" EntityType="ZIRP_MONTH_END_CLOSING_API_SRV.Depreciation_Posting" sap:creatable="false"
+				sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/><EntitySet Name="Depreciation_ResultSet" EntityType="ZIRP_MONTH_END_CLOSING_API_SRV.Depreciation_Result" sap:creatable="false"
+				sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/><EntitySet Name="Vend_Clearing_ResSet" EntityType="ZIRP_MONTH_END_CLOSING_API_SRV.Vend_Clearing_Res" sap:creatable="false"
+				sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/><EntitySet Name="Vend_Clearing_Res_ResultSet" EntityType="ZIRP_MONTH_END_CLOSING_API_SRV.Vend_Clearing_Res_Result" sap:creatable="false"
+				sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+				<AssociationSet Name="AssnAccDeferRevToResultSet" Association="ZIRP_MONTH_END_CLOSING_API_SRV.AssnAccDeferRevToResult" sap:creatable="false"
+					sap:updatable="false" sap:deletable="false" sap:content-version="1"><End EntitySet="Accural_Deferral_ReverseSet" Role="FromRole_AssnAccDeferRevToResult"/><End EntitySet="Accural_Deferral_Reverse_ResultSet" Role="ToRole_AssnAccDeferRevToResult"/></AssociationSet>
+				<AssociationSet Name="AssnPeriodOpenToResultSet" Association="ZIRP_MONTH_END_CLOSING_API_SRV.AssnPeriodOpenToResult" sap:creatable="false"
+					sap:updatable="false" sap:deletable="false" sap:content-version="1"><End EntitySet="Period_OpenSet" Role="FromRole_AssnPeriodOpenToResult"/><End EntitySet="Result_OpenSet" Role="ToRole_AssnPeriodOpenToResult"/></AssociationSet>
+				<AssociationSet Name="AssnCusClrPartToResultSet" Association="ZIRP_MONTH_END_CLOSING_API_SRV.AssnCusClrPartToResult" sap:creatable="false"
+					sap:updatable="false" sap:deletable="false" sap:content-version="1"><End EntitySet="Cust_Clearing_PartSet" Role="FromRole_AssnCusClrPartToResult"/><End EntitySet="Cust_Clearing_Part_ResultSet" Role="ToRole_AssnCusClrPartToResult"/></AssociationSet>
+				<AssociationSet Name="AssnCusClrStdToResultSet" Association="ZIRP_MONTH_END_CLOSING_API_SRV.AssnCusClrStdToResult" sap:creatable="false"
+					sap:updatable="false" sap:deletable="false" sap:content-version="1"><End EntitySet="Cust_Clearing_StdSet" Role="FromRole_AssnCusClrStdToResult"/><End EntitySet="Cust_clearing_Std_ResultSet" Role="ToRole_AssnCusClrStdToResult"/></AssociationSet>
+				<AssociationSet Name="AssnVendClrStdToResultSet" Association="ZIRP_MONTH_END_CLOSING_API_SRV.AssnVendClrStdToResult" sap:creatable="false"
+					sap:updatable="false" sap:deletable="false" sap:content-version="1"><End EntitySet="Vend_Clearing_StdSet" Role="FromRole_AssnVendClrStdToResult"/><End EntitySet="Vend_Clearing_Std_ResultSet" Role="ToRole_AssnVendClrStdToResult"/></AssociationSet>
+				<AssociationSet Name="AssnVendResPartToResultSet" Association="ZIRP_MONTH_END_CLOSING_API_SRV.AssnVendResPartToResult" sap:creatable="false"
+					sap:updatable="false" sap:deletable="false" sap:content-version="1"><End EntitySet="Vend_Clearing_ResSet" Role="FromRole_AssnVendResPartToResult"/><End EntitySet="Vend_Clearing_Res_ResultSet" Role="ToRole_AssnVendResPartToResult"/></AssociationSet>
+				<AssociationSet Name="AssnGRIRHTToGRIRSet" Association="ZIRP_MONTH_END_CLOSING_API_SRV.AssnGRIRHTToGRIR" sap:creatable="false"
+					sap:updatable="false" sap:deletable="false" sap:content-version="1"><End EntitySet="GR_IR_CLEARING_HSet" Role="FromRole_AssnGRIRHTToGRIR"/><End EntitySet="GR_IR_CLEARINGSet" Role="ToRole_AssnGRIRHTToGRIR"/></AssociationSet>
+				<AssociationSet Name="AssnCusClrResToResultSet" Association="ZIRP_MONTH_END_CLOSING_API_SRV.AssnCusClrResToResult" sap:creatable="false"
+					sap:updatable="false" sap:deletable="false" sap:content-version="1"><End EntitySet="Cust_Clearing_ResSet" Role="FromRole_AssnCusClrResToResult"/><End EntitySet="Cust_Clearing_Res_ResultSet" Role="ToRole_AssnCusClrResToResult"/></AssociationSet>
+				<AssociationSet Name="AssnAccDeferLineToResultSet" Association="ZIRP_MONTH_END_CLOSING_API_SRV.AssnAccDeferLineToResult"
+					sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"><End EntitySet="Accrual_Deferral_LineSet" Role="FromRole_AssnAccDeferLineToResult"/><End EntitySet="Accrual_Deferral_ResultSet" Role="ToRole_AssnAccDeferLineToResult"/></AssociationSet>
+				<AssociationSet Name="AssnDepPeriodToDepResultSet" Association="ZIRP_MONTH_END_CLOSING_API_SRV.AssnDepPeriodToDepResult"
+					sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"><End EntitySet="Depreciation_PostingSet" Role="FromRole_AssnDepPeriodToDepResult"/><End EntitySet="Depreciation_ResultSet" Role="ToRole_AssnDepPeriodToDepResult"/></AssociationSet>
+				<AssociationSet Name="AssnPeriodCloseToResultSet" Association="ZIRP_MONTH_END_CLOSING_API_SRV.AssnPeriodCloseToResult" sap:creatable="false"
+					sap:updatable="false" sap:deletable="false" sap:content-version="1"><End EntitySet="Period_CloseSet" Role="FromRole_AssnPeriodCloseToResult"/><End EntitySet="ResultSet" Role="ToRole_AssnPeriodCloseToResult"/></AssociationSet>
+				<AssociationSet Name="AssnVendClrPartToResultSet" Association="ZIRP_MONTH_END_CLOSING_API_SRV.AssnVendClrPartToResult" sap:creatable="false"
+					sap:updatable="false" sap:deletable="false" sap:content-version="1"><End EntitySet="Vend_Clearing_PartSet" Role="FromRole_AssnVendClrPartToResult"/><End EntitySet="Vend_Clearing_Part_ResultSet" Role="ToRole_AssnVendClrPartToResult"/></AssociationSet>
+				<AssociationSet Name="AssnGRIRTOGRIROutSet" Association="ZIRP_MONTH_END_CLOSING_API_SRV.AssnGRIRTOGRIROut" sap:creatable="false"
+					sap:updatable="false" sap:deletable="false" sap:content-version="1"><End EntitySet="GR_IR_CLEARINGSet" Role="FromRole_AssnGRIRTOGRIROut"/><End EntitySet="GR_IR_CLEARING_OUTSet" Role="ToRole_AssnGRIRTOGRIROut"/></AssociationSet>
+				<AssociationSet Name="AssnAccDeferToLineSet" Association="ZIRP_MONTH_END_CLOSING_API_SRV.AssnAccDeferToLine" sap:creatable="false"
+					sap:updatable="false" sap:deletable="false" sap:content-version="1"><End EntitySet="Accrual_Deferral_PostSet" Role="FromRole_AssnAccDeferToLine"/><End EntitySet="Accrual_Deferral_LineSet" Role="ToRole_AssnAccDeferToLine"/></AssociationSet>
+				<AssociationSet Name="AssnMMPeriodToResultSet" Association="ZIRP_MONTH_END_CLOSING_API_SRV.AssnMMPeriodToResult" sap:creatable="false"
+					sap:updatable="false" sap:deletable="false" sap:content-version="1"><End EntitySet="MM_PeriodSet" Role="FromRole_AssnMMPeriodToResult"/><End EntitySet="MM_Period_ResultSet" Role="ToRole_AssnMMPeriodToResult"/></AssociationSet>
+			</EntityContainer><atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="./sap/ZIRP_MONTH_END_CLOSING_API_SRV/$metadata"/><atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="./sap/ZIRP_MONTH_END_CLOSING_API_SRV/$metadata"/></Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

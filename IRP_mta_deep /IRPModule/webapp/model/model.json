@@ -1,0 +1,19 @@
+{
+	"selectedKey": "root1",
+	"navigation": [{
+			"title": "Monitoring",
+			"icon": "sap-icon://performance",
+			"expanded": true,
+			"key": "root1",
+			"items": [{
+				"title": "Memory Utilization",
+				"key": "root1"
+			}, {
+				"title": "Cpu Utilization",
+				"key": "root1"
+			}]
+		}
+
+	]
+
+}

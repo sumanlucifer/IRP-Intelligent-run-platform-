@@ -1,0 +1,29 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<Dialog class="sapUiSizeCompact" afterClose="onPresswithoutMaterial" contentWidth="160px" contentHeight="250px"
+		title="Select Company Code Variant">
+		<content>
+			<Table growing="true" selectionChange="onSelectList" growingThreshold="90" sticky="ColumnHeaders" mode="SingleSelect" inset="false"
+				items="{MonthEndUpdate>/CompCodeVarSet}">
+				<columns>
+					<Column hAlign="Center">
+						<Text text="Company Code Variant"/>
+					</Column>
+					<Column hAlign="Center">
+						<Text text="Description"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Text text="{MonthEndUpdate>CompanyCodeVariant}"/>
+							<Text text="{MonthEndUpdate>Desc}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+		<endButton>
+			<Button type="Reject" text="Cancel" press="onPresswithoutMaterial"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

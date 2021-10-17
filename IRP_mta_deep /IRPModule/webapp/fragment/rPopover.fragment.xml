@@ -1,0 +1,18 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc">
+	<ResponsivePopover contentWidth="240px" contentHeight="455px" title="Select Filters" class="sapUiPopupWithPadding topcss" placement="Left">
+		<content>
+			<ComboBox id="idComboType" selectedKey="Day" items="{memoryUtilization>/workProcesstype}" placeholder="select"
+				selectionChange="officeComboChange" change="onchange" class="combocss">
+				<items class="listcss">
+					<core:ListItem key="{memoryUtilization>key}" text="{memoryUtilization>text}" class="listcss1"/>
+				</items>
+			</ComboBox>
+		</content>
+		<beginButton>
+			<Button text="Cancel" class="buttonFragC sapUiTinyMarginBottom" press="handleCloseButton"/>
+		</beginButton>
+		<endButton>
+			<Button text="Apply" class="buttonFragA sapUiTinyMarginBottom" press="handleApplyButton"/>
+		</endButton>
+	</ResponsivePopover>
+</core:FragmentDefinition>

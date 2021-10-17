@@ -1,0 +1,128 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:m="sap.m" xmlns:u="sap.ui.unified"
+	controllerName="ey.irp.IRPModule.controller.log_Traces" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:tnt="sap.tnt" xmlns="sap.ui.table"
+	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<m:Page title="Monitoring Dashboard/Log and Traces" enableScrolling="false" class="textcolor1 navbuttoncss sapUiSmallMarginTop"
+		showNavButton="true" navButtonPress="onPressLogTrace">
+		<m:content>
+			<m:SplitApp id="SplitAppDemo" initialDetail="detail" initialMaster="master" class="batchjobCss sapUiMediumMarginTop">
+				<m:detailPages>
+					<m:Page id="detail" title="Overview" backgroundDesign="Solid" class="sapUiStdPage detailcss" showHeader="false" enableScrolling="false">
+						<m:HBox class="sapUiTinyMarginTop" justifyContent="End">
+							<m:VBox>
+								<m:ComboBox id="idComboType" items="{logTraceModel>/workProcesstype}" placeholder="select" selectionChange="officeComboChange"
+									change="onchange" class="combocss">
+									<m:items class="listcss">
+										<core:ListItem key="{logTraceModel>key}" text="{logTraceModel>text}" class="listcss1"/>
+									</m:items>
+								</m:ComboBox>
+							</m:VBox>
+							<m:VBox>
+								<m:SearchField id="idSearch" class="searchicon sapUiTinyMarginBegin" search="searchuser" width="100%"/>
+							</m:VBox>
+							<m:VBox>
+								<m:Button id="previous" type="Emphasized" press="onPrevious" icon="sap-icon://nav-back" class="buttonclass sapUiLargeMarginBegin"/>
+							</m:VBox>
+							<m:VBox>
+								<m:Button id="idno" text="{logTraceModel>/currentPage}" class="buttonclassno sapUiTinyMarginBegin"/>
+							</m:VBox>
+							<m:VBox>
+								<m:Text text="/{logTraceModel>/totalPages}" class="textcss sapUiSmallMarginTop sapUiTinyMarginBegin"/>
+								<!--<m:Label text="/{logTraceModel>/totalPages}" class="buttonclass sapUiMediumMarginBegin"/>-->
+							</m:VBox>
+							<m:VBox>
+								<m:Button id="next" type="Emphasized" press="onNext" icon="sap-icon://navigation-right-arrow" class="buttonclass sapUiSmallMarginBegin"/>
+							</m:VBox>
+							<m:VBox class="sapUiSmallMarginEnd">
+								<m:Text text="{logTraceModel>/disRecInfo}" class="textcss sapUiSmallMarginTop sapUiMediumMarginBegin"/>
+							</m:VBox>
+							<!--<m:ToolbarSpacer width="100px"/>-->
+							<m:VBox class="sapUiSmallMarginEnd">
+								<m:Button id="idButton5" class="abapcss buttonhoverF" icon="sap-icon://filter" press="onPressFilterHana"></m:Button>
+							</m:VBox>
+						</m:HBox>
+						<m:Panel>
+							<m:VBox width="95%" class="sapUiMediumMarginBegin">
+								<Table id="idProductsTable" class="uitablecss batchjobclass" rows="{logTraceModel>/logTraceTableData}" selectionMode="None"
+									ariaLabelledBy="title">
+									<columns>
+										<Column width="15rem">
+											<m:Label text="Date" class="tableheadercss"/>
+											<template>
+												<m:Text text="{path:'logTraceModel>Date', formatter: '.formatter.dateValue'}" class="tablecellscss"/>
+											</template>
+										</Column>
+										<Column width="8rem">
+											<m:Label text="System" class="tableheadercss"/>
+											<template>
+												<m:Text text="{logTraceModel>SysID}" wrapping="false" class="tablecellscss sapUiTinyMarginBegin"/>
+											</template>
+										</Column>
+										<Column width="15rem">
+											<m:Label text="Instance" class="tableheadercss"/>
+											<template>
+												<m:Text text="{logTraceModel>Instance}" wrapping="true" class="tablecellscss"/>
+											</template>
+										</Column>
+										<Column width="9rem">
+											<m:Label text="User" class="tableheadercss"/>
+											<template>
+												<m:Text text="{logTraceModel>User}" wrapping="false" class="tablecellscss"/>
+											</template>
+										</Column>
+										<Column width="9rem">
+											<m:Label text="Client" class="tableheadercss"/>
+											<template>
+												<m:Text text="{logTraceModel>Client}" wrapping="false" class="tablecellscss"/>
+											</template>
+										</Column>
+										<Column width="8rem">
+											<m:Label text="Type" class="tableheadercss"/>
+											<template>
+												<m:Text text="{logTraceModel>Type}" wrapping="false" class="sapUiTinyMarginBegin tablecellscss"/>
+											</template>
+										</Column>
+										<Column width="11rem">
+											<m:Label text="Message Id" class="tableheadercss"/>
+											<template>
+												<m:Text text="{logTraceModel>Messageid}" wrapping="false" class=" tablecellscss sapUiSmallMarginBegin"/>
+											</template>
+										</Column>
+										<Column width="9rem">
+											<m:Label text="Process No" class="tableheadercss sapUiMediumMarginBegin"/>
+											<template>
+												<m:Text text="{logTraceModel>Processno}" wrapping="false" class="sapUiLargeMarginBegin tablecellscss"/>
+											</template>
+										</Column>
+										<Column width="25rem">
+											<m:Label text="Message Text" class="tableheadercss"/>
+											<template>
+												<m:Text text="{logTraceModel>Messagetext}" wrapping="true" class=" tablecellscss"/>
+											</template>
+										</Column>
+									</columns>
+								</Table>
+							</m:VBox>
+						</m:Panel>
+					</m:Page>
+					<m:Page id="detailDetail" title="Overview" class="sapUiStdPage detailcss" backgroundDesign="Solid" showHeader="false"
+						enableScrolling="false">
+						<m:VBox class="sapUiSmallMargin">
+							<m:Label text="System Details"/>
+						</m:VBox>
+					</m:Page>
+				</m:detailPages>
+				<m:masterPages>
+					<m:Page id="master2" title="Systems" backgroundDesign="List" class="sapUiStdPage mastercss sapUismallMarginBegin">
+						<m:VBox>
+							<m:List mode="SingleSelectMaster" id="listIDApp" items="{sysListModel>/APPSystems/data}" itemPress=".onListItemPress" class="s4dcss">
+								<m:items>
+									<m:StandardListItem title="{sysListModel>sysId}" type="Active" custom:to="detail1"/>
+								</m:items>
+							</m:List>
+						</m:VBox>
+					</m:Page>
+				</m:masterPages>
+			</m:SplitApp>
+		</m:content>
+	</m:Page>
+</mvc:View>

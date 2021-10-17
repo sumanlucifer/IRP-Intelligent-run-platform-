@@ -1,0 +1,65 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc">
+<!--	<ResponsivePopover contentWidth="240px" id="idP2PGlobal" contentHeight="455px" title="Select Filters" class="sapUiPopupWithPadding topcss" placement="Left">
+		<content>-->
+		<Dialog id= "idP2PGlobal" title="Select Filters" class="p2pDialog p2pfilter">
+		
+				<Label text = "Material Number" width="44%" class= "sapUiLargeMarginTop"/>
+			<ComboBox id="idP2PGlobalMat"  items="{ path: 'inventoryModel>/Materials' }" placeholder="select"
+				selectionChange="onMaterialChange"  class=" combocss">
+				<items class="listcss">
+					<core:ListItem  text="{inventoryModel>Matnr}" class="listcss1"/>
+				</items>
+			</ComboBox>
+				
+				<Label text = "Plant" width="44%"/>
+			<ComboBox id="idP2PGlobalPlant"  items="{ path: 'inventoryModel>/Plant' }" placeholder="select"
+				selectionChange="onPlantChange" change="onchange" class="combocss">
+				<items class="listcss">
+					<core:ListItem  text="{inventoryModel>PLANT}" class="listcss1"/>
+				</items>
+			</ComboBox>
+				<Label text = "Purchase Req Number" width="44%"/>
+			<ComboBox id="idP2PGlobalPR"  items="{ path: 'inventoryModel>/PR' }" placeholder="select"
+				selectionChange="onPRChange" change="onchange" class="combocss">
+				<items class="listcss">
+					<core:ListItem  text="{inventoryModel>PR}" class="listcss1"/>
+				</items>
+			</ComboBox>
+				<Label text = "Purchase Order Number" width="44%"/>
+			<ComboBox id="idP2PGlobalPO"  items="{ path: 'inventoryModel>/PO' }" placeholder="select"
+				selectionChange="onPOChange" change="onchange" class="combocss">
+				<items class="listcss">
+					<core:ListItem  text="{inventoryModel>PO}" class="listcss1"/>
+				</items>
+			</ComboBox>
+				<Label text = "Goods Receipt Number" width="44%"/>
+			<ComboBox id="idP2PGlobalGR"  items="{ path: 'inventoryModel>/GR' }" placeholder="select"
+				selectionChange="onGRChange" change="onchange" class="combocss">
+				<items class="listcss">
+					<core:ListItem  text="{inventoryModel>GR}" class="listcss1"/>
+				</items>
+			</ComboBox>
+				<Label text = "Invoice Verification Number" width="44%"/>
+			<ComboBox id="idP2PGlobalIV"  items="{ path: 'inventoryModel>/Invoice' }" placeholder="select"
+				selectionChange="onIVChange" change="onchange" class="combocss">
+				<items class="listcss">
+					<core:ListItem  text="{inventoryModel>INV}" class="listcss1"/>
+				</items>
+			</ComboBox>
+				<Label text = "Automatice Payment Number" width="44%"/>
+			<ComboBox id="idP2PGlobalAP"  items="{ path: 'inventoryModel>/AutoPayment' }" placeholder="select"
+				selectionChange="onAPRChange" change="onchange" class="combocss">
+				<items class="listcss">
+					<core:ListItem key="{inventoryModel>key}" text="{inventoryModel>text}" class="listcss1"/>
+				</items>
+			</ComboBox>
+
+		<beginButton>
+			<Button text="Cancel" class="buttonFragC sapUiTinyMarginBottom" press="onCloseFilterDialog"/>
+		</beginButton>
+		<endButton>
+			<Button text="Apply" class="buttonFragA sapUiTinyMarginBottom" press="handleApplyButton"/>
+		</endButton>
+		</Dialog>
+<!--	</ResponsivePopover>-->
+</core:FragmentDefinition>

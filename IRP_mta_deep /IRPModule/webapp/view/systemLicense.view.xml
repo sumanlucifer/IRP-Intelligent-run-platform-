@@ -1,0 +1,259 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:m="sap.m" xmlns:u="sap.ui.unified"
+	controllerName="ey.irp.IRPModule.controller.systemLicense" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+	xmlns="sap.ui.table" xmlns:html="http://www.w3.org/1999/xhtml">
+	<m:Page title="Monitoring Dashboard/System License" showNavButton="true" class="textcolor1 sapUiContentPadding navbuttoncss"
+		navButtonPress="onPressSysLicensePorcess">
+		<m:content>
+			<m:IconTabBar class="sapUiResponsiveContentPadding barcss iconss sapUiTinyMarginTop">
+				<m:items>
+					<m:IconTabFilter class="textpendinglc" text="Hana DB" key="products">
+						<m:SplitApp id="SplitAppDemo" initialDetail="detail" initialMaster="master" class="splitappcss">
+							<m:detailPages>
+								<m:Page id="detail" title="Overview" backgroundDesign="Solid" class="sapUiStdPage detailcss" showHeader="false">
+									<m:VBox>
+										<Table id="idIncTable" class="uitablecss" rows="{sysMModel>/sysMdata}" selectionMode="Single" ariaLabelledBy="title">
+											<columns>
+												<Column width="15rem">
+													<m:Label text="Start Date" class="tableheadercss"/>
+													<template>
+														<m:Text text="{sysMModel>START_DATE}" class="tablecellscss" wrapping="true"/>
+													</template>
+												</Column>
+												<Column width="15rem">
+													<m:Label text="Expiration Date" class="tableheadercss"/>
+													<template>
+														<m:Text text="{sysMModel>EXPIRATION_DATE}" class="tablecellscss" wrapping="false"/>
+													</template>
+												</Column>
+												<Column width="8rem">
+													<m:Label text="SID" class="tableheadercss"/>
+													<template>
+														<m:Text text="{sysMModel>SYSTEM_ID}" wrapping="false"/>
+													</template>
+												</Column>
+												<Column width="9rem">
+													<m:Label text="HOST" class="tableheadercss"/>
+													<template>
+														<m:Text text="{sysMModel>HOST}" wrapping="true"/>
+													</template>
+												</Column>
+												<Column width="9rem">
+													<m:Label text="Hardware Key" class="tableheadercss"/>
+													<template>
+														<m:Text text="{sysMModel>HARDWARE_KEY}" wrapping="false"/>
+													</template>
+												</Column>
+												<Column width="9rem">
+													<m:Label text="Insall No" class="tableheadercss"/>
+													<template>
+														<m:Text text="{sysMModel>INSTALL_NO}" wrapping="false"/>
+													</template>
+												</Column>
+												<Column width="9rem">
+													<m:Label text="Product Name" class="tableheadercss"/>
+													<template>
+														<m:Text text="{sysMModel>PRODUCT_NAME}" wrapping="false"/>
+													</template>
+												</Column>
+												<Column width="11rem">
+													<m:Label text="System No" class="tableheadercss"/>
+													<template>
+														<m:Text text="{sysMModel>SYSTEM_NO}" wrapping="false"/>
+													</template>
+												</Column>
+												<Column width="11rem">
+													<m:Label text="Product Limit" class="tableheadercss"/>
+													<template>
+														<m:Text text="{sysMModel>PRODUCT_LIMIT}" wrapping="false" class="sapUiSmallMarginBegin"/>
+													</template>
+												</Column>
+												<Column width="11rem">
+													<m:Label text="Product Usage" class="tableheadercss"/>
+													<template>
+														<m:Text text="{sysMModel>PRODUCT_USAGE}" wrapping="false" class="sapUiSmallMarginBegin"/>
+													</template>
+												</Column>
+											</columns>
+										</Table>
+									</m:VBox>
+								</m:Page>
+								<m:Page id="detailDetail" title="Overview" class="sapUiStdPage detailcss" backgroundDesign="Solid" showHeader="false">
+									<m:VBox class="sapUiSmallMargin">
+										<m:Label text="System Details"/>
+									</m:VBox>
+								</m:Page>
+							</m:detailPages>
+							<m:masterPages>
+								<m:Page id="master2" title="Systems" backgroundDesign="List" class="sapUiStdPage mastercss">
+									<m:List id="listID" itemPress=".onListItemPress" class="s4dcss">
+										<m:items>
+											<m:StandardListItem title="S4D" type="Active" custom:to="detail" class=""/>
+											<m:StandardListItem title="system" type="Active" custom:to="detailDetail" class=""/>
+										</m:items>
+									</m:List>
+								</m:Page>
+							</m:masterPages>
+						</m:SplitApp>
+					</m:IconTabFilter>
+					<m:IconTabFilter class="textpendinglc" text="Application" key="products">
+						<m:SplitApp id="SplitAppDemoApp" initialDetail="detail1" initialMaster="master" class="splitappcss">
+							<m:detailPages>
+								<m:Page id="detail1" title="Overview" backgroundDesign="Solid" class="sapUiStdPage detailcss" showHeader="false">
+									<m:VBox>
+										<Table id="idsapTable" class="uitablecss" rows="{sysLicenseModel>/sysLicenseTableData}" selectionMode="Single" ariaLabelledBy="title">
+											<columns>
+												<Column width="15rem">
+													<m:Label text="Begin Date" class="tableheadercss"/>
+													<template>
+														<m:Text text="{path:'sysLicenseModel>BEGIN_DATE',formatter:'.formatter.dateValue'}" class="tablecellscss" wrapping="true"/>
+													</template>
+												</Column>
+												<Column width="15rem">
+													<m:Label text="End Date" class="tableheadercss"/>
+													<template>
+														<m:Text text="{path:'sysLicenseModel>END_DATE',formatter:'.formatter.dateValue'}" class="tablecellscss" wrapping="false"/>
+													</template>
+												</Column>
+												<Column width="15rem">
+													<m:Label text="Last Date" class="tableheadercss"/>
+													<template>
+														<m:Text text="{path:'sysLicenseModel>LSC_DATE',formatter:'.formatter.dateValue'}" class="tablecellscss" wrapping="false"/>
+													</template>
+												</Column>
+												<Column width="8rem">
+													<m:Label text="SID" class="tableheadercss"/>
+													<template>
+														<m:Text text="{sysLicenseModel>SID}" wrapping="false"/>
+													</template>
+												</Column>
+												<Column width="9rem">
+													<m:Label text="HOST" class="tableheadercss"/>
+													<template>
+														<m:Text text="{sysLicenseModel>HOST}" wrapping="false"/>
+													</template>
+												</Column>
+												<Column width="9rem">
+													<m:Label text="Hardware Key" class="tableheadercss"/>
+													<template>
+														<m:Text text="{sysLicenseModel>HWKEY}" wrapping="false"/>
+													</template>
+												</Column>
+												<Column width="9rem">
+													<m:Label text="Software Product" class="tableheadercss"/>
+													<template>
+														<m:Text text="{sysLicenseModel>SW_PRODUCT}" wrapping="false"/>
+													</template>
+												</Column>
+												<Column width="14rem">
+													<m:Label text="Software Product Limit" class="tableheadercss"/>
+													<template>
+														<m:Text text="{sysLicenseModel>SW_PROD_LIMIT}" wrapping="false"/>
+													</template>
+												</Column>
+												<Column width="11rem">
+													<m:Label text="System No" class="tableheadercss"/>
+													<template>
+														<m:Text text="{sysLicenseModel>SYSTEM_NO}" wrapping="false"/>
+													</template>
+												</Column>
+												<Column width="9rem">
+													<m:Label text="Insall No" class="tableheadercss"/>
+													<template>
+														<m:Text text="{sysLicenseModel>INSTALL_NO}" wrapping="false"/>
+													</template>
+												</Column>
+												<Column width="11rem">
+													<m:Label text="Validity" class="tableheadercss"/>
+													<template>
+														<m:Text text="{sysLicenseModel>VALIDITY}" wrapping="false"/>
+													</template>
+												</Column>
+											</columns>
+										</Table>
+									</m:VBox>
+								</m:Page>
+								<m:Page id="detailDetail1" title="Overview" class="sapUiStdPage detailcss" backgroundDesign="Solid" showHeader="false">
+									<m:VBox class="sapUiSmallMargin">
+										<m:Label text="System another deatils"/>
+									</m:VBox>
+								</m:Page>
+							</m:detailPages>
+							<m:masterPages>
+								<m:Page id="master3" title="Systems" backgroundDesign="List" class="sapUiStdPage mastercss">
+									<m:List id="listID3" itemPress=".onListItemPressApp" class="s4dcss">
+										<m:items>
+											<m:StandardListItem title="S4A" type="Active" custom:to="detail1" class=""/>
+											<m:StandardListItem title="system" type="Active" custom:to="detailDetail1" class=""/>
+										</m:items>
+									</m:List>
+								</m:Page>
+							</m:masterPages>
+						</m:SplitApp>
+					</m:IconTabFilter>
+				</m:items>
+			</m:IconTabBar>
+		</m:content>
+		<!--<Table width="100%" class="tablecss sapUiMediumMarginTop batchjobclass" id="idlogTraceTableL" sticky="ColumnHeaders" inset="false"-->
+		<!--		items="{sysLicenseModel>/sysLicenseTableData}">-->
+		<!--		<headerToolbar class="sapUiMediumMarginTop">-->
+		<!--			<OverflowToolbar>-->
+		<!--				<content>-->
+		<!--					<SearchField class="searchicon" liveChange="searchlogTracetable" width="25%"/>-->
+		<!--				</content>-->
+		<!--			</OverflowToolbar>-->
+		<!--		</headerToolbar>-->
+		<!--		<columns>-->
+		<!--			<Column>-->
+		<!--				<Text text="SID" class="tableheadercss sapUiTinyMarginBegin"/>-->
+		<!--			</Column>-->
+		<!--			<Column>-->
+		<!--				<Text text="HOST" class="tableheadercss"/>-->
+		<!--			</Column>-->
+		<!--			<Column>-->
+		<!--				<Text text="HWKEY" class="tableheadercss sapUiMediumMarginBegin"/>-->
+		<!--			</Column>-->
+		<!--			<Column>-->
+		<!--				<Text text="SW_PRODUCT" class="tableheadercss"/>-->
+		<!--			</Column>-->
+		<!--			<Column>-->
+		<!--				<Text text="SW_PROD_LIMIT" class="tableheadercss"/>-->
+		<!--			</Column>-->
+		<!--			<Column>-->
+		<!--				<Text text="SYSTEM_NO" class="tableheadercss"/>-->
+		<!--			</Column>-->
+		<!--			<Column>-->
+		<!--				<Text text="INSTALL_NO" class="tableheadercss"/>-->
+		<!--			</Column>-->
+		<!--			<Column>-->
+		<!--				<Text text="BEGIN_DATE" class="tableheadercss"/>-->
+		<!--			</Column>-->
+		<!--			<Column>-->
+		<!--				<Text text="END_DATE" class="tableheadercss"/>-->
+		<!--			</Column>-->
+		<!--			<Column>-->
+		<!--				<Text text="LSC_DATE" class="tableheadercss"/>-->
+		<!--			</Column>-->
+		<!--			<Column>-->
+		<!--				<Text text="VALIDITY" class="tableheadercss"/>-->
+		<!--			</Column>-->
+		<!--		</columns>-->
+		<!--		<items>-->
+		<!--			<ColumnListItem>-->
+		<!--				<cells>-->
+		<!--					<Text text="{sysLicenseModel>SID}" class="sapUiTinyMarginBegin tablecellscss"/>-->
+		<!--					<Text text="{sysLicenseModel>HOST}" class="sapUiTinyMarginBegin tablecellscss"/>-->
+		<!--					<Text text="{sysLicenseModel>HWKEY}" class="sapUiTinyMarginBegin tablecellscss"/>-->
+		<!--					<Text text="{sysLicenseModel>SW_PRODUCT}" class="sapUiTinyMarginBegin tablecellscss"/>-->
+		<!--					<Text text="{sysLicenseModel>SW_PROD_LIMIT}" class="tablecellscss sapUiMediumMarginBegin"/>-->
+		<!--					<Text text="{sysLicenseModel>SYSTEM_NO}" class="tablecellscss sapUiTinyMarginBegin"/>-->
+		<!--					<Text text="{sysLicenseModel>INSTALL_NO}" class="tablecellscss"/>-->
+		<!--					<Text text="{path:'sysLicenseModel>BEGIN_DATE', formatter: '.formatter.dateValue'}" class="tablecellscss"/>-->
+		<!--					<Text text="{path:'sysLicenseModel>END_DATE', formatter: '.formatter.dateValue'}" class="tablecellscss"/>-->
+		<!--					<Text text="{path:'sysLicenseModel>LSC_DATE', formatter: '.formatter.dateValue'}" class="tablecellscss"/>-->
+		<!--					<Text text="{sysLicenseModel>VALIDITY}" class="tablecellscss"/>-->
+		<!--				</cells>-->
+		<!--			</ColumnListItem>-->
+		<!--		</items>-->
+		<!--	</Table>-->
+	</m:Page>
+</mvc:View>

@@ -1,0 +1,66 @@
+ID: IRP_mta
+_schema-version: '2.1'
+description: IRP_mta
+parameters:
+  deploy_mode: html5-repo
+version: 0.0.1
+modules:
+  - name: irp-mta-approuter
+    type: approuter.nodejs
+    path: irp-mta-approuter
+    parameters:
+      disk-quota: 256M
+      memory: 256M
+    requires:
+      - name: IRP_mta_html5_repo_runtime
+      - name: uaa_IRP_mta
+      - name: dest_IRP_mta
+      - name: conn_IRP_mta
+  - name: IRP_mta_ui_deployer
+    type: com.sap.html5.application-content
+    path: IRP_mta_ui_deployer
+    requires:
+      - name: IRP_mta_html5_repo_host
+    build-parameters:
+      requires:
+        - name: IRPModule
+          artifacts:
+            - './*'
+          target-path: resources/IRPModule
+  - name: IRPModule
+    type: html5
+    path: IRPModule
+    build-parameters:
+      builder: custom
+      commands:
+        - npm install
+        - npm run build
+      supported-platforms: []
+      build-result: dist
+resources:
+  - name: IRP_mta_html5_repo_runtime
+    parameters:
+      service-plan: app-runtime
+      service: html5-apps-repo
+    type: org.cloudfoundry.managed-service
+  - name: IRP_mta_html5_repo_host
+    parameters:
+      service-plan: app-host
+      service: html5-apps-repo
+    type: org.cloudfoundry.managed-service
+  - name: uaa_IRP_mta
+    parameters:
+      path: ./xs-security.json
+      service-plan: application
+      service: xsuaa
+    type: org.cloudfoundry.managed-service
+  - name: dest_IRP_mta
+    parameters:
+      service-plan: lite
+      service: destination
+    type: org.cloudfoundry.managed-service
+  - name: conn_IRP_mta
+    parameters:
+      service-plan: lite
+      service: connectivity
+    type: org.cloudfoundry.managed-service

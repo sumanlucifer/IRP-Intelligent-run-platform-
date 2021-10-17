@@ -1,0 +1,28 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog id="P2PDialog" title="Materials Below reorder Level"     >
+		<List class=" s4dcss p2pnotiList" width="auto" items="{NotificationModel>/}" >
+			<!--<items>
+<ObjectListItem
+title="{product>ProductName}" number="{product>Quantity}"/> 
+</items>-->
+			<layoutData>
+				<FlexItemData maxWidth="100px"/>
+			</layoutData>
+			<NotificationListItem
+				title="Materials"
+				description="{NotificationModel>message}"
+				type="Active"
+				class="p2pnotiList"
+				showCloseButton="true" datetime="" unread="true"   press=".onListItemPress" authorName=""
+				 >
+			<!--	<buttons>
+					<Button text="Accept All Requested Information" press=".onAcceptPress"/>
+					<Button text="Reject All Requested Information" press=".onRejectPress"/>
+				</buttons>-->
+			</NotificationListItem>
+		</List>
+		<beginButton>
+			<Button text="{i18n>dialogCloseButtonText}" press= "onCloseDialog"/>
+		</beginButton>
+	</Dialog>
+</core:FragmentDefinition>

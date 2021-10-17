@@ -1,0 +1,437 @@
+{
+	"_version": "1.12.0",
+	"sap.app": {
+		"id": "ey.irp.IRPModule",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"sourceTemplate": {
+			"id": "servicecatalog.connectivityComponentForManifest",
+			"version": "0.0.0"
+		},
+		"dataSources": {
+			"monthEndOdata": {
+				"uri": "http://euwdrh200el02.SPRADV.SBP.LOCAL:8001/sap/opu/odata/sap/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0"
+				}
+			},
+			"ZIRP_MONTH_END_CLOSING_API_SRV": {
+				"uri": "/S4A_dest/sap/opu/odata/sap/ZIRP_MONTH_END_CLOSING_API_SRV/",
+				"type": "OData",
+				"settings": {
+					"localUri": "localService/metadata.xml"
+				}
+			},
+			"ZIRP_MONTH_END_F4_SRV": {
+				"uri": "/S4A_dest/sap/opu/odata/sap/ZIRP_MONTH_END_F4_SRV/",
+				"type": "OData",
+				"settings": {
+					"localUri": "localService/metadata.xml"
+				}
+			}
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		}
+	},
+	"sap.ui5": {
+		"flexEnabled": false,
+		"rootView": {
+			"viewName": "ey.irp.IRPModule.view.App",
+			"type": "XML",
+			"async": true,
+			"id": "App"
+		},
+		"dependencies": {
+			"minUI5Version": "1.60.1",
+			"libs": {
+				"sap.ui.core": {},
+				"sap.m": {},
+				"sap.ui.layout": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "ey.irp.IRPModule.i18n.i18n"
+				}
+			},
+			"workprocessModel": {
+				"type": "sap.ui.model.json.JSONModel"
+			},
+			"batchjobModel": {
+				"type": "sap.ui.model.json.JSONModel"
+			},
+			"monthEnd": {
+				"dataSource": "monthEndOdata"
+			},
+			"landingPageModel": {
+				"type": "sap.ui.model.json.JSONModel"
+			},
+			"MemoryUtilzation": {
+				"type": "sap.ui.model.json.JSONModel"
+			},
+			"hanaDBUtilzation": {
+				"type": "sap.ui.model.json.JSONModel"
+			},
+			"cpuUtilization": {
+				"type": "sap.ui.model.json.JSONModel"
+			},
+			"abapDumpsModel": {
+				"type": "sap.ui.model.json.JSONModel"
+			},
+			"incList": {
+				"type": "sap.ui.model.json.JSONModel"
+			},
+			"activeUSuserDetail": {
+				"type": "sap.ui.model.json.JSONModel"
+			},
+			"inventoryModel": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"preload": false
+			},
+			"PurReqModel": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"preload": false
+			},
+			"purOrderModel": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"preload": false
+			},
+			"GoodRecieptModel": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"preload": false
+			},
+			"InvoiceModel": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"preload": false
+			},
+			"PaymentRunModel": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"preload": false
+			},
+			"NotificationModel": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"preload": false
+			},
+			"P2PglobalModel": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"preload": false
+			},
+			"sysListModel": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"preload": false
+			},
+			"landingbatchModel": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"preload": false
+			},
+			"landingPageWP": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"preload": false
+			},
+			"abapDumpModelL": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"preload": false
+			},
+			"activeHanaUSuserDetail": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"preload": false
+			},
+			"monthEndClosing1": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "TwoWay",
+					"defaultCountMode": "Request",
+					"useBatch": false
+				},
+				"dataSource": "ZIRP_MONTH_END_CLOSING_API_SRV",
+				"preload": true
+			},
+			"MonthEndActivity": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneWay",
+					"useBatch": false,
+					"defaultCountMode": "Request"
+				},
+				"dataSource": "ZIRP_MONTH_END_CLOSING_API_SRV",
+				"preload": true
+			},
+			"MonthEndvaluehelp": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneWay",
+					"useBatch": false,
+					"defaultCountMode": "Request"
+				},
+				"dataSource": "ZIRP_MONTH_END_F4_SRV",
+				"preload": true
+			},
+			"MonthEndTableModel": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"preload": false
+			},
+			"MonthEndUpdate": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"preload": false
+			}
+		},
+		"resources": {
+			"css": [{
+				"uri": "css/style.css"
+			}]
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"async": true,
+				"viewPath": "ey.irp.IRPModule.view",
+				"controlAggregation": "content",
+				"controlId": "lcappid",
+				"clearControlAggregation": true
+			},
+			"routes": [{
+				"name": "TargetApp",
+				"pattern": "",
+				"target": [
+					"View1"
+				]
+			}, {
+				"name": "Login",
+				"pattern": "Login",
+				"target": [
+					"Login"
+				]
+			}, {
+				"name": "batchjoblogs",
+				"pattern": "batchjoblogs/{listdata}",
+				"target": [
+					"batchjoblogs"
+				]
+			}, {
+				"name": "wokprocess",
+				"pattern": "wokprocess",
+				"target": [
+					"wokprocess"
+				]
+			}, {
+				"name": "systemAnalysis",
+				"pattern": "systemAnalysis",
+				"target": [
+					"systemAnalysis"
+				]
+			}, {
+				"name": "cpuUtilization",
+				"pattern": "cpuUtilization",
+				"target": [
+					"cpuUtilization"
+				]
+			}, {
+				"name": "MemoryUtilzation",
+				"pattern": "MemoryUtilzation",
+				"target": [
+					"MemoryUtilzation"
+				]
+			}, {
+				"name": "abapDumps",
+				"pattern": "abapDumps",
+				"target": [
+					"abapDumps"
+				]
+			}, {
+				"name": "log_Traces",
+				"pattern": "log_Traces",
+				"target": [
+					"log_Traces"
+				]
+			}, {
+				"name": "incList",
+				"pattern": "incList",
+				"target": [
+					"incList"
+				]
+			}, {
+				"name": "createIncident",
+				"pattern": "createIncident",
+				"target": [
+					"createIncident"
+				]
+			}, {
+				"name": "incdetail",
+				"pattern": "incdetail/{incident}",
+				"target": [
+					"incdetail"
+				]
+			}, {
+				"name": "activeUSuserDetail",
+				"pattern": "activeUSuserDetail",
+				"target": [
+					"activeUSuserDetail"
+				]
+			}, {
+				"name": "userAuthorization",
+				"pattern": "userAuthorization/{ouserName}",
+				"target": [
+					"userAuthorization"
+				]
+			}, {
+				"name": "user_Privilege",
+				"pattern": "user_Privilege/{ouserNameP}",
+				"target": [
+					"user_Privilege"
+				]
+			}, {
+				"name": "monthEndUpadte",
+				"pattern": "monthEndUpadte",
+				"target": [
+					"monthEndUpadte"
+				]
+			}],
+			"targets": {
+				"TargetApp": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearControlAggregation": false,
+					"viewId": "App",
+					"viewName": "App"
+				},
+				"App": {
+					"viewType": "XML",
+					"viewName": "App"
+				},
+				"View1": {
+					"viewType": "XML",
+					"viewName": "View1"
+				},
+				"batchjoblogs": {
+					"viewType": "XML",
+					"viewName": "batchjoblogs"
+				},
+				"Login": {
+					"viewType": "XML",
+					"viewName": "Login"
+				},
+				"wokprocess": {
+					"viewType": "XML",
+					"viewName": "wokprocess"
+				},
+				"systemAnalysis": {
+					"viewType": "XML",
+					"viewName": "systemAnalysis"
+				},
+				"cpuUtilization": {
+					"viewType": "XML",
+					"viewName": "cpuUtilization"
+				},
+				"MemoryUtilzation": {
+					"viewType": "XML",
+					"viewName": "MemoryUtilzation"
+				},
+				"abapDumps": {
+					"viewType": "XML",
+					"viewName": "abapDumps"
+				},
+				"log_Traces": {
+					"viewType": "XML",
+					"viewName": "log_Traces"
+				},
+				"systemChange": {
+					"viewType": "XML",
+					"viewName": "systemChange"
+				},
+				"systemLicense": {
+					"viewType": "XML",
+					"viewName": "systemLicense"
+				},
+				"enqueueRequests": {
+					"viewType": "XML",
+					"viewName": "enqueueRequests"
+				},
+				"incList": {
+					"viewType": "XML",
+					"viewName": "incidentList"
+				},
+				"incdetail": {
+					"viewType": "XML",
+					"viewName": "incidentDetail"
+				},
+				"createIncident": {
+					"viewType": "XML",
+					"viewName": "createIncident"
+				},
+				"activeUSuserDetail": {
+					"viewType": "XML",
+					"viewName": "activeUserSession"
+				},
+				"systemchange": {
+					"viewType": "XML",
+					"viewName": "systemchange"
+				},
+				"userAuthorization": {
+					"viewType": "XML",
+					"viewName": "userAuthorization"
+				},
+				"user_Privilege": {
+					"viewType": "XML",
+					"viewName": "user_Privilege"
+				},
+				"P2PFilterResult": {
+					"viewType": "XML",
+					"viewName": "P2PFilterResult"
+				},
+				"monthEndActivity": {
+					"viewType": "XML",
+					"viewName": "monthEndActivity"
+				},
+				"monthEndUpadte": {
+					"viewType": "XML",
+					"viewName": "monthEndUpadte"
+				}
+			}
+		}
+	}
+}

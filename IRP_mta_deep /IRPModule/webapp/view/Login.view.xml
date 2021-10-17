@@ -1,0 +1,36 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="ey.irp.IRPModule.controller.Login"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<App>
+		<Page class="page2BgImg" showHeader="false">
+			<content>
+				<VBox fitContainer="true" alignItems="Center" class="alinmentcss">
+					<items>
+						<Toolbar class="toolbarcss">
+							<VBox>
+								<HBox>
+									<Image src='./image/Eylogo.png ' class="imagecss"></Image>
+								</HBox>
+								<HBox class="sapUiSmallMarginTop">
+									<Label text="Intelligent Run" class="margincss"/>
+								</HBox>
+									<HBox class="sapUiTinyMarginTop">
+									<Label text="Platform" class="margincssp"/>
+								</HBox>
+							</VBox>
+							<!--<ToolbarSeparator class="cssseprator"></ToolbarSeparator>-->
+						</Toolbar>
+					</items>
+					<VBox class="grad2" fitContainer="true">
+						<items>
+							<!--<Title text="Enter Credentials to Login" class="titlecss"></Title>-->
+							<Input width="230px" id="uid" placeholder="Username" class="einputcss sapUiSmallMarginTop"></Input>
+							<Input width="230px" id="pasw" placeholder="Password" type="Password" class="einputcss sapUiSmallMarginTop"></Input>
+							<Link text="Forgot Password ? " press="ForgotPasswordliink" class="linkcss sapUiSmallMarginTop"/>
+							<Button width="230px" text="Login" press="onLoginTap" class="buttoncss sapUiSmallMarginTop"></Button>
+						</items>
+					</VBox>
+				</VBox>
+			</content>
+		</Page>
+	</App>
+</mvc:View>

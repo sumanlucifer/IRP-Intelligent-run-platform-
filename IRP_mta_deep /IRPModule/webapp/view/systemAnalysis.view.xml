@@ -1,0 +1,555 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:ui="sap.ui.table" xmlns:tnt="sap.tnt"
+	controllerName="ey.irp.IRPModule.controller.systemAnalysis" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Page title="Monitoring Dashboard/System Analysis" class="textcolor1 navbuttoncss" showNavButton="true" navButtonPress="onPressSysAnalysis">
+		<IconTabBar select="getselectedKey" class="sapUiResponsiveContentPadding iconss barcss sapUiTinyMarginTop">
+			<items>
+				<IconTabFilter id="hanaDB" class="textpendinglc" text="Hana DB" key="Hana">
+					<HBox>
+						<VBox>
+							<RadioButton id="idSys" selected="true" groupName="GroupA" text="System" select="selectSysHana"/>
+						</VBox>
+						<VBox>
+							<RadioButton id="idLic" groupName="GroupA" text="Licenses" select="selectLic"/>
+						</VBox>
+						<VBox>
+							<RadioButton id="idBCat" groupName="GroupA" text="Backup Catalog" select="selectBCat"/>
+						</VBox>
+						<VBox>
+							<RadioButton id="idBPro" groupName="GroupA" text="Backup Progress" select="selectBPro"/>
+						</VBox>
+					</HBox>
+					<HBox class="hboxcss" justifyContent="End">
+						<VBox>
+							<SearchField id="eRequestId" enabled="false" class="searchicon" search="searchuserHana" width="100%"/>
+						</VBox>
+						<VBox class="sapUiSmallMarginBegin">
+							<Button id="idButton2" class="abapcss buttonhoverg" visible="true" icon="sap-icon://table-view" press="onPress2"></Button>
+						</VBox>
+						<!--<VBox class="sapUiTinyMarginBegin">-->
+						<!--	<Button id="idButton1" class="abapcss buttonhoverg" visible="true" icon="sap-icon://donut-chart" press="onPress1"></Button>-->
+						<!--</VBox>-->
+					</HBox>
+					<SplitApp id="SplitAppDemo" initialDetail="detail" initialMaster="master" class="splitappcss">
+						<detailPages>
+							<Page id="detail" title="Overview" backgroundDesign="Solid" class="sapUiStdPage detailcss" showHeader="false">
+								<VBox class="sapUiTinyMarginTop" visible="true" width="100%" id="idVbox1">
+									<Table growing="true" id="idIncTable" items="{path:'sysAppData>/0/d/results'}" class="mutableclassHD" inset="false" sticky="ColumnHeaders">
+										<columns>
+											<Column width="6rem">
+												<Text text="System" class="tableheadercss"/>
+											</Column>
+											<Column width="9rem">
+												<Text text="Host" class="tableheadercss"/>
+											</Column>
+											<Column width="6rem">
+												<Text text="" class="tableheadercss"/>
+											</Column>
+											<Column width="6rem">
+												<Text text="Port" id="ttext" class="tableheadercss"/>
+											</Column>
+											<Column width="6rem">
+												<Text text="Service Name" class="tableheadercss"/>
+											</Column>
+											<Column width="6rem">
+												<Text text="Process ID" class="tableheadercss"/>
+											</Column>
+											<Column width="6rem">
+												<Text text="Status" class="tableheadercss"/>
+											</Column>
+										</columns>
+										<items>
+											<ColumnListItem type="Active">
+												<cells>
+													<Text text="{sysAppData>SYSTEM_ID}" class="tablecellscss"/>
+													<Text text="{sysAppData>HOST}" class="tablecellscss"/>
+													<Text text="" class="tablecellscss"/>
+													<Text text="{sysAppData>PORT}" class="tablecellscss"/>
+													<Text text="{sysAppData>SERVICE_NAME}" class="tablecellscss"/>
+													<Text text="{sysAppData>PROCESS_ID}" class="tablecellscss"/>
+													<!--<ObjectStatus class="tablecellscss" text="{ path: 'incList>ACTIVE_STATUS', formatter: '.formatter.statusTextSAHana'}"-->
+													<!--	state="{ path: 'sysAppData>ACTIVE_STATUS', formatter: '.formatter.statusColorSAHana'}"/>-->
+													<Text text="{sysAppData>State}" class="tablecellscss"/>
+												</cells>
+											</ColumnListItem>
+										</items>
+									</Table>
+								</VBox>
+								<VBox class="sapUiTinyMarginTop" visible="false" width="100%" id="idVbox2">
+									<Table growing="true" items="{path:'sysMModel>/0/d/results'}" class="mutableclassHD" inset="false" sticky="ColumnHeaders">
+										<columns>
+											<Column width="6rem">
+												<Text text="Start Date" class="tableheadercss"/>
+											</Column>
+											<Column width="6rem">
+												<Text text="Expiration Date" class="tableheadercss"/>
+											</Column>
+											<Column width="6rem">
+												<Text text="System" class="tableheadercss"/>
+											</Column>
+											<Column width="9rem">
+												<Text text="Host" class="tableheadercss"/>
+											</Column>
+											<Column width="9rem">
+												<Text text="Hardware Key" class="tableheadercss"/>
+											</Column>
+											<Column width="9rem">
+												<Text text="Install No" class="tableheadercss"/>
+											</Column>
+											<Column width="9rem">
+												<Text text="Product Name" class="tableheadercss"/>
+											</Column>
+											<Column width="10rem">
+												<Text text="System No" class="tableheadercss"/>
+											</Column>
+											<Column width="6rem">
+												<Text text="Product Limit" class="tableheadercss"/>
+											</Column>
+											<Column width="6rem">
+												<Text text="Product Usages" class="tableheadercss"/>
+											</Column>
+										</columns>
+										<items>
+											<ColumnListItem type="Active">
+												<cells>
+													<Text text="{path:'sysMModel>START_DATE',formatter:'.formatter.removetime'}" class="tablecellscss"/>
+													<Text text="{path:'sysMModel>EXPIRATION_DATE',formatter:'.formatter.removetime'}" class="tablecellscss"/>
+													<Text text="{sysMModel>SYSTEM_ID}" class="tablecellscss"/>
+													<Text text="{sysMModel>HOST}" class="tablecellscss"/>
+													<Text text="{sysMModel>HARDWARE_KEY}" class="tablecellscss"/>
+													<Text text="{sysMModel>INSTALL_NO}" class="tablecellscss"/>
+													<Text text="{sysMModel>PRODUCT_NAME}" class="tablecellscss"/>
+													<Text text="{sysMModel>SYSTEM_NO}" class="tablecellscss"/>
+													<Text text="{sysMModel>PRODUCT_LIMIT}" class="tablecellscss"/>
+													<Text text="{sysMModel>PRODUCT_USAGE}" class="tablecellscss"/>
+												</cells>
+											</ColumnListItem>
+										</items>
+									</Table>
+								</VBox>
+								<VBox class="sapUiTinyMarginTop" visible="false" width="100%" id="idVbox3">
+									<Table growing="true" items="{path:'backupCatalogModel>/0/d/results'}" class="mutableclassHD" inset="false" sticky="ColumnHeaders">
+										<columns>
+											<Column width="9rem">
+												<Text text="Utc Start Time" class="tableheadercss"/>
+											</Column>
+											<Column width="9rem">
+												<Text text="Sys End Time" class="tableheadercss"/>
+											</Column>
+											<Column width="9rem">
+												<Text text="Utc End Time" class="tableheadercss"/>
+											</Column>
+											<Column width="6rem">
+												<Text text="System" class="tableheadercss"/>
+											</Column>
+											<Column width="9rem">
+												<Text text="Host" class="tableheadercss"/>
+											</Column>
+											<Column width="9rem">
+												<Text text="Entry ID" class="tableheadercss"/>
+											</Column>
+											<Column width="9rem">
+												<Text text="BackupID" class="tableheadercss"/>
+											</Column>
+											<Column width="9rem">
+												<Text text="Entry Name" class="tableheadercss"/>
+											</Column>
+											<Column width="9rem">
+												<Text text="Sys Start Time" class="tableheadercss"/>
+											</Column>
+											<Column width="9rem">
+												<Text text="State Name" class="tableheadercss"/>
+											</Column>
+										</columns>
+										<items>
+											<ColumnListItem type="Active">
+												<cells>
+													<Text text="{path:'backupCatalogModel>UTC_START_TIME',formatter:'.formatter.removetime'}" class="tablecellscss"/>
+													<Text text="{path:'backupCatalogModel>SYS_END_TIME',formatter:'.formatter.removetime'}" class="tablecellscss"/>
+													<Text text="{path:'backupCatalogModel>UTC_END_TIME',formatter:'.formatter.removetime'}" class="tablecellscss"/>
+													<Text text="{backupCatalogModel>SYSTEM_ID}" class="tablecellscss"/>
+													<Text text="{backupCatalogModel>HOST}" class="tablecellscss"/>
+													<Text text="{backupCatalogModel>ENTRY_ID}" class="tablecellscss"/>
+													<Text text="{backupCatalogModel>SBACKUP_ID}" class="tablecellscss"/>
+													<Text text="{backupCatalogModel>ENTRY_TYPE_NAME}" class="tablecellscss"/>
+													<Text text="{backupCatalogModel>SYS_START_TIME}" class="tablecellscss"/>
+													<Text text="{backupCatalogModel>STATE_NAME}" class="tablecellscss"/>
+												</cells>
+											</ColumnListItem>
+										</items>
+									</Table>
+								</VBox>
+								<VBox class="sapUiTinyMarginTop" visible="false" width="100%" id="idVbox4">
+									<Table growing="true" items="{path:'backupProgressgModel>/0/d/results'}" class="mutableclassHD" inset="false" sticky="ColumnHeaders">
+										<columns>
+											<Column width="10rem">
+												<Text text="Sys Start Time" class="tableheadercss"/>
+											</Column>
+											<Column width="10rem">
+												<Text text="Utc Start Time" class="tableheadercss"/>
+											</Column>
+											<Column width="10rem">
+												<Text text="Sys End Time" class="tableheadercss"/>
+											</Column>
+											<Column width="10rem">
+												<Text text="Utc End Time" class="tableheadercss"/>
+											</Column>
+											<Column width="6rem">
+												<Text text="System" class="tableheadercss"/>
+											</Column>
+											<Column width="6rem">
+												<Text text="Host" class="tableheadercss"/>
+											</Column>
+											<Column width="10rem">
+												<Text text="Backup ID" class="tableheadercss"/>
+											</Column>
+											<Column width="10rem">
+												<Text text="Service Name" class="tableheadercss"/>
+											</Column>
+											<Column width="10rem">
+												<Text text="Port" class="tableheadercss"/>
+											</Column>
+											<Column width="10rem">
+												<Text text="Entry Name" class="tableheadercss"/>
+											</Column>
+											<Column width="10rem">
+												<Text text="State Name" class="tableheadercss"/>
+											</Column>
+											<Column width="6rem">
+												<Text text="Backup Size" class="tableheadercss"/>
+											</Column>
+											<Column width="6rem">
+												<Text text="Transferred Size" class="tableheadercss"/>
+											</Column>
+										</columns>
+										<items>
+											<ColumnListItem type="Active">
+												<cells>
+													<Text text="{backupProgressgModel>SYS_START_TIME}" class="tablecellscss"/>
+													<Text text="{backupProgressgModel>UTC_START_TIME}" class="tablecellscss"/>
+													<Text text="{backupProgressgModel>SYS_END_TIME}" class="tablecellscss"/>
+													<Text text="{backupProgressgModel>UTC_END_TIME}" class="tablecellscss"/>
+													<Text text="{backupProgressgModel>SYSTEM_ID}" class="tablecellscss"/>
+													<Text text="{backupProgressgModel>HOST}" class="tablecellscss"/>
+													<Text text="{backupProgressgModel>BACKUP_ID}" class="tablecellscss"/>
+													<Text text="{backupProgressgModel>SERVICE_NAME}" class="tablecellscss"/>
+													<Text text="{backupProgressgModel>PORT}" class="tablecellscss"/>
+													<Text text="{backupProgressgModel>ENTRY_TYPE_NAME}" class="tablecellscss"/>
+													<Text text="{backupProgressgModel>STATE_NAME}" class="tablecellscss"/>
+													<Text text="{backupProgressgModel>BACKUP_SIZE}" class="tablecellscss"/>
+													<Text text="{backupProgressgModel>TRANSFERRED_SIZE}" class="tablecellscss"/>
+												</cells>
+											</ColumnListItem>
+										</items>
+									</Table>
+								</VBox>
+							</Page>
+							<Page id="detailDetail" title="Overview" class="sapUiStdPage detailcss" backgroundDesign="Solid" showHeader="false">
+								<VBox>
+									<Label text="S4A Details"/>
+								</VBox>
+							</Page>
+						</detailPages>
+						<masterPages>
+							<Page id="master2" title="Systems" backgroundDesign="List" class="sapUiStdPage mastercss">
+								<List mode="SingleSelectMaster" items="{sysListModel>/DBSystems/data}" id="listID" itemPress="onListItemPress" class="s4dcss">
+									<items>
+										<StandardListItem title="{sysListModel>sysId}" type="Active" custom:to="detail" class="s4dcss s4dcss1"/>
+									</items>
+								</List>
+							</Page>
+						</masterPages>
+					</SplitApp>
+				</IconTabFilter>
+				<IconTabFilter id="applicationId" text="Application" key="attachments">
+					<HBox>
+						<VBox>
+							<RadioButton id="idSysA" selected="true" groupName="GroupA" text="System Details" select="selectSysHanaA"/>
+						</VBox>
+						<VBox>
+							<RadioButton id="idLicA" groupName="GroupA" text="Licenses" select="selectLicA"/>
+						</VBox>
+						<VBox>
+							<RadioButton id="iERA" groupName="GroupA" text="Enqune Request" select="enqueneRequest"/>
+						</VBox>
+						<VBox>
+							<RadioButton id="idHCChan" groupName="GroupA" text="client Changes" select="SysChange"/>
+						</VBox>
+						<VBox>
+							<RadioButton id="idUStatus" groupName="GroupA" text="Update Status" select="updateStatus"/>
+						</VBox>
+					</HBox>
+					<HBox class="hboxcss" justifyContent="End">
+						<VBox id="idVBoxC" visible="false">
+							<ComboBox id="idComboTypes" items="{systemAnalysis>/workProcesstype}" placeholder="select" selectionChange="officeComboChange"
+								change="onchange" class="combocss">
+								<items class="listcss">
+									<core:ListItem key="{systemAnalysis>key}" text="{systemAnalysis>text}" class="listcss1"/>
+								</items>
+							</ComboBox>
+						</VBox>
+						<VBox>
+							<SearchField id="idSearch" enabled="false" class="searchicon" search="searchuser" width="100%"/>
+						</VBox>
+						<VBox class="sapUiSmallMarginBegin">
+							<Button id="idButton3" class="abapcss buttonhoverg" visible="true" icon="sap-icon://table-view" press="onPress3"></Button>
+						</VBox>
+						<VBox id="idVBoxF" visible="false">
+							<Button id="idButton5" class="abapcss buttonhoverF sapUiTinyMarginEnd" icon="sap-icon://filter" press="onPressFilterApp"></Button>
+						</VBox>
+					</HBox>
+					<SplitApp id="SplitAppDemoApp" initialDetail="detail1" initialMaster="master" class="splitappcss">
+						<detailPages>
+							<Page id="detail1" title="Overview" backgroundDesign="Solid" class="sapUiStdPage detailcss" showHeader="false">
+								<VBox class="sapUiTinyMarginTop" visible="true" width="100%" id="idVbox5">
+									<Table growing="true" id="idsapTable" class="smtableclassApp" inset="false" items="{path:'sapAppList>/0/d/results'}">
+										<columns>
+											<Column>
+												<Text text="System ID" class="tableheadercss"/>
+											</Column>
+											<Column >
+												<Text text="Service Name" class="tableheadercss"/>
+											</Column>
+											<Column>
+												<Text text="Host" class="tableheadercss"/>
+											</Column>
+											<Column>
+												<Text text="State" class="tableheadercss"/>
+											</Column>
+										</columns>
+										<items>
+											<ColumnListItem type="Active">
+												<cells>
+													<Text text="{sapAppList>Sysid}" class="tablecellscss"/>
+													<Text text="{sapAppList>Name}" class="tablecellscss"/>
+													<Text text="{sapAppList>Host}" class="tablecellscss"/>
+													<Text text="{path: 'sapAppList>State', formatter: '.formatter.statusTextAS'}" class="tablecellscss"/>
+													<ObjectStatus class="tablecellscss" text="{ path: 'landingPageSA>/statuscount/State', formatter: '.formatter.statusTextSA'}"
+														state="{ path: 'sapAppList>State', formatter: '.formatter.statusColorSA'}"/>
+												</cells>
+											</ColumnListItem>
+										</items>
+									</Table>
+								</VBox>
+								<VBox class="sapUiTinyMarginTop" visible="false" width="100%" id="idVbox6">
+									<Table growing="true" items="{path:'sysLicenseTableData>/0/d/results'}" class="mutableclassHD" inset="false" sticky="ColumnHeaders">
+										<columns>
+											<Column width="9rem">
+												<Text text="Start Date" class="tableheadercss"/>
+											</Column>
+											<Column width="9rem">
+												<Text text="End Date" class="tableheadercss"/>
+											</Column>
+											<Column width="9rem">
+												<Text text="Last Date" class="tableheadercss"/>
+											</Column>
+											<Column width="6rem">
+												<Text text="System" class="tableheadercss"/>
+											</Column>
+											<Column width="8rem">
+												<Text text="Host" class="tableheadercss"/>
+											</Column>
+											<Column width="9rem">
+												<Text text="Hardware Key" class="tableheadercss"/>
+											</Column>
+											<Column width="9rem">
+												<Text text="Software Product" class="tableheadercss"/>
+											</Column>
+											<Column width="9rem">
+												<Text text="Product Limit" class="tableheadercss"/>
+											</Column>
+											<Column width="9rem">
+												<Text text="Product Text" class="tableheadercss"/>
+											</Column>
+											<Column width="9rem">
+												<Text text="Type" class="tableheadercss"/>
+											</Column>
+											<Column width="9rem">
+												<Text text="Install No" class="tableheadercss"/>
+											</Column>
+											<Column width="9rem">
+												<Text text="System No" class="tableheadercss"/>
+											</Column>
+											<Column width="9rem">
+												<Text text="Validity" class="tableheadercss"/>
+											</Column>
+										</columns>
+										<items>
+											<ColumnListItem type="Active">
+												<cells>
+													<Text text="{path:'sysLicenseTableData>BEGIN_DATE',formatter:'.formatter.removetime'}" class="tablecellscss"/>
+													<Text text="{path:'sysLicenseTableData>END_DATE',formatter:'.formatter.removetime'}" class="tablecellscss"/>
+													<Text text="{path:'sysLicenseTableData>LSC_DATE',formatter:'.formatter.removetime'}" class="tablecellscss"/>
+													<Text text="{sysLicenseTableData>SID}" class="tablecellscss"/>
+													<Text text="{sysLicenseTableData>HOST}" class="tablecellscss"/>
+													<Text text="{sysLicenseTableData>HWKEY}" class="tablecellscss"/>
+													<Text text="{sysLicenseTableData>SW_PRODUCT}" class="tablecellscss"/>
+													<Text text="{sysLicenseTableData>SW_PROD_LIMIT}" class="tablecellscss"/>
+													<Text text="{sysLicenseTableData>SW_PROD_TEXT}" class="tablecellscss"/>
+													<Text text="{sysLicenseTableData>TYPE}" class="tablecellscss"/>
+													<Text text="{sysLicenseTableData>INSTALL_NO}" class="tablecellscss"/>
+													<Text text="{sysLicenseTableData>SYSTEM_NO}" class="tablecellscss"/>
+													<Text text="{sysLicenseTableData>VALIDITY}" class="tablecellscss"/>
+												</cells>
+											</ColumnListItem>
+										</items>
+									</Table>
+								</VBox>
+								<VBox class="sapUiTinyMarginTop" visible="false" width="100%" id="idVbox7">
+									<Table growing="true" items="{path:'sysEnqueneModel>/0/d/results'}" class="mutableclassHD" inset="false" sticky="ColumnHeaders">
+										<columns>
+											<Column width="9rem">
+												<Text text="Date" class="tableheadercss"/>
+											</Column>
+											<Column width="9rem">
+												<Text text="Time" class="tableheadercss"/>
+											</Column>
+											<Column width="7rem">
+												<Text text="System" class="tableheadercss"/>
+											</Column>
+											<Column width="9rem">
+												<Text text="Client" class="tableheadercss"/>
+											</Column>
+											<Column width="9rem">
+												<Text text="Host" class="tableheadercss"/>
+											</Column>
+											<Column width="9rem">
+												<Text text="User Name" class="tableheadercss"/>
+											</Column>
+											<Column width="9rem">
+												<Text text="Lock Argument" class="tableheadercss"/>
+											</Column>
+											<Column width="9rem">
+												<Text text="Lock Mode" class="tableheadercss"/>
+											</Column>
+											<Column width="9rem">
+												<Text text="Table Name" class="tableheadercss"/>
+											</Column>
+										</columns>
+										<items>
+											<ColumnListItem type="Active">
+												<cells>
+													<Text text="{path:'sysEnqueneModel>Gtdate',formatter:'.formatter.removetime'}" class="tablecellscss"/>
+													<Text text="{path:'sysEnqueneModel>Gttime',formatter:'.formatter.timeFormatter'}" class="tablecellscss"/>
+													<Text text="{sysEnqueneModel>Sysid}" class="tablecellscss"/>
+													<Text text="{sysEnqueneModel>Gclient}" class="tablecellscss"/>
+													<Text text="{sysEnqueneModel>Host}" class="tablecellscss"/>
+													<Text text="{sysEnqueneModel>Guname}" class="tablecellscss"/>
+													<Text text="{sysEnqueneModel>Garg}" class="tablecellscss"/>
+													<Text text="{path:'sysEnqueneModel>Gmode',formatter:'.formatter.statusTextER'}" class="tablecellscss"/>
+													<Text text="{sysEnqueneModel>Gname}" class="tablecellscss"/>
+												</cells>
+											</ColumnListItem>
+										</items>
+									</Table>
+								</VBox>
+								<VBox class="sapUiTinyMarginTop" visible="false" width="100%" id="idVbox8">
+									<Table growing="true" items="{path:'sysChangeModel>/0/d/results'}" class="mutableclassHD" inset="false" sticky="ColumnHeaders">
+										<columns>
+											<Column width="9rem">
+												<Text text="Change Date" class="tableheadercss"/>
+											</Column>
+											<Column width="9rem">
+												<Text text="System" class="tableheadercss"/>
+											</Column>
+											<Column width="9rem">
+												<Text text="Host" class="tableheadercss"/>
+											</Column>
+											<Column width="9rem">
+												<Text text="Client" class="tableheadercss"/>
+											</Column>
+											<Column width="9rem">
+												<Text text="Name" class="tableheadercss"/>
+											</Column>
+											<Column width="9rem">
+												<Text text="City" class="tableheadercss"/>
+											</Column>
+											<Column width="9rem">
+												<Text text="Currency" class="tableheadercss"/>
+											</Column>
+											<Column width="9rem">
+												<Text text="Log System" class="tableheadercss"/>
+											</Column>
+											<Column width="9rem">
+												<Text text="Change User" class="tableheadercss"/>
+											</Column>
+										</columns>
+										<items>
+											<ColumnListItem type="Active">
+												<cells>
+													<Text text="{path:'sysChangeModel>Changedate',formatter:'.formatter.removetime'}" class="tablecellscss"/>
+													<Text text="{sysChangeModel>Sysid}" class="tablecellscss"/>
+													<Text text="{sysChangeModel>Host}" class="tablecellscss"/>
+													<Text text="{sysChangeModel>Mandt}" class="tablecellscss"/>
+													<Text text="{sysChangeModel>Mtext}" class="tablecellscss"/>
+													<Text text="{sysChangeModel>Ort01}" class="tablecellscss"/>
+													<Text text="{sysChangeModel>Mwaer}" class="tablecellscss"/>
+													<Text text="{sysChangeModel>Logsys}" class="tablecellscss"/>
+													<Text text="{sysChangeModel>Changeuser}" class="tablecellscss"/>
+												</cells>
+											</ColumnListItem>
+										</items>
+									</Table>
+								</VBox>
+								<VBox class="sapUiTinyMarginTop" visible="false" width="100%" id="idVbox9">
+									<Table growing="true" items="{path:'logTraceModel>/0/d/results'}" class="mutableclassHD" inset="false" sticky="ColumnHeaders">
+										<columns>
+											<Column width="9rem">
+												<Text text="Date" class="tableheadercss"/>
+											</Column>
+											<Column width="9rem">
+												<Text text="System" class="tableheadercss"/>
+											</Column>
+											<Column width="9rem">
+												<Text text="Host" class="tableheadercss"/>
+											</Column>
+											<Column width="9rem">
+												<Text text="Client" class="tableheadercss"/>
+											</Column>
+											<Column width="9rem">
+												<Text text="User" class="tableheadercss"/>
+											</Column>
+											<Column width="9rem">
+												<Text text="Tcode" class="tableheadercss"/>
+											</Column>
+											<Column width="9rem">
+												<Text text="Status" class="tableheadercss"/>
+											</Column>
+										</columns>
+										<items>
+											<ColumnListItem type="Active">
+												<cells>
+													<Text text="{path:'logTraceModel>Date',formatter:'.formatter.dateValue'}" class="tablecellscss"/>
+													<Text text="{logTraceModel>Sysid}" class="tablecellscss"/>
+													<Text text="{logTraceModel>Host}" class="tablecellscss"/>
+													<Text text="{logTraceModel>Client}" class="tablecellscss"/>
+													<Text text="{logTraceModel>User}" class="tablecellscss"/>
+													<Text text="{logTraceModel>Tcode}" class="tablecellscss"/>
+													<Text text="{logTraceModel>Status}" class="tablecellscss"/>
+												</cells>
+											</ColumnListItem>
+										</items>
+									</Table>
+								</VBox>
+							</Page>
+							<Page id="detailDetail1" title="Overview" class="sapUiStdPage detailcss" backgroundDesign="Solid" showHeader="false">
+								<VBox class="sapUiSmallMargin">
+									<Label text="S4A Details"/>
+								</VBox>
+							</Page>
+						</detailPages>
+						<masterPages>
+							<Page id="master3" title="Systems" backgroundDesign="List" class="sapUiStdPage mastercss">
+								<List mode="SingleSelectMaster" items="{sysListModel>/APPSystems/data}" id="listIDApp" itemPress=".onListItemPressApp" class="s4dcss">
+									<items>
+										<StandardListItem id="s4dIdapp" title="{sysListModel>sysId}" type="Active" custom:to="detail1"/>
+									</items>
+								</List>
+							</Page>
+						</masterPages>
+					</SplitApp>
+				</IconTabFilter>
+			</items>
+		</IconTabBar>
+	</Page>
+</mvc:View>

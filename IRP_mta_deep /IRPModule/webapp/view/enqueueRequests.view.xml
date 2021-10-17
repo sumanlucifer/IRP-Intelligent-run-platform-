@@ -1,0 +1,63 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:m="sap.m" xmlns:u="sap.ui.unified"
+	controllerName="ey.irp.IRPModule.controller.enqueueRequests" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.ui.table">
+	<m:Page title="Monitoring Dashboard/Enqueue requests" showNavButton="true" class="page2BgImg textcolor1 navbuttoncss"
+		navButtonPress="onPressEnqueneRPorcess">
+		<m:content>
+			<m:IconTabBar class="sapUiResponsiveContentPadding iconss sapUiTinyMarginTop">
+				<m:items>
+					<m:IconTabFilter class="textpendinglc" text="Application" key="products">
+						<m:VBox>
+							<Table id="idsapTable" class="uitablecss sapUiMediumMarginTop batchjobclass" rows="{sysEnqueneModel>/sysEnqueneTableData}"
+								selectionMode="Single" ariaLabelledBy="title">
+								<columns>
+									<Column width="8rem">
+										<m:Label text="SID" class="tableheadercss"/>
+										<template>
+											<m:Text text="{sysEnqueneModel>Sysid}" wrapping="false"/>
+										</template>
+									</Column>
+									<Column width="9rem">
+										<m:Label text="HOST" class="tableheadercss"/>
+										<template>
+											<m:Text text="{sysEnqueneModel>Host}" wrapping="false"/>
+										</template>
+									</Column>
+									<Column width="15rem">
+										<m:Label text="User Name" class="tableheadercss"/>
+										<template>
+											<m:Text text="{sysEnqueneModel>Gname}" wrapping="false"/>
+										</template>
+									</Column>
+									<Column width="15rem">
+										<m:Label text="Lock Argument" class="tableheadercss"/>
+										<template>
+											<m:Text text="{sysEnqueneModel>Garg}" wrapping="true"/>
+										</template>
+									</Column>
+									<Column width="12rem">
+										<m:Label text="Lock Mode" class="tableheadercss"/>
+										<template>
+											<m:Text text="{path:'sysEnqueneModel>Gmode',formatter:'.formatter.statusTextER'}" wrapping="true"/>
+										</template>
+									</Column>
+									<Column width="9rem">
+										<m:Label text="Name" class="tableheadercss"/>
+										<template>
+											<m:Text text="{sysEnqueneModel>Guname}" wrapping="true"/>
+										</template>
+									</Column>
+									<Column width="15rem">
+										<m:Label text="Date" class="tableheadercss"/>
+										<template>
+											<m:Text text="{path:'sysEnqueneModel>Gtdate',formatter:'.formatter.dateValue'}" class="tablecellscss" wrapping="true"/>
+										</template>
+									</Column>
+								</columns>
+							</Table>
+						</m:VBox>
+					</m:IconTabFilter>
+				</m:items>
+			</m:IconTabBar>
+		</m:content>
+	</m:Page>
+</mvc:View>

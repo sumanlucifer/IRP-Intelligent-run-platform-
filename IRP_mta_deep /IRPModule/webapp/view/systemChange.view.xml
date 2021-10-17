@@ -1,0 +1,226 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:m="sap.m" xmlns:u="sap.ui.unified" xmlns="sap.ui.table"
+	controllerName="ey.irp.IRPModule.controller.systemChange" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<m:Page title="Monitoring Dashboard/System Change" class="textcolor1 navbuttoncss sapUiSmallMarginTop" showNavButton="true"
+		navButtonPress="onPressSysChangePorcess" enableScrolling="false">
+		<m:content>
+			<m:SplitApp id="SplitAppDemo" initialDetail="detail" initialMaster="master" class="batchjobCss sapUiMediumMarginTop">
+				<m:detailPages>
+					<m:Page id="detail1" title="Overview" backgroundDesign="Solid" class="sapUiStdPage detailcss" showHeader="false" enableScrolling="false">
+						<m:HBox justifyContent="End">
+							<m:VBox class="sapUiTinyMarginBegin">
+								<m:Button id="idButton3" class="abapcss buttonhover4 buttonwidth" visible="true" text="Software Component" press="onPress3"></m:Button>
+							</m:VBox>
+							<m:VBox class="sapUiTinyMarginBegin">
+								<m:Button id="idButton4" class="abapcss buttonhover4" visible="true" text="Namespace" press="onPress4"></m:Button>
+							</m:VBox>
+						</m:HBox>
+						<m:Panel>
+							<m:HBox>
+								<m:VBox class="mutableclassApp sapUiTinyMarginTop"  width="100%" visible="true" id="idVbox3">
+									<Table id="PendingTable1" class="uitablecss batchjobclass" rows="{path:'sysCompModel>/0/d/results'}" selectionMode="None"
+										ariaLabelledBy="title">
+										<columns>
+											<Column width="5rem">
+												<m:Label text="System" class="tableheadercss"/>
+												<template>
+													<m:Text text="{sysCompModel>Sysid}" class="tablecellscss"/>
+												</template>
+											</Column>
+											<Column width="8rem">
+												<m:Label text="Host" class="tableheadercss sapUiMediumMarginBegin"/>
+												<template>
+													<m:Text text="{sysCompModel>Host}" wrapping="false" class="sapUiMediumMarginBegin tablecellscss"/>
+												</template>
+											</Column>
+											<Column width="15rem">
+												<m:Label text="Software Component" class="tableheadercss sapUiMediumMarginBegin"/>
+												<template>
+													<m:Text text="{sysCompModel>SoftwareComponent}" class="sapUiLargeMarginBegin tablecellscss"/>
+												</template>
+											</Column>
+											<Column width="10rem">
+												<m:Label text="Modifiable" class="tableheadercss sapUiMediumMarginBegin"/>
+												<template>
+													<m:Text text="{sysCompModel>Modifiable}" class="sapUiMediumMarginBegin tablecellscss"/>
+												</template>
+											</Column>
+											<Column width="25rem">
+												<m:Label text="Tech Name" class="tableheadercss"/>
+												<template>
+													<m:Text text="{sysCompModel>TechName}" wrapping="false" class="tablecellscss sapUiTinyMarginBegin"/>
+												</template>
+											</Column>
+										</columns>
+									</Table>
+								</m:VBox>
+								<m:VBox class="sapUiTinyMarginTop" visible="false" width="100%" id="idVbox4">
+									<Table id="PendingTable" class="uitablecss batchjobclass" rows="{path:'sysNameModel>/0/d/results'}" selectionMode="None"
+										ariaLabelledBy="title">
+										<columns>
+											<Column width="5rem">
+												<m:Label text="System" class="tableheadercss"/>
+												<template>
+													<m:Text text="{sysNameModel>Sysid}" class="tablecellscss"/>
+												</template>
+											</Column>
+											<Column width="10rem">
+												<m:Label text="Host" class="tableheadercss sapUiMediumMarginBegin"/>
+												<template>
+													<m:Text text="{sysNameModel>Host}" wrapping="false" class="sapUiMediumMarginBegin tablecellscss"/>
+												</template>
+											</Column>
+											<Column width="10rem">
+												<m:Label text="Namespace" class="tableheadercss sapUiMediumMarginBegin"/>
+												<template>
+													<m:Text text="{sysNameModel>Namespace}" wrapping="false" class="sapUiMediumMarginBegin tablecellscss"/>
+												</template>
+											</Column>
+											<Column width="10rem">
+												<m:Label text="Prefix" class="tableheadercss sapUiMediumMarginBegin"/>
+												<template>
+													<m:Text text="{sysNameModel>Prefix}" wrapping="false" class="sapUiLargeMarginBegin tablecellscss"/>
+												</template>
+											</Column>
+											<Column width="8rem">
+												<m:Label text="Modifiable" class="tableheadercss"/>
+												<template>
+													<m:Text text="{sysNameModel>Modifiable}" class="tablecellscss sapUiSmallMarginBegin"/>
+												</template>
+											</Column>
+											<Column width="7rem">
+												<m:Label text="TechId" class="tableheadercss"/>
+												<template>
+													<m:Text text="{sysNameModel>TechID}" class="tablecellscss"/>
+												</template>
+											</Column>
+										</columns>
+									</Table>
+								</m:VBox>
+							</m:HBox>
+						</m:Panel>
+					</m:Page>
+					<m:Page id="detailDetail" title="Overview" class="sapUiStdPage detailcss" backgroundDesign="Solid" showHeader="false"
+						enableScrolling="false">
+						<m:VBox class="sapUiSmallMargin">
+							<m:Label text="System Details"/>
+						</m:VBox>
+					</m:Page>
+				</m:detailPages>
+				<m:masterPages>
+					<m:Page id="master2" title="Systems" backgroundDesign="List" class="sapUiStdPage mastercss">
+						<m:List mode="SingleSelectMaster" id="listIDApp" items="{sysListModel>/APPSystems/data}" itemPress=".onListItemPress" class="s4dcss">
+							<m:items>
+								<m:StandardListItem title="{sysListModel>sysId}" type="Active" custom:to="detail1"/>
+							</m:items>
+						</m:List>
+					</m:Page>
+				</m:masterPages>
+			</m:SplitApp>
+		</m:content>
+	</m:Page>
+	<!--<IconTabBar class="sapUiResponsiveContentPadding iconss barcss">-->
+	<!--	<items>-->
+	<!--		<IconTabFilter class="textpendinglc" text="Application">-->
+	<!--			<SplitApp id="SplitAppDemo" initialDetail="detail" initialMaster="master" class="splitappcss">-->
+	<!--				<detailPages>-->
+	<!--					<Page id="detail" title="Overview" backgroundDesign="Solid" class="sapUiStdPage detailcss" showHeader="false">-->
+	<!--						<HBox class="hboxcss" justifyContent="End">-->
+	<!--							<VBox class="sapUiTinyMarginBegin">-->
+	<!--								<Button id="idButton3" class="abapcss buttonhover4 buttonwidth" visible="true" text="Software Component" press="onPress3"></Button>-->
+	<!--							</VBox>-->
+	<!--							<VBox class="sapUiTinyMarginBegin">-->
+	<!--								<Button id="idButton4" class="abapcss buttonhover4" visible="true" text="Namespace" press="onPress4"></Button>-->
+	<!--							</VBox>-->
+	<!--						</HBox>-->
+	<!--						<HBox>-->
+	<!--							<VBox class="mutableclassApp sapUiTinyMarginTop" visible="true" id="idVbox3">-->
+	<!--								<Table growing="true" sticky="ColumnHeaders" class="mutableclassHD" inset="false" items="{path:'sysCompModel>/0/d/results'}">-->
+	<!--									<columns>-->
+	<!--										<Column width="6rem">-->
+	<!--											<Text text="System" class="tableheadercss"/>-->
+	<!--										</Column>-->
+	<!--										<Column width="9rem">-->
+	<!--											<Text text="Host" class="tableheadercss"/>-->
+	<!--										</Column>-->
+	<!--										<Column width="10rem">-->
+	<!--											<Text text="Software Component" class="tableheadercss"/>-->
+	<!--										</Column>-->
+	<!--										<Column width="6rem">-->
+	<!--											<Text text="Modifiable" class="tableheadercss"/>-->
+	<!--										</Column>-->
+	<!--										<Column width="11rem">-->
+	<!--											<Text text="Tech Name" class="tableheadercss"/>-->
+	<!--										</Column>-->
+	<!--									</columns>-->
+	<!--									<items>-->
+	<!--										<ColumnListItem>-->
+	<!--											<cells>-->
+	<!--												<Text text="{sysCompModel>Sysid}" class="tablecellscss" wrapping="true"/>-->
+	<!--												<Text text="{sysCompModel>Host}" class="tablecellscss" wrapping="true"/>-->
+	<!--												<Text text="{sysCompModel>SoftwareComponent}" class="tablecellscss sapUiSmallMarginBegin" wrapping="true"/>-->
+	<!--												<Text text="{sysCompModel>Modifiable}" class="tablecellscss" wrapping="true"/>-->
+	<!--												<Text text="{sysCompModel>TechName}" class="tablecellscss" wrapping="true"/>-->
+	<!--											</cells>-->
+	<!--										</ColumnListItem>-->
+	<!--									</items>-->
+	<!--								</Table>-->
+	<!--							</VBox>-->
+	<!--							<VBox class="sapUiTinyMarginTop" visible="false" width="100%" id="idVbox4">-->
+	<!--								<Table growing="true" sticky="ColumnHeaders" class="mutableclassHD" inset="false" items="{path:'sysNameModel>/0/d/results'}">-->
+	<!--									<columns>-->
+	<!--										<Column width="6rem">-->
+	<!--											<Text text="System" class="tableheadercss"/>-->
+	<!--										</Column>-->
+	<!--										<Column width="9rem">-->
+	<!--											<Text text="Host" class="tableheadercss"/>-->
+	<!--										</Column>-->
+	<!--										<Column width="9rem">-->
+	<!--											<Text text="Namespace" class="tableheadercss"/>-->
+	<!--										</Column>-->
+	<!--										<Column width="6rem">-->
+	<!--											<Text text="Prefix" class="tableheadercss"/>-->
+	<!--										</Column>-->
+	<!--										<Column width="9rem">-->
+	<!--											<Text text="Modifiable" class="tableheadercss"/>-->
+	<!--										</Column>-->
+	<!--										<Column width="8rem">-->
+	<!--											<Text text="TechID" class="tableheadercss"/>-->
+	<!--										</Column>-->
+	<!--									</columns>-->
+	<!--									<items>-->
+	<!--										<ColumnListItem>-->
+	<!--											<cells>-->
+	<!--												<Text text="{sysNameModel>Sysid}" class="tablecellscss" wrapping="true"/>-->
+	<!--												<Text text="{sysNameModel>Host}" class="tablecellscss" wrapping="true"/>-->
+	<!--												<Text text="{sysNameModel>Namespace}" class="tablecellscss" wrapping="true"/>-->
+	<!--												<Text text="{sysNameModel>Prefix}" class="tablecellscss" wrapping="true"/>-->
+	<!--												<Text text="{sysNameModel>Modifiable}" class="tablecellscss" wrapping="true"/>-->
+	<!--												<Text text="{sysNameModel>TechID}" class="tablecellscss" wrapping="true"/>-->
+	<!--											</cells>-->
+	<!--										</ColumnListItem>-->
+	<!--									</items>-->
+	<!--								</Table>-->
+	<!--							</VBox>-->
+	<!--						</HBox>-->
+	<!--					</Page>-->
+	<!--					<Page id="detailDetail" title="Overview" class="sapUiStdPage detailcss" backgroundDesign="Solid" showHeader="false">-->
+	<!--						<VBox class="sapUiSmallMargin">-->
+	<!--							<Label text="System2 Details"/>-->
+	<!--						</VBox>-->
+	<!--					</Page>-->
+	<!--				</detailPages>-->
+	<!--				<masterPages>-->
+	<!--					<Page id="master2" title="Systems" backgroundDesign="List" class="sapUiStdPage mastercss">-->
+	<!--						<List mode="SingleSelectMaster" id="listID" items="{sysListModel>/APPSystems/data}" itemPress=".onListItemPress" class="s4dcss">-->
+	<!--							<items>-->
+	<!--								<StandardListItem title="{sysListModel>sysId}" type="Active" custom:to="detail1"/>-->
+	<!--							</items>-->
+	<!--						</List>-->
+	<!--					</Page>-->
+	<!--				</masterPages>-->
+	<!--			</SplitApp>-->
+	<!--		</IconTabFilter>-->
+	<!--	</items>-->
+	<!--</IconTabBar>-->
+</mvc:View>
